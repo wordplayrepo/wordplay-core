@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.lang.english;
 
 import org.syphr.wordplay.core.Letter;
 

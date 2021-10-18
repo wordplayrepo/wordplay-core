@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.bot.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +12,9 @@ import java.util.stream.Stream.Builder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.syphr.wordplay.bot.Robot;
+import org.syphr.wordplay.bot.RobotStrategy;
+import org.syphr.wordplay.bot.impl.AbstractRobot.PieceWrapper;
 import org.syphr.wordplay.core.Board;
 import org.syphr.wordplay.core.Configuration;
 import org.syphr.wordplay.core.Dimension;
@@ -20,11 +23,10 @@ import org.syphr.wordplay.core.Location;
 import org.syphr.wordplay.core.Orientation;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Placement;
-import org.syphr.wordplay.core.Robot;
-import org.syphr.wordplay.core.RobotStrategy;
 import org.syphr.wordplay.core.TileSet;
 import org.syphr.wordplay.core.ValuedPlacement;
-import org.syphr.wordplay.core.impl.AbstractRobot.PieceWrapper;
+import org.syphr.wordplay.core.impl.PlayerImpl;
+import org.syphr.wordplay.core.impl.ValuedPlacementImpl;
 
 import com.google.common.collect.Collections2;
 
@@ -83,10 +85,10 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
         placements.clear();
 
         Collection<List<PieceWrapper>> candidates = getPlacementCandidates(getRack().getPieces());
-        //        if (LOGGER.isTraceEnabled())
-        //        {
+        // if (LOGGER.isTraceEnabled())
+        // {
         LOGGER.info("Found {} possible combinations and permutations", candidates.size());
-        //        }
+        // }
 
         generateLocations(board).parallel()
                                 .flatMap(location -> Collections.synchronizedCollection(candidates)
@@ -95,14 +97,15 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
                                                                                                        candidate)))
                                 .flatMap(candidate -> generatePlacements(board, candidate))
                                 .filter(placement -> board.isValid(placement))
-                                .peek(placement -> ((ValuedPlacementImpl)placement).setPoints(board.calculatePoints(placement)))
+                                .peek(placement -> ((ValuedPlacementImpl) placement).setPoints(board.calculatePoints(placement)))
                                 .collect(Collectors.toCollection(() -> placements));
 
-        //        candidates.parallelStream()
-        //                  .flatMap(candidate -> generatePlacements(board, candidate))
-        //                  .filter(placement -> board.isValid(placement))
-        //                  .peek(placement -> ((ValuedPlacementImpl)placement).setPoints(board.calculatePoints(placement)))
-        //                  .collect(Collectors.toCollection(() -> placements));
+        // candidates.parallelStream()
+        // .flatMap(candidate -> generatePlacements(board, candidate))
+        // .filter(placement -> board.isValid(placement))
+        // .peek(placement ->
+        // ((ValuedPlacementImpl)placement).setPoints(board.calculatePoints(placement)))
+        // .collect(Collectors.toCollection(() -> placements));
     }
 
     private static class LocatedCandidate
@@ -124,15 +127,11 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
         Dimension boardDimension = board.getDimension();
         TileSet tiles = board.getTiles();
 
-        for (int x = 0; x < boardDimension.getWidth(); x++)
-        {
-            for (int y = 0; y < boardDimension.getHeight(); y++)
-            {
-                for (int z = 0; z < boardDimension.getDepth(); z++)
-                {
+        for (int x = 0; x < boardDimension.getWidth(); x++) {
+            for (int y = 0; y < boardDimension.getHeight(); y++) {
+                for (int z = 0; z < boardDimension.getDepth(); z++) {
                     Location location = Location.at(x, y, z);
-                    if (tiles.getTile(location).hasPiece())
-                    {
+                    if (tiles.getTile(location).hasPiece()) {
                         continue;
                     }
 
@@ -148,8 +147,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
     {
         Builder<Orientation> builder = Stream.builder();
 
-        for (Orientation orientation : configuration.getOrientations())
-        {
+        for (Orientation orientation : configuration.getOrientations()) {
             builder.accept(orientation);
         }
 
@@ -160,8 +158,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
     {
         Builder<ValuedPlacement> builder = Stream.builder();
 
-        for (Orientation orientation : configuration.getOrientations())
-        {
+        for (Orientation orientation : configuration.getOrientations()) {
             ValuedPlacementImpl placement = new ValuedPlacementImpl();
             placement.setPieces(unwrap(lc.candidate));
             placement.setStartLocation(lc.location);
@@ -175,12 +172,10 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
 
     protected Stream<ValuedPlacement> generatePlacements(Board board, List<PieceWrapper> candidate)
     {
-        return generateLocations(board).flatMap(location ->
-        {
+        return generateLocations(board).flatMap(location -> {
             Builder<ValuedPlacement> builder = Stream.builder();
 
-            for (Orientation orientation : configuration.getOrientations())
-            {
+            for (Orientation orientation : configuration.getOrientations()) {
                 ValuedPlacementImpl placement = new ValuedPlacementImpl();
                 placement.setPieces(unwrap(candidate));
                 placement.setStartLocation(location);
@@ -197,11 +192,9 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
     {
         Collection<List<PieceWrapper>> candidates = new HashSet<List<PieceWrapper>>();
 
-        for (List<Piece> pieceGroup : getCombinationsAndPermutations(pieces))
-        {
+        for (List<Piece> pieceGroup : getCombinationsAndPermutations(pieces)) {
             for (List<PieceWrapper> expandedPieceGroup : expandWildcards(Collections.<PieceWrapper>emptyList(),
-                                                                         wrap(pieceGroup)))
-            {
+                                                                         wrap(pieceGroup))) {
                 candidates.add(expandedPieceGroup);
             }
         }
@@ -209,27 +202,23 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
         return candidates;
     }
 
-    protected Collection<List<PieceWrapper>> expandWildcards(List<PieceWrapper> prefix,
-                                                             List<PieceWrapper> list)
+    protected Collection<List<PieceWrapper>> expandWildcards(List<PieceWrapper> prefix, List<PieceWrapper> list)
     {
-        if (list.isEmpty())
-        {
+        if (list.isEmpty()) {
             return Collections.singleton(prefix);
         }
 
         PieceWrapper nextPiece = list.get(0);
         List<PieceWrapper> newList = list.subList(1, list.size());
 
-        if (!nextPiece.isWild())
-        {
+        if (!nextPiece.isWild()) {
             List<PieceWrapper> newPrefix = new ArrayList<PieceWrapper>(prefix);
             newPrefix.add(nextPiece);
             return expandWildcards(newPrefix, newList);
         }
 
         Collection<List<PieceWrapper>> expanded = new HashSet<List<PieceWrapper>>();
-        for (Letter expandedLetter : configuration.getLetterFactory().getLetters())
-        {
+        for (Letter expandedLetter : configuration.getLetterFactory().getLetters()) {
             PieceWrapper newPiece = nextPiece.copy();
             newPiece.setLetter(expandedLetter);
 
@@ -245,8 +234,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
     {
         List<PieceWrapper> wrapped = new ArrayList<PieceWrapper>();
 
-        for (Piece piece : pieces)
-        {
+        for (Piece piece : pieces) {
             wrapped.add(PieceWrapper.wrap(piece));
         }
 
@@ -257,8 +245,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
     {
         List<Piece> unwrapped = new ArrayList<Piece>();
 
-        for (PieceWrapper piece : pieces)
-        {
+        for (PieceWrapper piece : pieces) {
             unwrapped.add(piece.getPiece());
         }
 
@@ -270,8 +257,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
         Collection<List<T>> results = new HashSet<List<T>>(Collections2.permutations(list));
 
         int size = list.size();
-        for (int i = 0; i < size; i++)
-        {
+        for (int i = 0; i < size; i++) {
             List<T> newList = new ArrayList<T>();
             newList.addAll(list.subList(0, i));
             newList.addAll(list.subList(i + 1, size));

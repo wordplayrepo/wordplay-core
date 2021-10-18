@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.bot.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,6 +20,7 @@ import org.syphr.wordplay.core.LetterFactory;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Placement;
 import org.syphr.wordplay.core.ValuedPlacement;
+import org.syphr.wordplay.lang.english.EnglishLetter;
 
 import com.google.common.collect.Iterators;
 

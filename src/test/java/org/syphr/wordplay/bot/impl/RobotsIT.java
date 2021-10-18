@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.bot.impl;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,24 +8,24 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.syphr.wordplay.bot.Robot;
 import org.syphr.wordplay.core.Board;
 import org.syphr.wordplay.core.Configuration;
 import org.syphr.wordplay.core.Location;
 import org.syphr.wordplay.core.Piece;
-import org.syphr.wordplay.core.Robot;
 import org.syphr.wordplay.core.TileSet;
 import org.syphr.wordplay.core.TileSetFactory;
 import org.syphr.wordplay.core.ValuedPlacement;
-import org.syphr.wordplay.core.impl.AbstractRobot;
-import org.syphr.wordplay.core.impl.AbstractStreamRobot;
 import org.syphr.wordplay.core.impl.AbstractTileSet;
 import org.syphr.wordplay.core.impl.BoardImpl;
 import org.syphr.wordplay.core.impl.ConfigurationBuilder;
-import org.syphr.wordplay.core.impl.EnglishLetter;
-import org.syphr.wordplay.core.impl.HighestScoreStrategy;
 import org.syphr.wordplay.core.impl.RackImpl;
 import org.syphr.wordplay.core.impl.ScoreCalculatorImpl;
+import org.syphr.wordplay.core.impl.TestPiece;
 import org.syphr.wordplay.core.impl.WordFactoryImpl;
+import org.syphr.wordplay.lang.english.EnableDictionary;
+import org.syphr.wordplay.lang.english.EnglishLetter;
+import org.syphr.wordplay.lang.english.EnglishLetterFactory;
 
 @Ignore
 public class RobotsIT
@@ -37,7 +37,11 @@ public class RobotsIT
     @BeforeClass
     public static void setup()
     {
-        Configuration config = new ConfigurationBuilder().build();
+        Configuration config = new ConfigurationBuilder().letterFactory(new EnglishLetterFactory())
+                                                         .dictionary(new EnableDictionary())
+                                                         .allLetterCount(5)
+                                                         .allLetterValue(1)
+                                                         .build();
 
         robotThreaded = new AbstractRobot()
         {};

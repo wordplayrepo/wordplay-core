@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.bot.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +18,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.syphr.wordplay.bot.Robot;
+import org.syphr.wordplay.bot.RobotStrategy;
 import org.syphr.wordplay.core.Board;
 import org.syphr.wordplay.core.Configuration;
 import org.syphr.wordplay.core.Dimension;
@@ -26,10 +28,10 @@ import org.syphr.wordplay.core.Location;
 import org.syphr.wordplay.core.Orientation;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Placement;
-import org.syphr.wordplay.core.Robot;
-import org.syphr.wordplay.core.RobotStrategy;
 import org.syphr.wordplay.core.TileSet;
 import org.syphr.wordplay.core.ValuedPlacement;
+import org.syphr.wordplay.core.impl.PlayerImpl;
+import org.syphr.wordplay.core.impl.ValuedPlacementImpl;
 import org.syphr.wordplay.xsd.v1.PlayerType;
 
 import com.google.common.collect.Collections2;
@@ -90,8 +92,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
 
     protected ExecutorService getExecutor()
     {
-        if (executor == null)
-        {
+        if (executor == null) {
             executor = Executors.newCachedThreadPool(createThreadFactory());
         }
 
@@ -111,26 +112,23 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         placements.clear();
 
         Collection<List<PieceWrapper>> candidates = getPlacementCandidates(getRack().getPieces());
-        //        if (LOGGER.isTraceEnabled())
-        //        {
+        // if (LOGGER.isTraceEnabled())
+        // {
         LOGGER.info("Found {} possible combinations and permutations", candidates.size());
-        //        }
+        // }
 
         CompletionService<Collection<ValuedPlacement>> completionService = new ExecutorCompletionService<Collection<ValuedPlacement>>(getExecutor());
 
         Iterator<List<PieceWrapper>> candidateIter = candidates.iterator();
-        int groupSize = (int)Math.ceil((double)candidates.size() / (double)getMaxThreads());
-        for (int t = 0; t < getMaxThreads(); t++)
-        {
+        int groupSize = (int) Math.ceil((double) candidates.size() / (double) getMaxThreads());
+        for (int t = 0; t < getMaxThreads(); t++) {
             Collection<List<PieceWrapper>> candidateGroup = new ArrayList<List<PieceWrapper>>();
 
-            for (int c = t * groupSize; c < (t + 1) * groupSize && candidateIter.hasNext(); c++)
-            {
+            for (int c = t * groupSize; c < (t + 1) * groupSize && candidateIter.hasNext(); c++) {
                 candidateGroup.add(candidateIter.next());
             }
 
-            if (LOGGER.isTraceEnabled())
-            {
+            if (LOGGER.isTraceEnabled()) {
                 LOGGER.trace("Candidate group {} contains {} entries", t, candidateGroup.size());
             }
 
@@ -138,26 +136,18 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         }
         assert (!candidateIter.hasNext());
 
-        for (int i = 0; i < getMaxThreads(); i++)
-        {
-            try
-            {
+        for (int i = 0; i < getMaxThreads(); i++) {
+            try {
                 placements.addAll(completionService.take().get());
-            }
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 throw new IllegalStateException(e.getMessage(), e);
-            }
-            catch (ExecutionException e)
-            {
+            } catch (ExecutionException e) {
                 throw new IllegalStateException(e.getMessage(), e);
             }
         }
 
-        if (LOGGER.isTraceEnabled())
-        {
-            for (ValuedPlacement placement : placements)
-            {
+        if (LOGGER.isTraceEnabled()) {
+            for (ValuedPlacement placement : placements) {
                 LOGGER.trace("{}\t{}", placement.getPoints(), placement.getPieces());
             }
         }
@@ -177,60 +167,41 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
                 Dimension boardDimension = board.getDimension();
                 TileSet tiles = board.getTiles();
 
-                for (int x = 0; x < boardDimension.getWidth(); x++)
-                {
-                    for (int y = 0; y < boardDimension.getHeight(); y++)
-                    {
-                        for (int z = 0; z < boardDimension.getDepth(); z++)
-                        {
-                            if (Thread.interrupted())
-                            {
+                for (int x = 0; x < boardDimension.getWidth(); x++) {
+                    for (int y = 0; y < boardDimension.getHeight(); y++) {
+                        for (int z = 0; z < boardDimension.getDepth(); z++) {
+                            if (Thread.interrupted()) {
                                 return placements;
                             }
 
                             Location location = Location.at(x, y, z);
-                            if (tiles.getTile(location).hasPiece())
-                            {
+                            if (tiles.getTile(location).hasPiece()) {
                                 continue;
                             }
 
-                            for (List<PieceWrapper> candidate : candidates)
-                            {
-                                for (Orientation orientation : configuration.getOrientations())
-                                {
+                            for (List<PieceWrapper> candidate : candidates) {
+                                for (Orientation orientation : configuration.getOrientations()) {
                                     ValuedPlacementImpl placement = new ValuedPlacementImpl();
                                     placement.setPieces(unwrap(candidate));
                                     placement.setStartLocation(location);
                                     placement.setOrientation(orientation);
 
                                     /*
-                                     * If this placement is the same as another
-                                     * accepted placement, there is no need to
-                                     * check it. This can happen because the
-                                     * pieces have been wrapped to allow piece
-                                     * groups that only differ by the wildcard
-                                     * letter selected to be added together so
-                                     * they can each be tested. However, if the
-                                     * only difference between two valid
-                                     * placements is the letter selected for a
-                                     * wildcard, there is no scoring difference
-                                     * and so it can be skipped.
-                                     *
-                                     * For future strategy consideration, the
-                                     * letter selected may impact future turns
-                                     * for both this player and the opponent(s).
-                                     * Applying some sort of ranking mechanism
-                                     * to each letter would allow a more
-                                     * strategic wildcard selection to override
-                                     * another.
+                                     * If this placement is the same as another accepted placement, there is no need
+                                     * to check it. This can happen because the pieces have been wrapped to allow
+                                     * piece groups that only differ by the wildcard letter selected to be added
+                                     * together so they can each be tested. However, if the only difference between
+                                     * two valid placements is the letter selected for a wildcard, there is no
+                                     * scoring difference and so it can be skipped. For future strategy
+                                     * consideration, the letter selected may impact future turns for both this
+                                     * player and the opponent(s). Applying some sort of ranking mechanism to each
+                                     * letter would allow a more strategic wildcard selection to override another.
                                      */
-                                    if (placements.contains(placement))
-                                    {
+                                    if (placements.contains(placement)) {
                                         continue;
                                     }
 
-                                    if (board.isValid(placement))
-                                    {
+                                    if (board.isValid(placement)) {
                                         placement.setPoints(board.calculatePoints(placement));
                                         placements.add(placement);
                                     }
@@ -249,11 +220,9 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
     {
         Collection<List<PieceWrapper>> candidates = new HashSet<List<PieceWrapper>>();
 
-        for (List<Piece> pieceGroup : getCombinationsAndPermutations(pieces))
-        {
+        for (List<Piece> pieceGroup : getCombinationsAndPermutations(pieces)) {
             for (List<PieceWrapper> expandedPieceGroup : expandWildcards(Collections.<PieceWrapper>emptyList(),
-                                                                         wrap(pieceGroup)))
-            {
+                                                                         wrap(pieceGroup))) {
                 candidates.add(expandedPieceGroup);
             }
         }
@@ -261,27 +230,23 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         return candidates;
     }
 
-    protected Collection<List<PieceWrapper>> expandWildcards(List<PieceWrapper> prefix,
-                                                             List<PieceWrapper> list)
+    protected Collection<List<PieceWrapper>> expandWildcards(List<PieceWrapper> prefix, List<PieceWrapper> list)
     {
-        if (list.isEmpty())
-        {
+        if (list.isEmpty()) {
             return Collections.singleton(prefix);
         }
 
         PieceWrapper nextPiece = list.get(0);
         List<PieceWrapper> newList = list.subList(1, list.size());
 
-        if (!nextPiece.isWild())
-        {
+        if (!nextPiece.isWild()) {
             List<PieceWrapper> newPrefix = new ArrayList<PieceWrapper>(prefix);
             newPrefix.add(nextPiece);
             return expandWildcards(newPrefix, newList);
         }
 
         Collection<List<PieceWrapper>> expanded = new HashSet<List<PieceWrapper>>();
-        for (Letter expandedLetter : configuration.getLetterFactory().getLetters())
-        {
+        for (Letter expandedLetter : configuration.getLetterFactory().getLetters()) {
             PieceWrapper newPiece = nextPiece.copy();
             newPiece.setLetter(expandedLetter);
 
@@ -297,8 +262,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
     {
         List<PieceWrapper> wrapped = new ArrayList<PieceWrapper>();
 
-        for (Piece piece : pieces)
-        {
+        for (Piece piece : pieces) {
             wrapped.add(PieceWrapper.wrap(piece));
         }
 
@@ -309,8 +273,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
     {
         List<Piece> unwrapped = new ArrayList<Piece>();
 
-        for (PieceWrapper piece : pieces)
-        {
+        for (PieceWrapper piece : pieces) {
             unwrapped.add(piece.getPiece());
         }
 
@@ -322,8 +285,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         Collection<List<T>> results = new HashSet<List<T>>(Collections2.permutations(list));
 
         int size = list.size();
-        for (int i = 0; i < size; i++)
-        {
+        for (int i = 0; i < size; i++) {
             List<T> newList = new ArrayList<T>();
             newList.addAll(list.subList(0, i));
             newList.addAll(list.subList(i + 1, size));
@@ -349,12 +311,12 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
 
     /**
      * Pieces are normally implemented such that wildcards are considered equal.
-     * This is because a wildcard has no letter by definition, even though one
-     * will be selected when it is placed on the board for validating word
-     * choice. However, when testing all possibilities for the robot, the
-     * wildcards are expanded to all possible letter choices to test for valid
-     * words. Therefore, in this use case two wildcards with the different
-     * letters must be treated as unequal objects until the testing is complete.
+     * This is because a wildcard has no letter by definition, even though one will
+     * be selected when it is placed on the board for validating word choice.
+     * However, when testing all possibilities for the robot, the wildcards are
+     * expanded to all possible letter choices to test for valid words. Therefore,
+     * in this use case two wildcards with the different letters must be treated as
+     * unequal objects until the testing is complete.
      *
      * @author Gregory P. Moyer
      */
@@ -418,36 +380,28 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         {
             final int prime = 31;
             int result = 1;
-            result = prime * result
-                     + ((delegate.getLetter() == null) ? 0 : delegate.getLetter().hashCode());
+            result = prime * result + ((delegate.getLetter() == null) ? 0 : delegate.getLetter().hashCode());
             return result;
         }
 
         @Override
         public boolean equals(Object obj)
         {
-            if (this == obj)
-            {
+            if (this == obj) {
                 return true;
             }
-            if (obj == null)
-            {
+            if (obj == null) {
                 return false;
             }
-            if (getClass() != obj.getClass())
-            {
+            if (getClass() != obj.getClass()) {
                 return false;
             }
-            PieceWrapper other = (PieceWrapper)obj;
-            if (delegate.getLetter() == null)
-            {
-                if (other.getPiece().getLetter() != null)
-                {
+            PieceWrapper other = (PieceWrapper) obj;
+            if (delegate.getLetter() == null) {
+                if (other.getPiece().getLetter() != null) {
                     return false;
                 }
-            }
-            else if (!delegate.getLetter().equals(other.getPiece().getLetter()))
-            {
+            } else if (!delegate.getLetter().equals(other.getPiece().getLetter())) {
                 return false;
             }
             return true;
@@ -456,9 +410,9 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
 
     /**
      * This class is almost identical to the default thread factory in
-     * {@link Executors}, except that the threads are marked as daemon so that
-     * they do not prevent JVM shutdown and the threads are named uniquely to
-     * this utility class.
+     * {@link Executors}, except that the threads are marked as daemon so that they
+     * do not prevent JVM shutdown and the threads are named uniquely to this
+     * utility class.
      */
     private static class DaemonThreadFactory implements ThreadFactory
     {
@@ -472,22 +426,19 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         {
             SecurityManager s = System.getSecurityManager();
             group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
-            namePrefix = AbstractRobot.class.getSimpleName()
-                         + " Thread Pool "
-                         + POOL_NUMBER.getAndIncrement()
-                         + ", Thread ";
+            namePrefix = AbstractRobot.class.getSimpleName() + " Thread Pool " +
+                         POOL_NUMBER.getAndIncrement() +
+                         ", Thread ";
         }
 
         @Override
         public Thread newThread(Runnable r)
         {
             Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
-            if (!t.isDaemon())
-            {
+            if (!t.isDaemon()) {
                 t.setDaemon(true);
             }
-            if (t.getPriority() != Thread.NORM_PRIORITY)
-            {
+            if (t.getPriority() != Thread.NORM_PRIORITY) {
                 t.setPriority(Thread.NORM_PRIORITY);
             }
 

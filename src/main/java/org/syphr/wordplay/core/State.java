@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
+import org.syphr.wordplay.bot.Robot;
+import org.syphr.wordplay.bot.RobotStrategy;
 import org.syphr.wordplay.core.impl.JaxbUtils;
 import org.syphr.wordplay.xsd.v1.PieceType;
 import org.syphr.wordplay.xsd.v1.PlayerType;
@@ -119,6 +121,7 @@ public class State
                     playersInfo.addLetter(player.getId(), piece.getLetter());
                 }
 
+                // TODO remove reference to Robot & RobotStrategy from the core
                 if (player instanceof Robot) {
                     Robot robot = (Robot) player;
                     robot.setConfiguration(getConfiguration());

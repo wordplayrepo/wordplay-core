@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.bot.impl;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -8,8 +8,8 @@ import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.syphr.wordplay.bot.RobotStrategy;
 import org.syphr.wordplay.core.Piece;
-import org.syphr.wordplay.core.RobotStrategy;
 import org.syphr.wordplay.core.ValuedPlacement;
 
 public class HighestScoreStrategy implements RobotStrategy

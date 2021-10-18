@@ -14,7 +14,7 @@ import org.syphr.wordplay.core.LetterFactory;
 import org.syphr.wordplay.core.Location;
 import org.syphr.wordplay.core.Orientation;
 import org.syphr.wordplay.core.TileAttribute;
-import org.syphr.wordplay.core.impl.EnglishLetterFactory;
+import org.syphr.wordplay.lang.english.EnglishLetterFactory;
 
 public class TestConfiguration implements Configuration
 {

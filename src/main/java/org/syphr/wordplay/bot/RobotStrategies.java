@@ -1,11 +1,11 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.bot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.syphr.wordplay.core.impl.HighestScoreStrategy;
-import org.syphr.wordplay.core.impl.RandomSelectionStrategy;
-import org.syphr.wordplay.core.impl.SaveEnablingLettersStrategy;
+import org.syphr.wordplay.bot.impl.HighestScoreStrategy;
+import org.syphr.wordplay.bot.impl.RandomSelectionStrategy;
+import org.syphr.wordplay.bot.impl.SaveEnablingLettersStrategy;
 
 // TODO huge problem here - strategies are not immutable
 public class RobotStrategies

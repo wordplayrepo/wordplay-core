@@ -19,13 +19,13 @@ import org.syphr.wordplay.core.TileAttribute;
 
 public class ConfigurationBuilder
 {
-    private Dimension boardDimension;
-    private Location boardStart;
-    private Set<Orientation> orientations;
-    private Map<Location, Set<TileAttribute>> tileAttributes;
+    private Dimension boardDimension = Dimension.of(9, 9);
+    private Location boardStart = Location.at(4, 4);
+    private Set<Orientation> orientations = Orientations.setOf(Orientations.x(), Orientations.y());
+    private Map<Location, Set<TileAttribute>> tileAttributes = new HashMap<>();
 
-    private int rackSize;
-    private int rackBonus;
+    private int rackSize = 5;
+    private int rackBonus = 0;
 
     private LetterFactory letterFactory;
     private Dictionary dictionary;
@@ -33,13 +33,7 @@ public class ConfigurationBuilder
     private Map<Letter, Integer> letterCounts;
     private Map<Letter, Integer> letterValues;
 
-    private Map<String, Object> extensions;
-
-    public ConfigurationBuilder()
-    {
-        super();
-        reset();
-    }
+    private Map<String, Object> extensions = new HashMap<>();
 
     public Configuration build()
     {
@@ -54,32 +48,7 @@ public class ConfigurationBuilder
                                                      letterCounts,
                                                      letterValues,
                                                      extensions);
-        reset();
         return config;
-    }
-
-    private void reset()
-    {
-        boardDimension = Dimension.of(9, 9);
-        boardStart = Location.at(4, 4);
-        orientations = Orientations.setOf(Orientations.x(), Orientations.y());
-        tileAttributes = new HashMap<>();
-
-        rackSize = 5;
-        rackBonus = 0;
-
-        letterFactory = new EnglishLetterFactory();
-        dictionary = new EnableDictionary();
-
-        defaultLetterCountsAndValues();
-
-        extensions = new HashMap<>();
-    }
-
-    private void defaultLetterCountsAndValues()
-    {
-        allLetterCount(5);
-        allLetterValue(1);
     }
 
     public ConfigurationBuilder boardDimension(Dimension dimension)
@@ -103,8 +72,7 @@ public class ConfigurationBuilder
     public ConfigurationBuilder tileAttribute(Location location, TileAttribute attribute)
     {
         Set<TileAttribute> attributes = tileAttributes.get(location);
-        if (attributes == null)
-        {
+        if (attributes == null) {
             attributes = new HashSet<>();
             tileAttributes.put(location, attributes);
         }
@@ -147,8 +115,7 @@ public class ConfigurationBuilder
 
     public ConfigurationBuilder allLetterCount(int count)
     {
-        letterCounts = letterFactory.getLetters().stream().collect(Collectors.toMap(Function.identity(),
-                                                                                    l -> count));
+        letterCounts = letterFactory.getLetters().stream().collect(Collectors.toMap(Function.identity(), l -> count));
         return this;
     }
 
@@ -160,8 +127,7 @@ public class ConfigurationBuilder
 
     public ConfigurationBuilder allLetterValue(int value)
     {
-        letterValues = letterFactory.getLetters().stream().collect(Collectors.toMap(Function.identity(),
-                                                                                    l -> value));
+        letterValues = letterFactory.getLetters().stream().collect(Collectors.toMap(Function.identity(), l -> value));
         return this;
     }
 

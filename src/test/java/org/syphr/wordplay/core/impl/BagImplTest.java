@@ -13,7 +13,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
-import java.util.Random;
+import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 
 import org.junit.Before;
@@ -28,7 +28,6 @@ import org.syphr.wordplay.core.NoSuchPieceException;
 import org.syphr.wordplay.core.NotEnoughPiecesException;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.PieceFactory;
-import org.syphr.wordplay.core.impl.BagImpl;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
@@ -40,7 +39,7 @@ public class BagImplTest
     PieceFactory pieceFactory;
 
     @Mock
-    Random random;
+    RandomGenerator random;
 
     @Before
     public void setup()

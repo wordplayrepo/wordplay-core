@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import org.syphr.wordplay.core.RobotStrategy;
 import org.syphr.wordplay.core.ValuedPlacement;
 
 public class RandomSelectionStrategy implements RobotStrategy
 {
-    private final Random rng = new Random();
+    private final RandomGenerator rng = new Random();
 
     private final List<ValuedPlacement> placements = new ArrayList<ValuedPlacement>();
 
@@ -23,8 +24,7 @@ public class RandomSelectionStrategy implements RobotStrategy
     @Override
     public ValuedPlacement selectPlacement()
     {
-        if (placements.isEmpty())
-        {
+        if (placements.isEmpty()) {
             return null;
         }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import org.syphr.wordplay.core.Bag;
 import org.syphr.wordplay.core.Letter;
@@ -23,7 +24,7 @@ public class BagImpl implements Bag
 {
     private final Multiset<Letter> letters;
     private final PieceFactory pieceFactory;
-    private final Random random;
+    private final RandomGenerator random;
 
     public BagImpl(Multiset<Letter> letters, PieceFactory pieceFactory)
     {

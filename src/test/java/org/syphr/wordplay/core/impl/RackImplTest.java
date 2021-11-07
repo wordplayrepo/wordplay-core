@@ -14,8 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.syphr.wordplay.core.Bag;
 import org.syphr.wordplay.core.NotEnoughPiecesException;
-import org.syphr.wordplay.core.Piece;
-import org.syphr.wordplay.core.impl.RackImpl;
+import org.syphr.wordplay.core.board.Piece;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RackImplTest

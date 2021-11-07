@@ -14,9 +14,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.syphr.wordplay.core.Piece;
-import org.syphr.wordplay.core.Placement;
-import org.syphr.wordplay.core.ValuedPlacement;
+import org.syphr.wordplay.core.board.Piece;
+import org.syphr.wordplay.core.board.Placement;
+import org.syphr.wordplay.core.board.ValuedPlacement;
 import org.syphr.wordplay.core.config.Configuration;
 import org.syphr.wordplay.core.lang.Letter;
 import org.syphr.wordplay.core.lang.LetterFactory;

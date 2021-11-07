@@ -9,6 +9,8 @@ import javax.xml.namespace.QName;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.syphr.wordplay.core.board.Piece;
+import org.syphr.wordplay.core.board.Tile;
 import org.syphr.wordplay.core.config.Configurations;
 import org.syphr.wordplay.core.xml.JaxbFactory;
 import org.syphr.wordplay.core.xml.JaxbUtils;

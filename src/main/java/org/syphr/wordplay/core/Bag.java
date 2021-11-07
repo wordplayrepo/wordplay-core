@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.board.Piece;
 import org.syphr.wordplay.core.lang.Letter;
 
 /**

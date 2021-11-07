@@ -5,11 +5,11 @@ import java.util.UUID;
 
 import javax.xml.namespace.QName;
 
-import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Player;
 import org.syphr.wordplay.core.Rack;
 import org.syphr.wordplay.core.SchemaVersion;
 import org.syphr.wordplay.core.UnsupportedSchemaVersionException;
+import org.syphr.wordplay.core.board.Piece;
 import org.syphr.wordplay.core.lang.Letter;
 import org.syphr.wordplay.core.xml.JaxbFactory;
 

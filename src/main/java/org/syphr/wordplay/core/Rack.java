@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.board.Piece;
+
 /**
  * A rack represents a player's current set of playable pieces.
  * 

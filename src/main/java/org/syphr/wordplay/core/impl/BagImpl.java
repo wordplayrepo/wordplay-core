@@ -9,8 +9,8 @@ import java.util.random.RandomGenerator;
 import org.syphr.wordplay.core.Bag;
 import org.syphr.wordplay.core.NoSuchPieceException;
 import org.syphr.wordplay.core.NotEnoughPiecesException;
-import org.syphr.wordplay.core.Piece;
-import org.syphr.wordplay.core.PieceFactory;
+import org.syphr.wordplay.core.board.Piece;
+import org.syphr.wordplay.core.board.PieceFactory;
 import org.syphr.wordplay.core.lang.Letter;
 
 import com.google.common.collect.Multiset;

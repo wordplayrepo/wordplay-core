@@ -9,8 +9,8 @@ import java.util.TreeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.syphr.wordplay.bot.RobotStrategy;
-import org.syphr.wordplay.core.Piece;
-import org.syphr.wordplay.core.ValuedPlacement;
+import org.syphr.wordplay.core.board.Piece;
+import org.syphr.wordplay.core.board.ValuedPlacement;
 
 public class HighestScoreStrategy implements RobotStrategy
 {

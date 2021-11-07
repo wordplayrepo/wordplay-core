@@ -10,6 +10,8 @@ import java.util.UUID;
 
 import org.syphr.wordplay.bot.Robot;
 import org.syphr.wordplay.bot.RobotStrategy;
+import org.syphr.wordplay.core.board.Board;
+import org.syphr.wordplay.core.board.Piece;
 import org.syphr.wordplay.core.config.Configuration;
 import org.syphr.wordplay.core.config.Configurations;
 import org.syphr.wordplay.core.lang.Letter;

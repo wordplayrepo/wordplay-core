@@ -7,8 +7,8 @@ import java.util.List;
 import org.syphr.wordplay.core.Bag;
 import org.syphr.wordplay.core.NoSuchPieceException;
 import org.syphr.wordplay.core.NotEnoughPiecesException;
-import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Rack;
+import org.syphr.wordplay.core.board.Piece;
 
 import lombok.RequiredArgsConstructor;
 

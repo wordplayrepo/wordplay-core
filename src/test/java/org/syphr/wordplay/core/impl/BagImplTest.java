@@ -25,8 +25,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 import org.syphr.wordplay.core.NoSuchPieceException;
 import org.syphr.wordplay.core.NotEnoughPiecesException;
-import org.syphr.wordplay.core.Piece;
-import org.syphr.wordplay.core.PieceFactory;
+import org.syphr.wordplay.core.board.Piece;
+import org.syphr.wordplay.core.board.PieceFactory;
 import org.syphr.wordplay.core.lang.Letter;
 
 import com.google.common.collect.HashMultiset;

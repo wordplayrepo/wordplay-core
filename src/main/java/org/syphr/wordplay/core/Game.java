@@ -6,6 +6,9 @@ import java.util.UUID;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.board.Board;
+import org.syphr.wordplay.core.board.Placement;
+import org.syphr.wordplay.core.board.PlacementException;
 import org.syphr.wordplay.core.config.Configuration;
 
 /**

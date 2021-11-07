@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.random.RandomGenerator;
 
 import org.syphr.wordplay.bot.RobotStrategy;
-import org.syphr.wordplay.core.ValuedPlacement;
+import org.syphr.wordplay.core.board.ValuedPlacement;
 
 public class RandomSelectionStrategy implements RobotStrategy
 {

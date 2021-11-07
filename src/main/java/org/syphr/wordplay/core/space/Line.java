@@ -1,13 +1,10 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.space;
 
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
 import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.ThreadSafe;
-
-import org.syphr.wordplay.core.space.Distance;
-import org.syphr.wordplay.core.space.Location;
 
 @ThreadSafe
 @Immutable

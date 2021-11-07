@@ -1,9 +1,7 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.space;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.syphr.wordplay.core.Line;
-import org.syphr.wordplay.core.space.Location;
 
 public class LineTest
 {

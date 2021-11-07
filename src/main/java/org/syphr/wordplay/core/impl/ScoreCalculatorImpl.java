@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.syphr.wordplay.core.Line;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.ScoreCalculator;
 import org.syphr.wordplay.core.Tile;
 import org.syphr.wordplay.core.Word;
 import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.space.Distance;
+import org.syphr.wordplay.core.space.Line;
 import org.syphr.wordplay.core.space.Location;
 
 import java.util.Set;

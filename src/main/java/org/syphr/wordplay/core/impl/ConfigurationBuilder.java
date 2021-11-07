@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 
 import org.syphr.wordplay.core.Configuration;
 import org.syphr.wordplay.core.Dictionary;
-import org.syphr.wordplay.core.Dimension;
 import org.syphr.wordplay.core.Letter;
 import org.syphr.wordplay.core.LetterFactory;
-import org.syphr.wordplay.core.Location;
-import org.syphr.wordplay.core.Orientation;
-import org.syphr.wordplay.core.Orientations;
 import org.syphr.wordplay.core.TileAttribute;
+import org.syphr.wordplay.core.space.Dimension;
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
+import org.syphr.wordplay.core.space.Orientations;
 
 public class ConfigurationBuilder
 {

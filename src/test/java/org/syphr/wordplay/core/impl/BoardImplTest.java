@@ -32,12 +32,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 import org.syphr.wordplay.core.Dictionary;
-import org.syphr.wordplay.core.Dimension;
 import org.syphr.wordplay.core.InvalidLocationException;
 import org.syphr.wordplay.core.InvalidWordException;
-import org.syphr.wordplay.core.Location;
-import org.syphr.wordplay.core.Orientation;
-import org.syphr.wordplay.core.Orientations;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Placement;
 import org.syphr.wordplay.core.PlacementException;
@@ -46,11 +42,15 @@ import org.syphr.wordplay.core.Tile;
 import org.syphr.wordplay.core.TileAttribute;
 import org.syphr.wordplay.core.TileSet;
 import org.syphr.wordplay.core.TileSetFactory;
-import org.syphr.wordplay.core.Vector;
 import org.syphr.wordplay.core.Word;
 import org.syphr.wordplay.core.WordFactory;
 import org.syphr.wordplay.core.impl.BoardImpl;
 import org.syphr.wordplay.core.impl.PlacementImpl;
+import org.syphr.wordplay.core.space.Dimension;
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
+import org.syphr.wordplay.core.space.Orientations;
+import org.syphr.wordplay.core.space.Vector;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BoardImplTest

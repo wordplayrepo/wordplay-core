@@ -4,6 +4,10 @@ import java.util.Set;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.space.Dimension;
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
+
 /**
  * A board represents the playing area for a game. It consists of a set of tiles
  * on which placements of pieces can be made. These tiles can also have other

@@ -7,11 +7,8 @@ import java.util.Map.Entry;
 
 import org.syphr.wordplay.core.Board;
 import org.syphr.wordplay.core.Dictionary;
-import org.syphr.wordplay.core.Dimension;
 import org.syphr.wordplay.core.InvalidLocationException;
 import org.syphr.wordplay.core.InvalidWordException;
-import org.syphr.wordplay.core.Location;
-import org.syphr.wordplay.core.Orientation;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Placement;
 import org.syphr.wordplay.core.ScoreCalculator;
@@ -20,6 +17,9 @@ import org.syphr.wordplay.core.TileSet;
 import org.syphr.wordplay.core.TileSetFactory;
 import org.syphr.wordplay.core.Word;
 import org.syphr.wordplay.core.WordFactory;
+import org.syphr.wordplay.core.space.Dimension;
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
 
 import java.util.Set;
 import java.util.SortedMap;

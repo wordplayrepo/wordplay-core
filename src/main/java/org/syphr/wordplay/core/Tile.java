@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.space.Location;
+
 /**
  * A tile represents a location on the game board that can be occupied by a
  * piece.

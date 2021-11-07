@@ -1,8 +1,8 @@
 package org.syphr.wordplay.core.impl;
 
-import org.syphr.wordplay.core.Location;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.SinglePlacement;
+import org.syphr.wordplay.core.space.Location;
 
 public class SinglePlacementImpl implements SinglePlacement
 {

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.syphr.wordplay.core.Dimension;
-import org.syphr.wordplay.core.Location;
+import org.syphr.wordplay.core.space.Dimension;
+import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.xsd.v1.ClassType;
 import org.syphr.wordplay.xsd.v1.DimensionType;
 import org.syphr.wordplay.xsd.v1.ExtensionType;

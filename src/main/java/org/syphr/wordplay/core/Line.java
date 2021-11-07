@@ -6,6 +6,9 @@ import java.util.TreeSet;
 import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.ThreadSafe;
 
+import org.syphr.wordplay.core.space.Distance;
+import org.syphr.wordplay.core.space.Location;
+
 @ThreadSafe
 @Immutable
 public class Line

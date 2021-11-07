@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.syphr.wordplay.core.impl.MultiplierAttribute;
+import org.syphr.wordplay.core.space.Distances;
 
 public class TileAttributes
 {

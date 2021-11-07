@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.syphr.wordplay.core.impl.ConfigurationBuilder;
+import org.syphr.wordplay.core.space.Dimension;
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
 
 public interface Configuration
 {

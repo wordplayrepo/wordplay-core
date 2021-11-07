@@ -3,10 +3,10 @@ package org.syphr.wordplay.core.impl;
 import java.util.Collections;
 import java.util.SortedSet;
 
-import org.syphr.wordplay.core.Location;
-import org.syphr.wordplay.core.Orientation;
 import org.syphr.wordplay.core.Tile;
 import org.syphr.wordplay.core.Word;
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
 
 public class WordImpl implements Word
 {

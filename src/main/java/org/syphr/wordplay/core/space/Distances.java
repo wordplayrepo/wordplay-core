@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.space;
 
 public class Distances
 {

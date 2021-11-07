@@ -1,36 +1,31 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.space;
 
-import javax.annotation.concurrent.Immutable;
-import javax.annotation.concurrent.ThreadSafe;
-
-@ThreadSafe
-@Immutable
-public class Vector implements Comparable<Vector>
+public class Distance implements Comparable<Distance>
 {
     private final int x;
     private final int y;
     private final int z;
 
-    public static Vector of(int x, int y)
+    public static Distance of(int x, int y)
     {
         return of(x, y, 0);
     }
 
-    public static Vector of(int x, int y, int z)
+    public static Distance of(int x, int y, int z)
     {
-        return new Vector(x, y, z);
+        return new Distance(x, y, z);
     }
 
-    public static Vector from(Location start, Location end)
+    public static Distance between(Location start, Location end)
     {
         return of(end.getX() - start.getX(), end.getY() - start.getY(), end.getZ() - start.getZ());
     }
 
-    protected Vector(int x, int y, int z)
+    protected Distance(int x, int y, int z)
     {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.x = Math.abs(x);
+        this.y = Math.abs(y);
+        this.z = Math.abs(z);
     }
 
     public int getX()
@@ -48,11 +43,16 @@ public class Vector implements Comparable<Vector>
         return z;
     }
 
+    public boolean isWithin(Distance distance)
+    {
+        return x <= distance.getX() && y <= distance.getY() && z <= distance.getZ();
+    }
+
     @Override
     public String toString()
     {
         StringBuilder builder = new StringBuilder();
-        builder.append("Vector [x=");
+        builder.append("Distance [x=");
         builder.append(x);
         builder.append(", y=");
         builder.append(y);
@@ -88,7 +88,7 @@ public class Vector implements Comparable<Vector>
         {
             return false;
         }
-        Vector other = (Vector)obj;
+        Distance other = (Distance)obj;
         if (x != other.x)
         {
             return false;
@@ -105,7 +105,7 @@ public class Vector implements Comparable<Vector>
     }
 
     @Override
-    public int compareTo(Vector o)
+    public int compareTo(Distance o)
     {
         int compare = x - o.x;
         if (compare != 0)

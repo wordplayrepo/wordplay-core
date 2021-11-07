@@ -17,16 +17,16 @@ import org.syphr.wordplay.bot.RobotStrategy;
 import org.syphr.wordplay.bot.impl.AbstractRobot.PieceWrapper;
 import org.syphr.wordplay.core.Board;
 import org.syphr.wordplay.core.Configuration;
-import org.syphr.wordplay.core.Dimension;
 import org.syphr.wordplay.core.Letter;
-import org.syphr.wordplay.core.Location;
-import org.syphr.wordplay.core.Orientation;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Placement;
 import org.syphr.wordplay.core.TileSet;
 import org.syphr.wordplay.core.ValuedPlacement;
 import org.syphr.wordplay.core.impl.PlayerImpl;
 import org.syphr.wordplay.core.impl.ValuedPlacementImpl;
+import org.syphr.wordplay.core.space.Dimension;
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
 
 import com.google.common.collect.Collections2;
 

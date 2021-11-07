@@ -7,6 +7,8 @@ import java.util.SortedMap;
 
 import javax.annotation.concurrent.ThreadSafe;
 
+import org.syphr.wordplay.core.space.Location;
+
 /**
  * The calculator determines the score for a given placement of pieces on tiles.
  * 

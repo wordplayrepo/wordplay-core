@@ -2,10 +2,10 @@ package org.syphr.wordplay.core.impl;
 
 import java.util.List;
 
-import org.syphr.wordplay.core.Location;
-import org.syphr.wordplay.core.Orientation;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Placement;
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

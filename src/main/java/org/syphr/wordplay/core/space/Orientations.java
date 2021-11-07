@@ -1,12 +1,8 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.space;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.syphr.wordplay.core.impl.XOrientation;
-import org.syphr.wordplay.core.impl.YOrientation;
-import org.syphr.wordplay.core.impl.ZOrientation;
 
 import com.google.common.collect.Sets;
 

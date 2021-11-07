@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.annotation.concurrent.ThreadSafe;
 
+import org.syphr.wordplay.core.space.Location;
+
 /**
  * A tile set is a collection of tiles belonging to a board.
  * 

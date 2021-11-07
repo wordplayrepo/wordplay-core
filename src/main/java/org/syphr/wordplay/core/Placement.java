@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
+
 /**
  * A placement is a specific grouping of pieces with a location and orientation.
  * 

@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.space;
 
 import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.ThreadSafe;

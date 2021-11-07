@@ -1,7 +1,7 @@
 package org.syphr.wordplay.core.impl;
 
-import org.syphr.wordplay.core.Distance;
 import org.syphr.wordplay.core.TileAttribute;
+import org.syphr.wordplay.core.space.Distance;
 
 public class MultiplierAttribute implements TileAttribute
 {

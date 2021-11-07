@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.syphr.wordplay.core.Location;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Tile;
 import org.syphr.wordplay.core.TileAttribute;
+import org.syphr.wordplay.core.space.Location;
 
 public class TileImpl implements Tile
 {

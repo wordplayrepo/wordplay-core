@@ -5,6 +5,9 @@ import java.util.SortedSet;
 import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.ThreadSafe;
 
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
+
 /**
  * A word is set of adjacent tiles that are occupied by pieces.
  * 

@@ -1,31 +1,31 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.space;
 
-public class Distance implements Comparable<Distance>
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.ThreadSafe;
+
+@ThreadSafe
+@Immutable
+public class Location implements Comparable<Location>
 {
     private final int x;
     private final int y;
     private final int z;
 
-    public static Distance of(int x, int y)
+    public static Location at(int x, int y)
     {
-        return of(x, y, 0);
+        return at(x, y, 0);
     }
 
-    public static Distance of(int x, int y, int z)
+    public static Location at(int x, int y, int z)
     {
-        return new Distance(x, y, z);
+        return new Location(x, y, z);
     }
 
-    public static Distance between(Location start, Location end)
+    protected Location(int x, int y, int z)
     {
-        return of(end.getX() - start.getX(), end.getY() - start.getY(), end.getZ() - start.getZ());
-    }
-
-    protected Distance(int x, int y, int z)
-    {
-        this.x = Math.abs(x);
-        this.y = Math.abs(y);
-        this.z = Math.abs(z);
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
     public int getX()
@@ -43,16 +43,27 @@ public class Distance implements Comparable<Distance>
         return z;
     }
 
-    public boolean isWithin(Distance distance)
+    public Location move(Vector vector)
     {
-        return x <= distance.getX() && y <= distance.getY() && z <= distance.getZ();
+        return Location.at(x + vector.getX(), y + vector.getY(), z + vector.getZ());
+    }
+
+    public boolean isWithin(Distance distance, Location location)
+    {
+        int otherX = location.getX();
+        int otherY = location.getY();
+        int otherZ = location.getZ();
+
+        return Math.abs(x - otherX) <= distance.getX()
+                && Math.abs(y - otherY) <= distance.getY()
+                && Math.abs(z - otherZ) <= distance.getZ();
     }
 
     @Override
     public String toString()
     {
         StringBuilder builder = new StringBuilder();
-        builder.append("Distance [x=");
+        builder.append("Location [x=");
         builder.append(x);
         builder.append(", y=");
         builder.append(y);
@@ -88,7 +99,7 @@ public class Distance implements Comparable<Distance>
         {
             return false;
         }
-        Distance other = (Distance)obj;
+        Location other = (Location)obj;
         if (x != other.x)
         {
             return false;
@@ -105,7 +116,7 @@ public class Distance implements Comparable<Distance>
     }
 
     @Override
-    public int compareTo(Distance o)
+    public int compareTo(Location o)
     {
         int compare = x - o.x;
         if (compare != 0)

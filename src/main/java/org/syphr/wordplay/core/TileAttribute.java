@@ -2,6 +2,8 @@ package org.syphr.wordplay.core;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.space.Distance;
+
 /**
  * A tile attribute represents a modifier that is applied to the value of a
  * piece placed on a tile or nearby tiles to increase or decrease the final

@@ -1,9 +1,4 @@
-package org.syphr.wordplay.core.impl;
-
-import org.syphr.wordplay.core.Distance;
-import org.syphr.wordplay.core.Location;
-import org.syphr.wordplay.core.Orientation;
-import org.syphr.wordplay.core.Vector;
+package org.syphr.wordplay.core.space;
 
 public class YOrientation implements Orientation
 {

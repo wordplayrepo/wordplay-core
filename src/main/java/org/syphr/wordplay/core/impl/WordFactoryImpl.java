@@ -8,13 +8,13 @@ import java.util.TreeSet;
 
 import org.syphr.wordplay.core.Board;
 import org.syphr.wordplay.core.Letter;
-import org.syphr.wordplay.core.Location;
-import org.syphr.wordplay.core.Orientation;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Tile;
 import org.syphr.wordplay.core.TileSet;
 import org.syphr.wordplay.core.Word;
 import org.syphr.wordplay.core.WordFactory;
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
 
 public class WordFactoryImpl implements WordFactory
 {

@@ -3,6 +3,9 @@ package org.syphr.wordplay.core;
 import java.util.Set;
 import java.util.SortedMap;
 
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
+
 /**
  * Generator of {@link Word words}.
  * 

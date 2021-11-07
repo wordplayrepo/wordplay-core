@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.space.Location;
 
 /**

@@ -1,8 +1,8 @@
 package org.syphr.wordplay.core.impl;
 
-import org.syphr.wordplay.core.Letter;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.impl.AbstractPiece;
+import org.syphr.wordplay.core.lang.Letter;
 
 public class TestPiece extends AbstractPiece
 {

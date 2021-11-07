@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.syphr.wordplay.core.Dictionary;
+import org.syphr.wordplay.core.lang.Dictionary;
 
 public class EnableDictionary implements Dictionary
 {

@@ -1,7 +1,7 @@
 package org.syphr.wordplay.core.impl;
 
-import org.syphr.wordplay.core.Letter;
 import org.syphr.wordplay.core.Piece;
+import org.syphr.wordplay.core.lang.Letter;
 
 import lombok.Data;
 

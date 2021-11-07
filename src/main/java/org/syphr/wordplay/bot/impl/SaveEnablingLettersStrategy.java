@@ -14,12 +14,12 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.syphr.wordplay.core.Configuration;
-import org.syphr.wordplay.core.Letter;
-import org.syphr.wordplay.core.LetterFactory;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Placement;
 import org.syphr.wordplay.core.ValuedPlacement;
+import org.syphr.wordplay.core.config.Configuration;
+import org.syphr.wordplay.core.lang.Letter;
+import org.syphr.wordplay.core.lang.LetterFactory;
 import org.syphr.wordplay.lang.english.EnglishLetter;
 
 import com.google.common.collect.Iterators;

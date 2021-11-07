@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.config.Configuration;
+
 /**
  * A game represents a grouping of game elements (i.e. the players, the board,
  * the bag of pieces).

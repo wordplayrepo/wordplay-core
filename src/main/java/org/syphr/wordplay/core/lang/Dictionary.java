@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.lang;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.core.config;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,11 +7,9 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.syphr.wordplay.core.Configuration;
-import org.syphr.wordplay.core.Dictionary;
-import org.syphr.wordplay.core.Letter;
-import org.syphr.wordplay.core.LetterFactory;
-import org.syphr.wordplay.core.TileAttribute;
+import org.syphr.wordplay.core.lang.Dictionary;
+import org.syphr.wordplay.core.lang.Letter;
+import org.syphr.wordplay.core.lang.LetterFactory;
 import org.syphr.wordplay.core.space.Dimension;
 import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.core.space.Orientation;

@@ -1,6 +1,6 @@
 package org.syphr.wordplay.lang.english;
 
-import org.syphr.wordplay.core.Letter;
+import org.syphr.wordplay.core.lang.Letter;
 
 public enum EnglishLetter implements Letter
 {

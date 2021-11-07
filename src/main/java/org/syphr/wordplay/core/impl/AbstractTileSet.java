@@ -9,10 +9,10 @@ import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.syphr.wordplay.core.Configuration;
 import org.syphr.wordplay.core.Tile;
-import org.syphr.wordplay.core.TileAttribute;
 import org.syphr.wordplay.core.TileSet;
+import org.syphr.wordplay.core.config.Configuration;
+import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.space.Location;
 
 import lombok.extern.slf4j.Slf4j;

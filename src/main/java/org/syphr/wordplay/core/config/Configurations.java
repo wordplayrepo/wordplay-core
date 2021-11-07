@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.config;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,8 +7,7 @@ import java.io.OutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.syphr.wordplay.core.impl.JaxbFactory;
-import org.syphr.wordplay.core.impl.XmlV1Configuration;
+import org.syphr.wordplay.core.xml.JaxbFactory;
 
 public class Configurations
 {

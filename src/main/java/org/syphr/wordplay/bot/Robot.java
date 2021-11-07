@@ -3,9 +3,9 @@ package org.syphr.wordplay.bot;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.syphr.wordplay.core.Board;
-import org.syphr.wordplay.core.Configuration;
 import org.syphr.wordplay.core.Placement;
 import org.syphr.wordplay.core.Player;
+import org.syphr.wordplay.core.config.Configuration;
 
 /**
  * A robot is an artificial player that follows a defined strategy to create

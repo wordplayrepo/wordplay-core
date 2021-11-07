@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.core.xml;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

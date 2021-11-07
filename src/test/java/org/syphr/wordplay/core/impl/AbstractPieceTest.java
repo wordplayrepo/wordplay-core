@@ -9,9 +9,9 @@ import static org.mockito.Mockito.mock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.syphr.wordplay.core.Letter;
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.impl.AbstractPiece;
+import org.syphr.wordplay.core.lang.Letter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AbstractPieceTest

@@ -1,9 +1,11 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.config;
 
 import java.util.Map;
 import java.util.Set;
 
-import org.syphr.wordplay.core.impl.ConfigurationBuilder;
+import org.syphr.wordplay.core.lang.Dictionary;
+import org.syphr.wordplay.core.lang.Letter;
+import org.syphr.wordplay.core.lang.LetterFactory;
 import org.syphr.wordplay.core.space.Dimension;
 import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.core.space.Orientation;

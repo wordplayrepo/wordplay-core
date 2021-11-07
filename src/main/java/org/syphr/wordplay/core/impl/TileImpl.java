@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.syphr.wordplay.core.Piece;
 import org.syphr.wordplay.core.Tile;
-import org.syphr.wordplay.core.TileAttribute;
+import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.space.Location;
 
 public class TileImpl implements Tile

@@ -2,6 +2,8 @@ package org.syphr.wordplay.core;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.lang.Letter;
+
 /**
  * A piece represents a game token that is represented by a {@link Letter} and
  * has attributes such as a value and a wildcard status.

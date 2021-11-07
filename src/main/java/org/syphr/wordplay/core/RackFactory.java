@@ -2,6 +2,8 @@ package org.syphr.wordplay.core;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.config.Configuration;
+
 /**
  * A rack factory generates racks based on the given configuration. A rack
  * represents a player's current set of playable pieces.

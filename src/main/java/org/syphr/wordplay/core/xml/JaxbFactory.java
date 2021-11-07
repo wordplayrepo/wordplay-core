@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.core.xml;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

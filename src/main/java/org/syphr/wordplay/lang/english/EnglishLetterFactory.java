@@ -6,8 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.syphr.wordplay.core.Letter;
-import org.syphr.wordplay.core.LetterFactory;
+import org.syphr.wordplay.core.lang.Letter;
+import org.syphr.wordplay.core.lang.LetterFactory;
 
 public class EnglishLetterFactory implements LetterFactory
 {

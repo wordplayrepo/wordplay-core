@@ -10,8 +10,12 @@ import java.util.UUID;
 
 import org.syphr.wordplay.bot.Robot;
 import org.syphr.wordplay.bot.RobotStrategy;
-import org.syphr.wordplay.core.impl.JaxbUtils;
+import org.syphr.wordplay.core.config.Configuration;
+import org.syphr.wordplay.core.config.Configurations;
+import org.syphr.wordplay.core.lang.Letter;
+import org.syphr.wordplay.core.lang.LetterFactory;
 import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.xml.JaxbUtils;
 import org.syphr.wordplay.xsd.v1.PieceType;
 import org.syphr.wordplay.xsd.v1.PlayerType;
 import org.syphr.wordplay.xsd.v1.PlayersType;

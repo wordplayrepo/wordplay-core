@@ -2,6 +2,8 @@ package org.syphr.wordplay.core;
 
 import javax.annotation.concurrent.ThreadSafe;
 
+import org.syphr.wordplay.core.lang.Letter;
+
 /**
  * Generator of {@link Piece pieces}.
  * 

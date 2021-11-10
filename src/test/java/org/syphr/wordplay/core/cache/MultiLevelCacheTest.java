@@ -1,9 +1,9 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.core.cache;
 
 import java.util.List;
 
 import org.junit.Test;
-import org.syphr.wordplay.core.impl.MultiLevelCache.MultiLevelCacheLoader;
+import org.syphr.wordplay.core.cache.MultiLevelCache.MultiLevelCacheLoader;
 
 import com.google.common.cache.CacheBuilder;
 

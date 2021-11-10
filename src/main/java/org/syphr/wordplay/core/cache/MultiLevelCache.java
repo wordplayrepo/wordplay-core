@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.core.cache;
 
 import java.util.ArrayList;
 import java.util.List;

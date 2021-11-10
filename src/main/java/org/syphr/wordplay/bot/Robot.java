@@ -3,8 +3,8 @@ package org.syphr.wordplay.bot;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.syphr.wordplay.core.Player;
-import org.syphr.wordplay.core.board.Board;
-import org.syphr.wordplay.core.board.Placement;
+import org.syphr.wordplay.core.component.Board;
+import org.syphr.wordplay.core.component.Placement;
 import org.syphr.wordplay.core.config.Configuration;
 
 /**

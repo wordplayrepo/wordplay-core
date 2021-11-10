@@ -1,6 +1,6 @@
 package org.syphr.wordplay.bot.impl;
 
-import org.syphr.wordplay.core.board.AbstractTileSet;
+import org.syphr.wordplay.core.component.AbstractTileSet;
 import org.syphr.wordplay.core.config.Configuration;
 
 public class TestTileSet extends AbstractTileSet

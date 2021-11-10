@@ -1,7 +1,7 @@
 package org.syphr.wordplay.bot.impl;
 
-import org.syphr.wordplay.core.board.AbstractPiece;
-import org.syphr.wordplay.core.board.Piece;
+import org.syphr.wordplay.core.component.AbstractPiece;
+import org.syphr.wordplay.core.component.Piece;
 import org.syphr.wordplay.core.lang.Letter;
 
 public class TestPiece extends AbstractPiece

@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.component.Rack;
+
 /**
  * A player represents an entity that earns points by making plays in an attempt
  * to end the game with highest score.<br>

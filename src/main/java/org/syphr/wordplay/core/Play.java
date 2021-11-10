@@ -2,7 +2,7 @@ package org.syphr.wordplay.core;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.syphr.wordplay.core.board.Placement;
+import org.syphr.wordplay.core.component.Placement;
 
 /**
  * A play is the result of a turn taken by a player that represents a record of

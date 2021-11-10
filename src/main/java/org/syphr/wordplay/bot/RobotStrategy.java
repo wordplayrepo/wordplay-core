@@ -2,7 +2,7 @@ package org.syphr.wordplay.bot;
 
 import java.util.Collection;
 
-import org.syphr.wordplay.core.board.ValuedPlacement;
+import org.syphr.wordplay.core.component.ValuedPlacement;
 
 /**
  * A robot strategy determines how a robot selects its next placement.

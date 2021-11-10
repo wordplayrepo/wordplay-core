@@ -16,7 +16,7 @@ import org.syphr.wordplay.core.component.Board;
 import org.syphr.wordplay.core.component.Placement;
 import org.syphr.wordplay.core.component.PlacementException;
 import org.syphr.wordplay.core.component.Rack;
-import org.syphr.wordplay.core.events.EventBus;
+import org.syphr.wordplay.core.event.EventBus;
 
 import com.google.common.collect.Iterators;
 

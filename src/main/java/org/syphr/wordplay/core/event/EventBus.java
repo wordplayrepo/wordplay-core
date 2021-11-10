@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.events;
+package org.syphr.wordplay.core.event;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

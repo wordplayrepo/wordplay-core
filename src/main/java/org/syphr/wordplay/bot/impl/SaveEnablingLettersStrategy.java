@@ -20,7 +20,6 @@ import org.syphr.wordplay.core.component.ValuedPlacement;
 import org.syphr.wordplay.core.config.Configuration;
 import org.syphr.wordplay.core.lang.Letter;
 import org.syphr.wordplay.core.lang.LetterFactory;
-import org.syphr.wordplay.lang.english.EnglishLetter;
 
 import com.google.common.collect.Iterators;
 
@@ -42,19 +41,6 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
     private final int minPointThreshold;
 
     private final Set<Letter> enablingLetters;
-
-    @SuppressWarnings("serial")
-    public SaveEnablingLettersStrategy()
-    {
-        this(0.3, 40, new HashSet<Letter>()
-        {
-            {
-                add(EnglishLetter.S);
-                add(EnglishLetter.R);
-                add(EnglishLetter.D);
-            }
-        });
-    }
 
     public SaveEnablingLettersStrategy(double maxPointSacrificePercent,
                                        int minPointThreshold,
@@ -80,8 +66,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
         Map<Character, Integer> startFreqMap = new HashMap<Character, Integer>();
         Map<Character, Integer> endFreqMap = new HashMap<Character, Integer>();
 
-        for (String word : configuration.getDictionary().getWords())
-        {
+        for (String word : configuration.getDictionary().getWords()) {
             char firstChar = word.charAt(0);
             char lastChar = word.charAt(word.length() - 1);
 
@@ -100,12 +85,10 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
 
         LetterFactory factory = configuration.getLetterFactory();
         Set<Letter> set = new HashSet<Letter>();
-        for (Entry<Character, Integer> entry : alternator)
-        {
+        for (Entry<Character, Integer> entry : alternator) {
             set.add(factory.toLetter(entry.getKey()));
 
-            if (set.size() == letterCount)
-            {
+            if (set.size() == letterCount) {
                 break;
             }
         }
@@ -115,8 +98,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
 
     protected Integer increment(Integer value)
     {
-        if (value == null)
-        {
+        if (value == null) {
             return 0;
         }
 
@@ -142,8 +124,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
     public ValuedPlacement selectPlacement()
     {
         Collection<ValuedPlacement> placements = getDataStructure();
-        if (placements.isEmpty())
-        {
+        if (placements.isEmpty()) {
             LOGGER.trace("No placements available");
             return null;
         }
@@ -151,8 +132,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
         Iterator<ValuedPlacement> placementIter = placements.iterator();
         ValuedPlacement highScorePlacement = placementIter.next();
 
-        if (!hasEnablingLetters(highScorePlacement))
-        {
+        if (!hasEnablingLetters(highScorePlacement)) {
             LOGGER.trace("Selecting highest score placement since it has no enabling letters");
             return highScorePlacement;
         }
@@ -161,29 +141,23 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
         LOGGER.trace("Highest score placement yields {} points", maxPoints);
 
         /*
-         * If the maximum possible points this round is less than the minimum
-         * for playing an enabling letter, set the minimum for an alternate
-         * placement to 1 so that any placement without enabling letters will be
-         * played.
+         * If the maximum possible points this round is less than the minimum for
+         * playing an enabling letter, set the minimum for an alternate placement to 1
+         * so that any placement without enabling letters will be played.
          */
-        int minPoints = maxPoints < minPointThreshold ? 1 : (int)Math.round(maxPoints
-                * (1 - maxPointSacrificePercent));
-        LOGGER.trace("Looking for a placement without enabling letters that provides at least {} point(s)",
-                     minPoints);
+        int minPoints = maxPoints < minPointThreshold ? 1
+                : (int) Math.round(maxPoints * (1 - maxPointSacrificePercent));
+        LOGGER.trace("Looking for a placement without enabling letters that provides at least {} point(s)", minPoints);
 
-        while (placementIter.hasNext())
-        {
+        while (placementIter.hasNext()) {
             ValuedPlacement placement = placementIter.next();
-            if (placement.getPoints() < minPoints)
-            {
+            if (placement.getPoints() < minPoints) {
                 LOGGER.trace("No placements available with no enabling letters above the minimum score");
                 break;
             }
 
-            if (!hasEnablingLetters(placement))
-            {
-                LOGGER.trace("Found a placement with no enabling letters yielding {} point(s)",
-                             placement.getPoints());
+            if (!hasEnablingLetters(placement)) {
+                LOGGER.trace("Found a placement with no enabling letters yielding {} point(s)", placement.getPoints());
                 return placement;
             }
         }
@@ -204,8 +178,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
     {
         Set<Letter> placementLetters = new HashSet<Letter>();
 
-        for (Piece piece : placement.getPieces())
-        {
+        for (Piece piece : placement.getPieces()) {
             placementLetters.add(piece.getLetter());
         }
 
@@ -218,8 +191,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
         StringBuilder builder = new StringBuilder();
         builder.append("Save Enabling Letters (");
 
-        for (Letter letter : enablingLetters)
-        {
+        for (Letter letter : enablingLetters) {
             builder.append(letter).append(", ");
         }
 
@@ -244,8 +216,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
             @SuppressWarnings("unchecked")
             Iterator<T>[] iterators = new Iterator[iterables.length];
 
-            for (int i = 0; i < iterables.length; i++)
-            {
+            for (int i = 0; i < iterables.length; i++) {
                 iterators[i] = iterables[i].iterator();
             }
 
@@ -277,8 +248,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
 
             T value = current.next();
 
-            if (!current.hasNext())
-            {
+            if (!current.hasNext()) {
                 iterators.remove();
             }
 

@@ -1,47 +1,44 @@
 package org.syphr.wordplay.bot;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.syphr.wordplay.bot.impl.HighestScoreStrategy;
 import org.syphr.wordplay.bot.impl.RandomSelectionStrategy;
 import org.syphr.wordplay.bot.impl.SaveEnablingLettersStrategy;
+import org.syphr.wordplay.core.config.Configuration;
+import org.syphr.wordplay.core.lang.Letter;
 
-// TODO huge problem here - strategies are not immutable
 public class RobotStrategies
 {
-    private static final RobotStrategy HIGHEST_SCORE = new HighestScoreStrategy();
-
-    private static final RobotStrategy RANDOM_SELECTION = new RandomSelectionStrategy();
-
-    private static final RobotStrategy SAVE_ENABLING_LETTERS = new SaveEnablingLettersStrategy();
-
-    private static final List<RobotStrategy> ALL_STRATEGIES = new ArrayList<RobotStrategy>();
-    static
-    {
-        ALL_STRATEGIES.add(HIGHEST_SCORE);
-        ALL_STRATEGIES.add(RANDOM_SELECTION);
-        ALL_STRATEGIES.add(SAVE_ENABLING_LETTERS);
-    }
-
     public static RobotStrategy highestScore()
     {
-        return HIGHEST_SCORE;
+        return new HighestScoreStrategy();
     }
 
     public static RobotStrategy randomSelection()
     {
-        return RANDOM_SELECTION;
+        return new RandomSelectionStrategy();
     }
 
-    public static RobotStrategy saveEnablingLetters()
+    public static RobotStrategy saveEnablingLetters(double maxPointSacrificePercent,
+                                                    int minPointThreshold,
+                                                    Set<Letter> enablingLetters)
     {
-        return SAVE_ENABLING_LETTERS;
+        return new SaveEnablingLettersStrategy(maxPointSacrificePercent, minPointThreshold, enablingLetters);
     }
 
-    public static List<RobotStrategy> getAllStrategies()
+    public static RobotStrategy saveEnablingLetters(int letterCount,
+                                                    double maxPointSacrificePercent,
+                                                    int minPointThreshold,
+                                                    Configuration configuration)
     {
-        return new ArrayList<RobotStrategy>(ALL_STRATEGIES);
+        return new SaveEnablingLettersStrategy(letterCount, maxPointSacrificePercent, minPointThreshold, configuration);
+    }
+
+    public static List<RobotStrategy> getAllStrategies(Configuration configuration)
+    {
+        return List.of(highestScore(), randomSelection(), saveEnablingLetters(3, 0.3, 40, configuration));
     }
 
     private RobotStrategies()

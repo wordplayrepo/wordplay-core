@@ -1,4 +1,4 @@
-package org.syphr.wordplay.bot.impl;
+package org.syphr.wordplay.core.player;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -8,7 +8,6 @@ import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.syphr.wordplay.bot.RobotStrategy;
 import org.syphr.wordplay.core.component.Piece;
 import org.syphr.wordplay.core.component.ValuedPlacement;
 

@@ -1,4 +1,4 @@
-package org.syphr.wordplay.bot.impl;
+package org.syphr.wordplay.core.player;
 
 import org.syphr.wordplay.core.component.AbstractPiece;
 import org.syphr.wordplay.core.component.Piece;

@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.game;
+package org.syphr.wordplay.core.player;
 
 import java.io.IOException;
 import java.util.UUID;

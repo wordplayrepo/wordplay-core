@@ -1,4 +1,4 @@
-package org.syphr.wordplay.bot.impl;
+package org.syphr.wordplay.core.player;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
-import org.syphr.wordplay.bot.RobotStrategy;
 import org.syphr.wordplay.core.component.ValuedPlacement;
 
 public class RandomSelectionStrategy implements RobotStrategy

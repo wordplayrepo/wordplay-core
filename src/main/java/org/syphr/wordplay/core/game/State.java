@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
-import org.syphr.wordplay.bot.Robot;
-import org.syphr.wordplay.bot.RobotStrategy;
 import org.syphr.wordplay.core.component.Bag;
 import org.syphr.wordplay.core.component.Board;
 import org.syphr.wordplay.core.component.NoSuchPieceException;
@@ -19,6 +17,9 @@ import org.syphr.wordplay.core.config.Configuration;
 import org.syphr.wordplay.core.config.Configurations;
 import org.syphr.wordplay.core.lang.Letter;
 import org.syphr.wordplay.core.lang.LetterFactory;
+import org.syphr.wordplay.core.player.Player;
+import org.syphr.wordplay.core.player.Robot;
+import org.syphr.wordplay.core.player.RobotStrategy;
 import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.core.xml.JaxbUtils;
 import org.syphr.wordplay.xsd.v1.PieceType;

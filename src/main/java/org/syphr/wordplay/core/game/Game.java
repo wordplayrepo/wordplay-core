@@ -11,6 +11,7 @@ import org.syphr.wordplay.core.component.Board;
 import org.syphr.wordplay.core.component.Placement;
 import org.syphr.wordplay.core.component.PlacementException;
 import org.syphr.wordplay.core.config.Configuration;
+import org.syphr.wordplay.core.player.Player;
 
 /**
  * A game represents a grouping of game elements (i.e. the players, the board,

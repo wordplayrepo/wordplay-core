@@ -1,4 +1,4 @@
-package org.syphr.wordplay.bot;
+package org.syphr.wordplay.core.player;
 
 import java.util.Collection;
 

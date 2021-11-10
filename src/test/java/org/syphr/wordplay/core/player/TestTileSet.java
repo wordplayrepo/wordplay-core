@@ -1,4 +1,4 @@
-package org.syphr.wordplay.bot.impl;
+package org.syphr.wordplay.core.player;
 
 import org.syphr.wordplay.core.component.AbstractTileSet;
 import org.syphr.wordplay.core.config.Configuration;

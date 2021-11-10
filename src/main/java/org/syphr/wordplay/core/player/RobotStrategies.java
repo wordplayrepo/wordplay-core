@@ -1,11 +1,8 @@
-package org.syphr.wordplay.bot;
+package org.syphr.wordplay.core.player;
 
 import java.util.List;
 import java.util.Set;
 
-import org.syphr.wordplay.bot.impl.HighestScoreStrategy;
-import org.syphr.wordplay.bot.impl.RandomSelectionStrategy;
-import org.syphr.wordplay.bot.impl.SaveEnablingLettersStrategy;
 import org.syphr.wordplay.core.config.Configuration;
 import org.syphr.wordplay.core.lang.Letter;
 

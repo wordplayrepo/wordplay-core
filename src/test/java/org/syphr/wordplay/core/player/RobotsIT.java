@@ -1,4 +1,4 @@
-package org.syphr.wordplay.bot.impl;
+package org.syphr.wordplay.core.player;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.syphr.wordplay.bot.Robot;
 import org.syphr.wordplay.core.component.AbstractTileSet;
 import org.syphr.wordplay.core.component.Board;
 import org.syphr.wordplay.core.component.BoardImpl;

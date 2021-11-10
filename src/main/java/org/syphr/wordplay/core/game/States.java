@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.syphr.wordplay.core.component.Piece;
 import org.syphr.wordplay.core.component.Tile;
 import org.syphr.wordplay.core.config.Configurations;
+import org.syphr.wordplay.core.player.Player;
 import org.syphr.wordplay.core.xml.JaxbFactory;
 import org.syphr.wordplay.core.xml.JaxbUtils;
 import org.syphr.wordplay.core.xml.SchemaVersion;

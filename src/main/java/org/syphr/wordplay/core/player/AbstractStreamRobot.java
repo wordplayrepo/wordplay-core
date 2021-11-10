@@ -1,4 +1,4 @@
-package org.syphr.wordplay.bot.impl;
+package org.syphr.wordplay.core.player;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,9 +12,6 @@ import java.util.stream.Stream.Builder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.syphr.wordplay.bot.Robot;
-import org.syphr.wordplay.bot.RobotStrategy;
-import org.syphr.wordplay.bot.impl.AbstractRobot.PieceWrapper;
 import org.syphr.wordplay.core.component.Board;
 import org.syphr.wordplay.core.component.Piece;
 import org.syphr.wordplay.core.component.Placement;
@@ -22,8 +19,8 @@ import org.syphr.wordplay.core.component.TileSet;
 import org.syphr.wordplay.core.component.ValuedPlacement;
 import org.syphr.wordplay.core.component.ValuedPlacementImpl;
 import org.syphr.wordplay.core.config.Configuration;
-import org.syphr.wordplay.core.game.PlayerImpl;
 import org.syphr.wordplay.core.lang.Letter;
+import org.syphr.wordplay.core.player.AbstractRobot.PieceWrapper;
 import org.syphr.wordplay.core.space.Dimension;
 import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.core.space.Orientation;

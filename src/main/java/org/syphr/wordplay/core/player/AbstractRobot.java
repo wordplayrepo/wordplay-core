@@ -103,7 +103,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         return strategy.selectPlacement();
     }
 
-    protected void findPlacements(Board board)
+    public void findPlacements(Board board)
     {
         Collection<ValuedPlacement> placements = strategy.getDataStructure();
         placements.clear();

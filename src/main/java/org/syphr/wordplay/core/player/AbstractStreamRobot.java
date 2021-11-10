@@ -77,7 +77,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
         return strategy.selectPlacement();
     }
 
-    protected void findPlacements(Board board, Collection<ValuedPlacement> placements)
+    public void findPlacements(Board board, Collection<ValuedPlacement> placements)
     {
         placements.clear();
 

@@ -22,7 +22,7 @@ import org.syphr.wordplay.core.component.TileSet;
 import org.syphr.wordplay.core.component.ValuedPlacement;
 import org.syphr.wordplay.core.component.ValuedPlacementImpl;
 import org.syphr.wordplay.core.config.Configuration;
-import org.syphr.wordplay.core.impl.PlayerImpl;
+import org.syphr.wordplay.core.game.PlayerImpl;
 import org.syphr.wordplay.core.lang.Letter;
 import org.syphr.wordplay.core.space.Dimension;
 import org.syphr.wordplay.core.space.Location;

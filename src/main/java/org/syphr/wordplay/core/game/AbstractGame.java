@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.core.game;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,18 +11,12 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.syphr.wordplay.core.Game;
-import org.syphr.wordplay.core.Play;
-import org.syphr.wordplay.core.Player;
 import org.syphr.wordplay.core.component.Bag;
 import org.syphr.wordplay.core.component.Board;
 import org.syphr.wordplay.core.component.Placement;
 import org.syphr.wordplay.core.component.PlacementException;
 import org.syphr.wordplay.core.component.Rack;
 import org.syphr.wordplay.core.events.EventBus;
-import org.syphr.wordplay.core.events.GameEndEvent;
-import org.syphr.wordplay.core.events.TurnEndEvent;
-import org.syphr.wordplay.core.events.TurnStartEvent;
 
 import com.google.common.collect.Iterators;
 

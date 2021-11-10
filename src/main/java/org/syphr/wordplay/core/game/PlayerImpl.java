@@ -1,11 +1,10 @@
-package org.syphr.wordplay.core.impl;
+package org.syphr.wordplay.core.game;
 
 import java.io.IOException;
 import java.util.UUID;
 
 import javax.xml.namespace.QName;
 
-import org.syphr.wordplay.core.Player;
 import org.syphr.wordplay.core.SchemaVersion;
 import org.syphr.wordplay.core.UnsupportedSchemaVersionException;
 import org.syphr.wordplay.core.component.Piece;

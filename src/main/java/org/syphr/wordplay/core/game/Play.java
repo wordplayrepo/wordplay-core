@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.game;
 
 import javax.annotation.concurrent.NotThreadSafe;
 

@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.game;
 
 import java.util.Set;
 import java.util.SortedSet;

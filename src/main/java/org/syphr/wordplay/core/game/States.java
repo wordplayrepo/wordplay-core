@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.game;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +9,8 @@ import javax.xml.namespace.QName;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.syphr.wordplay.core.SchemaVersion;
+import org.syphr.wordplay.core.UnsupportedSchemaVersionException;
 import org.syphr.wordplay.core.component.Piece;
 import org.syphr.wordplay.core.component.Tile;
 import org.syphr.wordplay.core.config.Configurations;
@@ -44,8 +46,7 @@ public class States
         org.syphr.wordplay.xsd.v1.State state = new org.syphr.wordplay.xsd.v1.State();
 
         org.syphr.wordplay.xsd.v1.BoardLayoutType boardLayout = new org.syphr.wordplay.xsd.v1.BoardLayoutType();
-        for (Tile tile : game.getBoard().getTiles().getOccupiedTiles())
-        {
+        for (Tile tile : game.getBoard().getTiles().getOccupiedTiles()) {
             Piece piece = tile.getPiece();
 
             org.syphr.wordplay.xsd.v1.PieceType pieceType = new org.syphr.wordplay.xsd.v1.PieceType();
@@ -62,29 +63,21 @@ public class States
 
         org.syphr.wordplay.xsd.v1.PlayersType playersType = new org.syphr.wordplay.xsd.v1.PlayersType();
         Player currentPlayer = game.getCurrentPlayer();
-        if (currentPlayer != null)
-        {
+        if (currentPlayer != null) {
             playersType.setCurrent(currentPlayer.getId().toString());
         }
-        try
-        {
-            for (Player player : game.getPlayers())
-            {
+        try {
+            for (Player player : game.getPlayers()) {
                 String xml = player.serialize(SchemaVersion._1);
                 org.syphr.wordplay.xsd.v1.PlayerType playerType = PLAYER_FACTORY_V1.read(xml);
 
                 playersType.getPlayers().add(playerType);
             }
-        }
-        catch (UnsupportedSchemaVersionException e)
-        {
+        } catch (UnsupportedSchemaVersionException e) {
             throw new IllegalArgumentException("The player objects in this game are incompatible with this schema version",
                                                e);
-        }
-        catch (IOException e)
-        {
-            throw new IllegalArgumentException("The player objects in this game cannot be saved",
-                                               e);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("The player objects in this game cannot be saved", e);
         }
         state.setPlayers(playersType);
 
@@ -114,15 +107,13 @@ public class States
         write(state.getExternalState(), out);
     }
 
-    public static void write(org.syphr.wordplay.xsd.v1.State baseState,
-                             File file) throws IOException
+    public static void write(org.syphr.wordplay.xsd.v1.State baseState, File file) throws IOException
     {
         LOGGER.trace("Writing state base to \"{}\"", file.getAbsolutePath());
         STATE_FACTORY_V1.write(baseState, file);
     }
 
-    public static void write(org.syphr.wordplay.xsd.v1.State baseState,
-                             OutputStream out) throws IOException
+    public static void write(org.syphr.wordplay.xsd.v1.State baseState, OutputStream out) throws IOException
     {
         LOGGER.trace("Writing state base to a stream");
         STATE_FACTORY_V1.write(baseState, out);

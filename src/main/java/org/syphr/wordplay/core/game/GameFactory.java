@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.game;
 
 import java.io.File;
 import java.io.IOException;

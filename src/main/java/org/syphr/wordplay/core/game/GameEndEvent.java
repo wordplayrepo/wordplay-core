@@ -1,6 +1,4 @@
-package org.syphr.wordplay.core.events;
-
-import org.syphr.wordplay.core.Game;
+package org.syphr.wordplay.core.game;
 
 public class GameEndEvent extends GameEvent
 {

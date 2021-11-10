@@ -1,4 +1,4 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.game;
 
 import java.util.ArrayList;
 import java.util.Collections;

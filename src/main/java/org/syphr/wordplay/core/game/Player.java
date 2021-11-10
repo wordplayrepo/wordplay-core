@@ -1,9 +1,11 @@
-package org.syphr.wordplay.core;
+package org.syphr.wordplay.core.game;
 
 import java.util.UUID;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
+import org.syphr.wordplay.core.SchemaVersion;
+import org.syphr.wordplay.core.UnsupportedSchemaVersionException;
 import org.syphr.wordplay.core.component.Rack;
 
 /**
@@ -22,8 +24,7 @@ public interface Player
     /**
      * Set the unique identifier for this player.
      *
-     * @param id
-     *            the identifier
+     * @param id the identifier
      */
     public void setId(UUID id);
 
@@ -37,8 +38,7 @@ public interface Player
     /**
      * Set the name of this player.
      *
-     * @param name
-     *            the name
+     * @param name the name
      */
     public void setName(String name);
 
@@ -53,14 +53,13 @@ public interface Player
      * Set the rack associated with this player. The rack contains the player's
      * pieces that can be made into a placement on the player's turn.
      *
-     * @param rack
-     *            the rack
+     * @param rack the rack
      */
     public void setRack(Rack rack);
 
     /**
-     * Retrieve the rack associated with this player. The rack contains the
-     * player's pieces that can be made into a placement on the player's turn.
+     * Retrieve the rack associated with this player. The rack contains the player's
+     * pieces that can be made into a placement on the player's turn.
      *
      * @return the rack
      */
@@ -76,8 +75,7 @@ public interface Player
     /**
      * Add the given amount to this player's current score.
      *
-     * @param value
-     *            the value to add (may be negative)
+     * @param value the value to add (may be negative)
      */
     public void addScore(int value);
 
@@ -101,16 +99,17 @@ public interface Player
     public boolean isResigned();
 
     /**
-     * Serialize the state of this player to XML. This functionality is intended
-     * for use when serializing the state of the game.
+     * Serialize the state of this player to XML. This functionality is intended for
+     * use when serializing the state of the game.
      *
-     * @param version
-     *            the schema version to which the serialized output must
-     *            validate
+     * @param version the schema version to which the serialized output must
+     *                validate
+     * 
      * @return the serialized XML version of this player
-     * @throws UnsupportedSchemaVersionException
-     *             if this player instance does not support serializing to the
-     *             requested schema version
+     * 
+     * @throws UnsupportedSchemaVersionException if this player instance does not
+     *                                           support serializing to the
+     *                                           requested schema version
      */
     public String serialize(SchemaVersion version) throws UnsupportedSchemaVersionException;
 

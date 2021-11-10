@@ -9,13 +9,13 @@ import javax.xml.namespace.QName;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.syphr.wordplay.core.SchemaVersion;
-import org.syphr.wordplay.core.UnsupportedSchemaVersionException;
 import org.syphr.wordplay.core.component.Piece;
 import org.syphr.wordplay.core.component.Tile;
 import org.syphr.wordplay.core.config.Configurations;
 import org.syphr.wordplay.core.xml.JaxbFactory;
 import org.syphr.wordplay.core.xml.JaxbUtils;
+import org.syphr.wordplay.core.xml.SchemaVersion;
+import org.syphr.wordplay.core.xml.UnsupportedSchemaVersionException;
 
 public class States
 {

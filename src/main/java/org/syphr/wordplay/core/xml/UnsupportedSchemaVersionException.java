@@ -1,5 +1,4 @@
-package org.syphr.wordplay.core;
-
+package org.syphr.wordplay.core.xml;
 
 public class UnsupportedSchemaVersionException extends Exception
 {

@@ -4,9 +4,9 @@ import java.util.UUID;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
-import org.syphr.wordplay.core.SchemaVersion;
-import org.syphr.wordplay.core.UnsupportedSchemaVersionException;
 import org.syphr.wordplay.core.component.Rack;
+import org.syphr.wordplay.core.xml.SchemaVersion;
+import org.syphr.wordplay.core.xml.UnsupportedSchemaVersionException;
 
 /**
  * A player represents an entity that earns points by making plays in an attempt

@@ -5,12 +5,12 @@ import java.util.UUID;
 
 import javax.xml.namespace.QName;
 
-import org.syphr.wordplay.core.SchemaVersion;
-import org.syphr.wordplay.core.UnsupportedSchemaVersionException;
 import org.syphr.wordplay.core.component.Piece;
 import org.syphr.wordplay.core.component.Rack;
 import org.syphr.wordplay.core.lang.Letter;
 import org.syphr.wordplay.core.xml.JaxbFactory;
+import org.syphr.wordplay.core.xml.SchemaVersion;
+import org.syphr.wordplay.core.xml.UnsupportedSchemaVersionException;
 
 public class PlayerImpl implements Player
 {

@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.UUID;
 
@@ -25,11 +26,29 @@ public class FileGameRepository implements GameRepository
     {
         log.trace("Saving game to \"{}\"", path.toAbsolutePath());
 
+        try {
+            validatePath();
+        } catch (IOException e) {
+            throw new GameSaveException(e);
+        }
+
         try (OutputStream out = new BufferedOutputStream(new FileOutputStream(path.toFile()))) {
             serializer.serialize(game, out);
             return game;
         } catch (IOException e) {
             throw new GameSaveException(e);
+        }
+    }
+
+    private void validatePath() throws IOException
+    {
+        Path parentDir = path.getParent();
+        if (!Files.isDirectory(parentDir)) {
+            Files.createDirectories(parentDir);
+        }
+
+        if (!Files.isWritable(parentDir)) {
+            throw new IOException("Unable to write to " + path.toAbsolutePath());
         }
     }
 

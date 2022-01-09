@@ -34,7 +34,4 @@ public abstract class AbstractGameFactory implements GameFactory
 
     @Override
     public abstract Game create(Configuration configuration);
-
-    @Override
-    public abstract Game load(State state);
 }

@@ -15,6 +15,4 @@ public interface GameFactory
     Game create(InputStream configurationStream) throws IOException;
 
     Game create(Configuration configuration);
-
-    Game load(State state);
 }

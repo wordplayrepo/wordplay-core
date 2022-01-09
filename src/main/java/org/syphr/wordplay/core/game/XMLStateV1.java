@@ -27,7 +27,7 @@ import org.syphr.wordplay.xsd.v1.PlayerType;
 import org.syphr.wordplay.xsd.v1.PlayersType;
 import org.syphr.wordplay.xsd.v1.TilePlacementType;
 
-public class State
+class XMLStateV1
 {
     private final org.syphr.wordplay.xsd.v1.State externalState;
 
@@ -39,7 +39,7 @@ public class State
 
     private Map<String, Object> extensions;
 
-    /* default */ State(org.syphr.wordplay.xsd.v1.State externalState)
+    /* default */ XMLStateV1(org.syphr.wordplay.xsd.v1.State externalState)
     {
         this.externalState = externalState;
     }

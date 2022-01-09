@@ -7,20 +7,20 @@ import java.io.OutputStream;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class XMLGameSerializerV1 implements GameSerializer
+public class XmlV1GameSerializer implements GameSerializer
 {
     private final GameFactory factory;
 
     @Override
     public void serialize(Game game, OutputStream out) throws IOException
     {
-        XMLStatesV1.write(XMLStatesV1.create(game), out);
+        XmlV1States.write(XmlV1States.create(game), out);
     }
 
     @Override
     public Game deserialize(InputStream in) throws IOException
     {
-        XMLStateV1 state = XMLStatesV1.create(XMLStatesV1.read(in));
+        XmlV1State state = XmlV1States.create(XmlV1States.read(in));
         Game game = factory.create(state.getConfiguration());
         state.resumeGame(game);
 

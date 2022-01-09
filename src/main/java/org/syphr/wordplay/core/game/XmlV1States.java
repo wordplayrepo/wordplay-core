@@ -18,9 +18,9 @@ import org.syphr.wordplay.core.xml.JaxbUtils;
 import org.syphr.wordplay.core.xml.SchemaVersion;
 import org.syphr.wordplay.core.xml.UnsupportedSchemaVersionException;
 
-class XMLStatesV1
+class XmlV1States
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(XMLStatesV1.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(XmlV1States.class);
 
     private static final JaxbFactory<org.syphr.wordplay.xsd.v1.State> STATE_FACTORY_V1 = JaxbFactory.create(org.syphr.wordplay.xsd.v1.State.class);
 
@@ -90,19 +90,19 @@ class XMLStatesV1
         return state;
     }
 
-    public static XMLStateV1 create(org.syphr.wordplay.xsd.v1.State baseState)
+    public static XmlV1State create(org.syphr.wordplay.xsd.v1.State baseState)
     {
         LOGGER.trace("Creating state from a base state");
-        return new XMLStateV1(baseState);
+        return new XmlV1State(baseState);
     }
 
-    public static void write(XMLStateV1 state, File file) throws IOException
+    public static void write(XmlV1State state, File file) throws IOException
     {
         LOGGER.trace("Writing state to \"{}\"", file.getAbsolutePath());
         write(state.getExternalState(), file);
     }
 
-    public static void write(XMLStateV1 state, OutputStream out) throws IOException
+    public static void write(XmlV1State state, OutputStream out) throws IOException
     {
         LOGGER.trace("Writing state to a stream");
         write(state.getExternalState(), out);
@@ -120,7 +120,7 @@ class XMLStatesV1
         STATE_FACTORY_V1.write(baseState, out);
     }
 
-    private XMLStatesV1()
+    private XmlV1States()
     {
         /*
          * Factory pattern

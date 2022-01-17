@@ -44,7 +44,6 @@ import org.syphr.wordplay.core.lang.Letter;
 import org.syphr.wordplay.core.space.Dimension;
 import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.core.space.Orientation;
-import org.syphr.wordplay.xsd.v1.PlayerType;
 
 import com.google.common.collect.Collections2;
 
@@ -306,19 +305,6 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         }
 
         return results;
-    }
-
-    @Override
-    protected void serialize(PlayerType playerType)
-    {
-        super.serialize(playerType);
-
-        /*
-         * A no-arg constructor is required.
-         */
-        org.syphr.wordplay.xsd.v1.ClassType classType = new org.syphr.wordplay.xsd.v1.ClassType();
-        classType.setType(strategy.getClass().getName());
-        playerType.setStrategy(classType);
     }
 
     /**

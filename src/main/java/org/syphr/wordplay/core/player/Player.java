@@ -20,8 +20,6 @@ import java.util.UUID;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.syphr.wordplay.core.component.Rack;
-import org.syphr.wordplay.core.xml.SchemaVersion;
-import org.syphr.wordplay.core.xml.UnsupportedSchemaVersionException;
 
 /**
  * A player represents an entity that earns points by making plays in an attempt
@@ -112,21 +110,6 @@ public interface Player
      *         otherwise
      */
     public boolean isResigned();
-
-    /**
-     * Serialize the state of this player to XML. This functionality is intended for
-     * use when serializing the state of the game.
-     *
-     * @param version the schema version to which the serialized output must
-     *                validate
-     * 
-     * @return the serialized XML version of this player
-     * 
-     * @throws UnsupportedSchemaVersionException if this player instance does not
-     *                                           support serializing to the
-     *                                           requested schema version
-     */
-    public String serialize(SchemaVersion version) throws UnsupportedSchemaVersionException;
 
     @Override
     public boolean equals(Object obj);

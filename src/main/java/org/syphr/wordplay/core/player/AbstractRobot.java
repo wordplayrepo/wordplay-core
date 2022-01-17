@@ -422,8 +422,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
 
         public DaemonThreadFactory()
         {
-            SecurityManager s = System.getSecurityManager();
-            group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
+            group = Thread.currentThread().getThreadGroup();
             namePrefix = AbstractRobot.class.getSimpleName() + " Thread Pool " +
                          POOL_NUMBER.getAndIncrement() +
                          ", Thread ";

@@ -178,9 +178,9 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
                 Dimension boardDimension = board.getDimension();
                 TileSet tiles = board.getTiles();
 
-                for (int x = 0; x < boardDimension.getWidth(); x++) {
-                    for (int y = 0; y < boardDimension.getHeight(); y++) {
-                        for (int z = 0; z < boardDimension.getDepth(); z++) {
+                for (int x = 0; x < boardDimension.width(); x++) {
+                    for (int y = 0; y < boardDimension.height(); y++) {
+                        for (int z = 0; z < boardDimension.depth(); z++) {
                             if (Thread.interrupted()) {
                                 return placements;
                             }

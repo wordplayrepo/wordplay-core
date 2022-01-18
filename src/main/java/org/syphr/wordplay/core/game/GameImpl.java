@@ -32,6 +32,7 @@ import org.syphr.wordplay.core.component.Placement;
 import org.syphr.wordplay.core.component.PlacementException;
 import org.syphr.wordplay.core.component.Rack;
 import org.syphr.wordplay.core.component.RackFactory;
+import org.syphr.wordplay.core.config.Configuration;
 import org.syphr.wordplay.core.event.EventBus;
 import org.syphr.wordplay.core.player.Player;
 
@@ -40,9 +41,9 @@ import com.google.common.collect.Iterators;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public abstract class AbstractGame implements Game
+public class GameImpl implements Game
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractGame.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GameImpl.class);
 
     private static final Comparator<Player> RANKING_COMPARATOR = new Comparator<Player>()
     {
@@ -55,15 +56,14 @@ public abstract class AbstractGame implements Game
 
     private final Set<Player> players = new LinkedHashSet<Player>();
 
+    private final Board board;
+    private final Bag bag;
     private final RackFactory rackFactory;
+    private final Configuration configuration;
 
     private UUID id = UUID.randomUUID();
 
     private Play lastPlay;
-
-    private Bag bag;
-
-    private Board board;
 
     private Iterator<Player> turns;
     private Player currentPlayer;
@@ -80,22 +80,20 @@ public abstract class AbstractGame implements Game
     }
 
     @Override
+    public Configuration getConfiguration()
+    {
+        return configuration;
+    }
+
+    @Override
     public Bag getBag()
     {
-        if (bag == null) {
-            bag = createBag();
-        }
-
         return bag;
     }
 
     @Override
     public Board getBoard()
     {
-        if (board == null) {
-            board = createBoard();
-        }
-
         return board;
     }
 
@@ -261,8 +259,4 @@ public abstract class AbstractGame implements Game
     {
         EventBus.post(new GameEndEvent(this));
     }
-
-    protected abstract Bag createBag();
-
-    protected abstract Board createBoard();
 }

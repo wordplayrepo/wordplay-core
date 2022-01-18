@@ -15,25 +15,21 @@
  */
 package org.syphr.wordplay.core.component;
 
-import javax.annotation.concurrent.NotThreadSafe;
-
-import org.syphr.wordplay.core.config.Configuration;
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * A rack factory generates racks based on the given configuration. A rack
- * represents a player's current set of playable pieces.
+ * A rack factory generates {@link Rack racks}. A rack represents a player's
+ * current set of playable pieces.
  * 
  * @author Gregory P. Moyer
  */
-@NotThreadSafe
+@ThreadSafe
 public interface RackFactory
 {
     /**
-     * Create a new rack based on the given configuration.
+     * Create a new rack.
      * 
-     * @param configuration
-     *            the configuration
      * @return a new rack
      */
-    public Rack create(Configuration configuration);
+    public Rack createRack();
 }

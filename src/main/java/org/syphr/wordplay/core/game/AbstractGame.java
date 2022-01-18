@@ -31,11 +31,15 @@ import org.syphr.wordplay.core.component.Board;
 import org.syphr.wordplay.core.component.Placement;
 import org.syphr.wordplay.core.component.PlacementException;
 import org.syphr.wordplay.core.component.Rack;
+import org.syphr.wordplay.core.component.RackFactory;
 import org.syphr.wordplay.core.event.EventBus;
 import org.syphr.wordplay.core.player.Player;
 
 import com.google.common.collect.Iterators;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public abstract class AbstractGame implements Game
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractGame.class);
@@ -49,9 +53,11 @@ public abstract class AbstractGame implements Game
         }
     };
 
-    private UUID id = UUID.randomUUID();
-
     private final Set<Player> players = new LinkedHashSet<Player>();
+
+    private final RackFactory rackFactory;
+
+    private UUID id = UUID.randomUUID();
 
     private Play lastPlay;
 
@@ -76,8 +82,7 @@ public abstract class AbstractGame implements Game
     @Override
     public Bag getBag()
     {
-        if (bag == null)
-        {
+        if (bag == null) {
             bag = createBag();
         }
 
@@ -87,8 +92,7 @@ public abstract class AbstractGame implements Game
     @Override
     public Board getBoard()
     {
-        if (board == null)
-        {
+        if (board == null) {
             board = createBoard();
         }
 
@@ -113,14 +117,13 @@ public abstract class AbstractGame implements Game
     @Override
     public void addPlayer(Player player)
     {
-        if (isStarted())
-        {
+        if (isStarted()) {
             throw new IllegalStateException("Cannot add a player after the game has started");
         }
 
         LOGGER.trace("Adding player {}", player);
 
-        Rack rack = createRack();
+        Rack rack = rackFactory.createRack();
         rack.fill(getBag());
         player.setRack(rack);
 
@@ -130,8 +133,7 @@ public abstract class AbstractGame implements Game
     @Override
     public void removePlayer(Player player)
     {
-        if (isStarted())
-        {
+        if (isStarted()) {
             throw new IllegalStateException("Cannot remove a player after the game has started (resign instead)");
         }
 
@@ -149,8 +151,7 @@ public abstract class AbstractGame implements Game
     @Override
     public void setCurrentPlayer(Player player) throws IllegalArgumentException
     {
-        if (!players.contains(player))
-        {
+        if (!players.contains(player)) {
             throw new IllegalArgumentException("Player " + player + " is not a member of this game");
         }
 
@@ -166,28 +167,23 @@ public abstract class AbstractGame implements Game
     @Override
     public void nextTurn()
     {
-        if (turns == null)
-        {
+        if (turns == null) {
             turns = Iterators.cycle(players);
 
-            if (currentPlayer != null)
-            {
+            if (currentPlayer != null) {
                 int playerCount = players.size();
                 int counter = 0;
-                for (; counter < playerCount; counter++)
-                {
-                    if (turns.next().equals(currentPlayer))
-                    {
+                for (; counter < playerCount; counter++) {
+                    if (turns.next().equals(currentPlayer)) {
                         break;
                     }
                 }
 
-                // TODO re-evaluate this based on the fact that current player cannot be set unless it is a member of the game
-                if (counter == playerCount)
-                {
-                    throw new IllegalStateException("The current player ("
-                            + currentPlayer.getId()
-                            + ") is not in the list of players");
+                // TODO re-evaluate this based on the fact that current player cannot be set
+                // unless it is a member of the game
+                if (counter == playerCount) {
+                    throw new IllegalStateException("The current player (" + currentPlayer.getId() +
+                                                    ") is not in the list of players");
                 }
 
                 fireTurnStarted();
@@ -238,15 +234,12 @@ public abstract class AbstractGame implements Game
     @Override
     public boolean isEnded()
     {
-        if (!isStarted())
-        {
+        if (!isStarted()) {
             return false;
         }
 
-        for (Player player : getPlayers())
-        {
-            if (player.getRack().isEmpty())
-            {
+        for (Player player : getPlayers()) {
+            if (player.getRack().isEmpty()) {
                 return true;
             }
         }
@@ -268,8 +261,6 @@ public abstract class AbstractGame implements Game
     {
         EventBus.post(new GameEndEvent(this));
     }
-
-    protected abstract Rack createRack();
 
     protected abstract Bag createBag();
 

@@ -38,11 +38,6 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
-import org.syphr.wordplay.core.component.BagImpl;
-import org.syphr.wordplay.core.component.NoSuchPieceException;
-import org.syphr.wordplay.core.component.NotEnoughPiecesException;
-import org.syphr.wordplay.core.component.Piece;
-import org.syphr.wordplay.core.component.PieceFactory;
 import org.syphr.wordplay.core.lang.Letter;
 
 import com.google.common.collect.HashMultiset;

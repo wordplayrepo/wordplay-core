@@ -94,7 +94,6 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
         List<Entry<Character, Integer>> endFreq = new ArrayList<Entry<Character, Integer>>(endFreqMap.entrySet());
         Collections.sort(endFreq, COMPARATOR);
 
-        @SuppressWarnings("unchecked")
         Iterable<Entry<Character, Integer>> alternator = new AlternatingIterable<Entry<Character, Integer>>(startFreq,
                                                                                                             endFreq);
 
@@ -220,6 +219,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
     {
         private final Iterable<T>[] iterables;
 
+        @SafeVarargs
         public AlternatingIterable(Iterable<T>... iterables)
         {
             this.iterables = iterables;
@@ -245,6 +245,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
 
         private Iterator<T> current;
 
+        @SafeVarargs
         public AlternatingIterator(Iterator<T>... iterators)
         {
             this.iterators = Iterators.cycle(iterators);

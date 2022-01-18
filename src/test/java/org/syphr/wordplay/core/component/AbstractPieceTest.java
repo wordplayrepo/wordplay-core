@@ -24,8 +24,6 @@ import static org.mockito.Mockito.mock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.syphr.wordplay.core.component.AbstractPiece;
-import org.syphr.wordplay.core.component.Piece;
 import org.syphr.wordplay.core.lang.Letter;
 
 @RunWith(MockitoJUnitRunner.class)

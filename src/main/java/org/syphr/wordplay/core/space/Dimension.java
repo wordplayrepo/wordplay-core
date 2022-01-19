@@ -27,6 +27,21 @@ public record Dimension(int width, int height, int depth) implements Comparable<
         return new Dimension(width, height, depth);
     }
 
+    public Dimension
+    {
+        if (width < 1) {
+            throw new IllegalArgumentException("Dimension width must be positive");
+        }
+
+        if (height < 1) {
+            throw new IllegalArgumentException("Dimension height must be positive");
+        }
+
+        if (depth < 1) {
+            throw new IllegalArgumentException("Dimension depth must be positive");
+        }
+    }
+
     public boolean contains(Location location)
     {
         int x = location.getX();

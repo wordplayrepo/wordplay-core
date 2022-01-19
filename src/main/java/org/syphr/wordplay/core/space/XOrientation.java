@@ -26,7 +26,7 @@ public class XOrientation implements Orientation
     @Override
     public boolean contains(Distance distance)
     {
-        return distance.getY() == 0 && distance.getZ() == 0;
+        return distance.y() == 0 && distance.z() == 0;
     }
 
     @Override

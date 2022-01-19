@@ -43,11 +43,11 @@ public class Line
         set.add(l1);
 
         Distance d = Distance.between(l1, l2);
-        float N = Math.max(d.getX(), Math.max(d.getY(), d.getZ()));
+        float N = Math.max(d.x(), Math.max(d.y(), d.z()));
 
-        float sx = d.getX() / N;
-        float sy = d.getY() / N;
-        float sz = d.getZ() / N;
+        float sx = d.x() / N;
+        float sy = d.y() / N;
+        float sz = d.z() / N;
 
         float px = l1.getX();
         float py = l1.getY();

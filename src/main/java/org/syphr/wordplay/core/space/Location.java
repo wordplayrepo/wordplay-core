@@ -69,9 +69,9 @@ public class Location implements Comparable<Location>
         int otherY = location.getY();
         int otherZ = location.getZ();
 
-        return Math.abs(x - otherX) <= distance.getX()
-                && Math.abs(y - otherY) <= distance.getY()
-                && Math.abs(z - otherZ) <= distance.getZ();
+        return Math.abs(x - otherX) <= distance.x()
+                && Math.abs(y - otherY) <= distance.y()
+                && Math.abs(z - otherZ) <= distance.z();
     }
 
     @Override

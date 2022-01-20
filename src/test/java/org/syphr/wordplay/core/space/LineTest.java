@@ -15,44 +15,98 @@
  */
 package org.syphr.wordplay.core.space;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
+import org.junit.jupiter.api.Test;
 
 public class LineTest
 {
     @Test
-    public void testHorizontalContains()
+    public void between()
     {
-        Line line = Line.from(Location.at(1, 1), Location.at(4, 1));
-
-        Assert.assertTrue(line.contains(Location.at(2, 1)));
-        Assert.assertFalse(line.contains(Location.at(0, 1)));
-        Assert.assertFalse(line.contains(Location.at(5, 1)));
-        Assert.assertFalse(line.contains(Location.at(2, 2)));
-        Assert.assertFalse(line.contains(Location.at(2, 0)));
+        assertThat(Line.between(Location.at(1, 1, 1), Location.at(2, 2, 2)),
+                   equalTo(new Line(Location.at(1, 1, 1), Location.at(2, 2, 2))));
     }
 
     @Test
-    public void testVerticalContains()
+    public void start()
     {
-        Line line = Line.from(Location.at(1, 1), Location.at(1, 4));
-
-        Assert.assertTrue(line.contains(Location.at(1, 2)));
-        Assert.assertFalse(line.contains(Location.at(1, 0)));
-        Assert.assertFalse(line.contains(Location.at(1, 5)));
-        Assert.assertFalse(line.contains(Location.at(2, 2)));
-        Assert.assertFalse(line.contains(Location.at(0, 2)));
+        assertThat(Line.between(Location.at(1, 2, 3), Location.at(4, 5, 6)).start(), equalTo(Location.at(1, 2, 3)));
     }
 
     @Test
-    public void testDiagonalContains()
+    public void end()
     {
-        Line line = Line.from(Location.at(1, 1), Location.at(4, 4));
+        assertThat(Line.between(Location.at(1, 2, 3), Location.at(4, 5, 6)).end(), equalTo(Location.at(4, 5, 6)));
+    }
 
-        Assert.assertTrue(line.contains(Location.at(2, 2)));
-        Assert.assertFalse(line.contains(Location.at(0, 0)));
-        Assert.assertFalse(line.contains(Location.at(5, 5)));
-        Assert.assertFalse(line.contains(Location.at(2, 1)));
-        Assert.assertFalse(line.contains(Location.at(2, 3)));
+    @Test
+    public void contains_XAxis()
+    {
+        Line line = Line.between(Location.at(1, 1, 1), Location.at(4, 1, 1));
+
+        assertAll(() -> assertFalse(line.contains(Location.at(0, 1, 1))),
+                  () -> assertFalse(line.contains(Location.at(1, 0, 1))),
+                  () -> assertFalse(line.contains(Location.at(1, 1, 0))),
+                  () -> assertTrue(line.contains(Location.at(1, 1, 1))),
+                  () -> assertTrue(line.contains(Location.at(2, 1, 1))),
+                  () -> assertTrue(line.contains(Location.at(3, 1, 1))),
+                  () -> assertTrue(line.contains(Location.at(4, 1, 1))),
+                  () -> assertFalse(line.contains(Location.at(5, 1, 1))),
+                  () -> assertFalse(line.contains(Location.at(2, 2, 1))),
+                  () -> assertFalse(line.contains(Location.at(2, 0, 1))));
+    }
+
+    @Test
+    public void contains_YAxis()
+    {
+        Line line = Line.between(Location.at(1, 1, 1), Location.at(1, 4, 1));
+
+        assertAll(() -> assertFalse(line.contains(Location.at(0, 1, 1))),
+                  () -> assertFalse(line.contains(Location.at(1, 0, 1))),
+                  () -> assertFalse(line.contains(Location.at(1, 1, 0))),
+                  () -> assertTrue(line.contains(Location.at(1, 1, 1))),
+                  () -> assertTrue(line.contains(Location.at(1, 2, 1))),
+                  () -> assertTrue(line.contains(Location.at(1, 3, 1))),
+                  () -> assertTrue(line.contains(Location.at(1, 4, 1))),
+                  () -> assertFalse(line.contains(Location.at(1, 5, 1))),
+                  () -> assertFalse(line.contains(Location.at(2, 2, 1))),
+                  () -> assertFalse(line.contains(Location.at(0, 2, 1))));
+    }
+
+    @Test
+    public void contains_ZAxis()
+    {
+        Line line = Line.between(Location.at(1, 1, 1), Location.at(1, 1, 4));
+
+        assertAll(() -> assertFalse(line.contains(Location.at(0, 1, 1))),
+                  () -> assertFalse(line.contains(Location.at(1, 0, 1))),
+                  () -> assertFalse(line.contains(Location.at(1, 1, 0))),
+                  () -> assertTrue(line.contains(Location.at(1, 1, 1))),
+                  () -> assertTrue(line.contains(Location.at(1, 1, 2))),
+                  () -> assertTrue(line.contains(Location.at(1, 1, 3))),
+                  () -> assertTrue(line.contains(Location.at(1, 1, 4))),
+                  () -> assertFalse(line.contains(Location.at(1, 1, 5))),
+                  () -> assertFalse(line.contains(Location.at(1, 2, 2))),
+                  () -> assertFalse(line.contains(Location.at(1, 2, 0))));
+    }
+
+    @Test
+    public void contains_Diagonal()
+    {
+        Line line = Line.between(Location.at(1, 1, 1), Location.at(4, 4, 4));
+
+        assertAll(() -> assertFalse(line.contains(Location.at(0, 0, 0))),
+                  () -> assertTrue(line.contains(Location.at(1, 1, 1))),
+                  () -> assertTrue(line.contains(Location.at(2, 2, 2))),
+                  () -> assertTrue(line.contains(Location.at(3, 3, 3))),
+                  () -> assertTrue(line.contains(Location.at(4, 4, 4))),
+                  () -> assertFalse(line.contains(Location.at(5, 5, 5))),
+                  () -> assertFalse(line.contains(Location.at(2, 1, 2))),
+                  () -> assertFalse(line.contains(Location.at(2, 3, 2))));
     }
 }

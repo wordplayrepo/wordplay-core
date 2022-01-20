@@ -48,7 +48,7 @@ public class ScoreCalculatorImpl implements ScoreCalculator
         for (Word word : words) {
             log.trace("Calculating score for word {}", word);
 
-            Line wordLine = Line.from(word.getStartLocation(), word.getEndLocation());
+            Line wordLine = Line.between(word.getStartLocation(), word.getEndLocation());
 
             for (Tile tile : word.getTiles()) {
                 Location tileLocation = tile.getLocation();

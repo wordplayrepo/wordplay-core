@@ -33,13 +33,13 @@ public class DimensionTest
     @Test
     public void of_WidthHeight()
     {
-        assertThat(new Dimension(1, 2, 1), equalTo(Dimension.of(1, 2)));
+        assertThat(Dimension.of(1, 2), equalTo(new Dimension(1, 2, 1)));
     }
 
     @Test
     public void of_WidthHeightDepth()
     {
-        assertThat(new Dimension(1, 2, 3), equalTo(Dimension.of(1, 2, 3)));
+        assertThat(Dimension.of(1, 2, 3), equalTo(new Dimension(1, 2, 3)));
     }
 
     @ParameterizedTest

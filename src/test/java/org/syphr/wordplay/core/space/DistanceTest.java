@@ -30,15 +30,15 @@ import org.junit.jupiter.params.provider.CsvSource;
 class DistanceTest
 {
     @Test
-    public void of_XY()
+    public void zero()
     {
-        assertThat(new Distance(1, 2, 0), equalTo(Distance.of(1, 2)));
+        assertThat(Distance.zero(), equalTo(Distance.of(0, 0, 0)));
     }
 
     @Test
-    public void of_XYZ()
+    public void max()
     {
-        assertThat(new Distance(1, 2, 3), equalTo(Distance.of(1, 2, 3)));
+        assertThat(Distance.max(), equalTo(Distance.of(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE)));
     }
 
     @Test
@@ -54,6 +54,18 @@ class DistanceTest
                                    equalTo(Distance.of(0, 1, 0))),
                   () -> assertThat(Distance.between(Location.at(0, 0, 0), Location.at(0, 0, 1)),
                                    equalTo(Distance.of(0, 0, 1))));
+    }
+
+    @Test
+    public void of_XY()
+    {
+        assertThat(Distance.of(1, 2), equalTo(new Distance(1, 2, 0)));
+    }
+
+    @Test
+    public void of_XYZ()
+    {
+        assertThat(Distance.of(1, 2, 3), equalTo(new Distance(1, 2, 3)));
     }
 
     @Test

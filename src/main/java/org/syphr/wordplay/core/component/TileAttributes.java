@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.syphr.wordplay.core.config.TileAttribute;
-import org.syphr.wordplay.core.space.Distances;
+import org.syphr.wordplay.core.space.Distance;
 
 public class TileAttributes
 {
@@ -30,9 +30,8 @@ public class TileAttributes
     public static TileAttribute letterMultiplier(int multiplier)
     {
         TileAttribute attribute = LETTER_MULTIPLIERS.get(multiplier);
-        if (attribute == null)
-        {
-            attribute = new MultiplierAttribute(Distances.zero(), multiplier, true, true);
+        if (attribute == null) {
+            attribute = new MultiplierAttribute(Distance.zero(), multiplier, true, true);
             LETTER_MULTIPLIERS.put(multiplier, attribute);
         }
 
@@ -42,9 +41,8 @@ public class TileAttributes
     public static TileAttribute wordMultiplier(int multiplier)
     {
         TileAttribute attribute = WORD_MULTIPLIERS.get(multiplier);
-        if (attribute == null)
-        {
-            attribute = new MultiplierAttribute(Distances.max(), multiplier, true, true);
+        if (attribute == null) {
+            attribute = new MultiplierAttribute(Distance.max(), multiplier, true, true);
             WORD_MULTIPLIERS.put(multiplier, attribute);
         }
 

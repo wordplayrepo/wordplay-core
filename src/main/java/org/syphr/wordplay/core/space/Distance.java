@@ -17,6 +17,24 @@ package org.syphr.wordplay.core.space;
 
 public record Distance(int x, int y, int z) implements Comparable<Distance>
 {
+    private static final Distance ZERO = Distance.of(0, 0, 0);
+    private static final Distance MAX = Distance.of(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
+
+    public static Distance zero()
+    {
+        return ZERO;
+    }
+
+    public static Distance max()
+    {
+        return MAX;
+    }
+
+    public static Distance between(Location start, Location end)
+    {
+        return of(end.getX() - start.getX(), end.getY() - start.getY(), end.getZ() - start.getZ());
+    }
+
     public static Distance of(int x, int y)
     {
         return of(x, y, 0);
@@ -25,11 +43,6 @@ public record Distance(int x, int y, int z) implements Comparable<Distance>
     public static Distance of(int x, int y, int z)
     {
         return new Distance(x, y, z);
-    }
-
-    public static Distance between(Location start, Location end)
-    {
-        return of(end.getX() - start.getX(), end.getY() - start.getY(), end.getZ() - start.getZ());
     }
 
     public Distance(int x, int y, int z)

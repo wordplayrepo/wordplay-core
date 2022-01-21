@@ -96,6 +96,7 @@ class DistanceTest
         assertAll(() -> assertThat(Distance.of(1, 1, 1), comparesEqualTo(Distance.of(1, 1, 1))),
                   () -> assertThat(Distance.of(1, 1, 1), lessThan(Distance.of(2, 1, 1))),
                   () -> assertThat(Distance.of(1, 1, 1), lessThan(Distance.of(1, 2, 1))),
-                  () -> assertThat(Distance.of(1, 1, 1), lessThan(Distance.of(1, 1, 2))));
+                  () -> assertThat(Distance.of(1, 1, 1), lessThan(Distance.of(1, 1, 2))),
+                  () -> assertThat(Distance.of(2, 2, 2), lessThan(Distance.of(3, 1, 1))));
     }
 }

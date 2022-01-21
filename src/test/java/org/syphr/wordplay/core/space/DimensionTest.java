@@ -69,6 +69,7 @@ public class DimensionTest
         assertAll(() -> assertThat(Dimension.of(1, 1, 1), comparesEqualTo(Dimension.of(1, 1, 1))),
                   () -> assertThat(Dimension.of(1, 1, 1), lessThan(Dimension.of(2, 1, 1))),
                   () -> assertThat(Dimension.of(1, 1, 1), lessThan(Dimension.of(1, 2, 1))),
-                  () -> assertThat(Dimension.of(1, 1, 1), lessThan(Dimension.of(1, 1, 2))));
+                  () -> assertThat(Dimension.of(1, 1, 1), lessThan(Dimension.of(1, 1, 2))),
+                  () -> assertThat(Dimension.of(2, 2, 2), lessThan(Dimension.of(3, 1, 1))));
     }
 }

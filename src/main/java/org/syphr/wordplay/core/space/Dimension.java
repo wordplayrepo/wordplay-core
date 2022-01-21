@@ -44,9 +44,9 @@ public record Dimension(int width, int height, int depth) implements Comparable<
 
     public boolean contains(Location location)
     {
-        int x = location.getX();
-        int y = location.getY();
-        int z = location.getZ();
+        int x = location.x();
+        int y = location.y();
+        int z = location.z();
 
         return x >= 0 && x < width && y >= 0 && y < height && z >= 0 && z < depth;
     }

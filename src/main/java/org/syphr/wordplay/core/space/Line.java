@@ -54,9 +54,9 @@ public final class Line
         float sy = d.y() / N;
         float sz = d.z() / N;
 
-        float px = start.getX();
-        float py = start.getY();
-        float pz = start.getZ();
+        float px = start.x();
+        float py = start.y();
+        float pz = start.z();
         for (int i = 0; i < N; i++) {
             px += sx;
             py += sy;

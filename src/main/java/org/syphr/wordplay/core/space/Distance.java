@@ -32,7 +32,7 @@ public record Distance(int x, int y, int z) implements Comparable<Distance>
 
     public static Distance between(Location start, Location end)
     {
-        return of(end.getX() - start.getX(), end.getY() - start.getY(), end.getZ() - start.getZ());
+        return of(end.x() - start.x(), end.y() - start.y(), end.z() - start.z());
     }
 
     public static Distance of(int x, int y)

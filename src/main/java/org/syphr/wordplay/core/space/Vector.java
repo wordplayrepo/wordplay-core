@@ -38,7 +38,7 @@ public class Vector implements Comparable<Vector>
 
     public static Vector from(Location start, Location end)
     {
-        return of(end.getX() - start.getX(), end.getY() - start.getY(), end.getZ() - start.getZ());
+        return of(end.x() - start.x(), end.y() - start.y(), end.z() - start.z());
     }
 
     protected Vector(int x, int y, int z)

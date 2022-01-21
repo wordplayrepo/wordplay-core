@@ -15,8 +15,20 @@
  */
 package org.syphr.wordplay.core.space;
 
-public class ZOrientation implements Orientation
+/* default */ final class ZOrientation implements Orientation
 {
+    private static final ZOrientation INSTANCE = new ZOrientation();
+
+    public static ZOrientation instance()
+    {
+        return INSTANCE;
+    }
+
+    private ZOrientation()
+    {
+        /* Singleton */
+    }
+
     @Override
     public Location move(Location location, int amount)
     {

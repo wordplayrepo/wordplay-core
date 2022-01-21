@@ -15,8 +15,20 @@
  */
 package org.syphr.wordplay.core.space;
 
-public class YOrientation implements Orientation
+/* default */ final class YOrientation implements Orientation
 {
+    private static final YOrientation INSTANCE = new YOrientation();
+
+    public static YOrientation instance()
+    {
+        return INSTANCE;
+    }
+
+    private YOrientation()
+    {
+        /* Singleton */
+    }
+
     @Override
     public Location move(Location location, int amount)
     {

@@ -15,8 +15,10 @@
  */
 package org.syphr.wordplay.core.config;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -34,7 +36,7 @@ public class ConfigurationBuilder
 {
     private Dimension boardDimension = Dimension.of(9, 9);
     private Location boardStart = Location.at(4, 4);
-    private Set<Orientation> orientations = Orientations.setOf(Orientations.x(), Orientations.y());
+    private Set<Orientation> orientations = Orientations.xy();
     private Map<Location, Set<TileAttribute>> tileAttributes = new HashMap<>();
 
     private int rackSize = 5;
@@ -78,7 +80,7 @@ public class ConfigurationBuilder
 
     public ConfigurationBuilder orientations(Orientation... orientations)
     {
-        this.orientations = Orientations.setOf(orientations);
+        this.orientations = new LinkedHashSet<>(Arrays.asList(orientations));
         return this;
     }
 

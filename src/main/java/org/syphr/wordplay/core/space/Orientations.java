@@ -15,59 +15,41 @@
  */
 package org.syphr.wordplay.core.space;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
-
-import com.google.common.collect.Sets;
 
 public class Orientations
 {
-    private static final Orientation X = new XOrientation();
-
-    private static final Orientation Y = new YOrientation();
-
-    private static final Orientation Z = new ZOrientation();
-
-    private static final Set<Orientation> XY = Collections.unmodifiableSet(Sets.newHashSet(X, Y));
-
-    private static final Set<Orientation> XYZ = Collections.unmodifiableSet(Sets.newHashSet(X,
-                                                                                            Y,
-                                                                                            Z));
-
     public static Orientation x()
     {
-        return X;
+        return XOrientation.instance();
     }
 
     public static Orientation y()
     {
-        return Y;
+        return YOrientation.instance();
     }
 
     public static Orientation z()
     {
-        return Z;
+        return ZOrientation.instance();
     }
 
     public static Set<Orientation> xy()
     {
-        return XY;
+        LinkedHashSet<Orientation> set = new LinkedHashSet<>();
+        set.add(x());
+        set.add(y());
+
+        return set;
     }
 
     public static Set<Orientation> xyz()
     {
-        return XYZ;
-    }
-
-    public static Set<Orientation> setOf(Orientation... orientations)
-    {
-        Set<Orientation> set = new HashSet<Orientation>();
-
-        for (Orientation orientation : orientations)
-        {
-            set.add(orientation);
-        }
+        LinkedHashSet<Orientation> set = new LinkedHashSet<>();
+        set.add(x());
+        set.add(y());
+        set.add(z());
 
         return set;
     }

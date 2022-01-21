@@ -15,8 +15,20 @@
  */
 package org.syphr.wordplay.core.space;
 
-public class XOrientation implements Orientation
+/* default */ final class XOrientation implements Orientation
 {
+    private static final XOrientation INSTANCE = new XOrientation();
+
+    public static XOrientation instance()
+    {
+        return INSTANCE;
+    }
+
+    private XOrientation()
+    {
+        /* Singleton */
+    }
+
     @Override
     public Location move(Location location, int amount)
     {

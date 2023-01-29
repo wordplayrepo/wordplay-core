@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2023 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ public record Location(int x, int y, int z) implements Comparable<Location>
 
     public Location move(Vector vector)
     {
-        return Location.at(x + vector.getX(), y + vector.getY(), z + vector.getZ());
+        return Location.at(x + vector.x(), y + vector.y(), z + vector.z());
     }
 
     public boolean isWithin(Distance distance, Location location)

@@ -15,16 +15,13 @@
  */
 package org.syphr.wordplay.core.cache;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,7 +33,7 @@ import com.google.common.util.concurrent.UncheckedExecutionException;
 
 import lombok.Data;
 
-public class MultiLevelCacheTest
+public class MultiLevelCacheTest implements WithAssertions
 {
     @ParameterizedTest
     @CsvSource({ "1,8", "2,8", "3,5" })
@@ -67,10 +64,16 @@ public class MultiLevelCacheTest
         }
 
         // then
-        assertAll(() -> assertThat(cacheMiss.getCount(), equalTo(missCount)),
-                  () -> assertThat(results, hasSize(8)),
-                  () -> assertThat(results,
-                                   contains("1|2|3", "2|3|4", "3|4|5", "4|5|6", "2|3|4", "3|4|5", "4|5|6", "5|6|7")));
+        assertAll(() -> assertThat(cacheMiss.getCount()).isEqualTo(missCount),
+                  () -> assertThat(results).hasSize(8)
+                                           .containsExactly("1|2|3",
+                                                            "2|3|4",
+                                                            "3|4|5",
+                                                            "4|5|6",
+                                                            "2|3|4",
+                                                            "3|4|5",
+                                                            "4|5|6",
+                                                            "5|6|7"));
     }
 
     @Test

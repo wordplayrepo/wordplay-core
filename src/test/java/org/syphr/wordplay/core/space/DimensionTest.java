@@ -15,31 +15,28 @@
  */
 package org.syphr.wordplay.core.space;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.comparesEqualTo;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class DimensionTest
+public class DimensionTest implements WithAssertions
 {
     @Test
     public void of_WidthHeight()
     {
-        assertThat(Dimension.of(1, 2), equalTo(new Dimension(1, 2, 1)));
+        assertThat(Dimension.of(1, 2)).isEqualTo(new Dimension(1, 2, 1));
     }
 
     @Test
     public void of_WidthHeightDepth()
     {
-        assertThat(Dimension.of(1, 2, 3), equalTo(new Dimension(1, 2, 3)));
+        assertThat(Dimension.of(1, 2, 3)).isEqualTo(new Dimension(1, 2, 3));
     }
 
     @ParameterizedTest
@@ -66,10 +63,10 @@ public class DimensionTest
     @Test
     public void compareTo()
     {
-        assertAll(() -> assertThat(Dimension.of(1, 1, 1), comparesEqualTo(Dimension.of(1, 1, 1))),
-                  () -> assertThat(Dimension.of(1, 1, 1), lessThan(Dimension.of(2, 1, 1))),
-                  () -> assertThat(Dimension.of(1, 1, 1), lessThan(Dimension.of(1, 2, 1))),
-                  () -> assertThat(Dimension.of(1, 1, 1), lessThan(Dimension.of(1, 1, 2))),
-                  () -> assertThat(Dimension.of(2, 2, 2), lessThan(Dimension.of(3, 1, 1))));
+        assertAll(() -> assertThat(Dimension.of(1, 1, 1)).isEqualByComparingTo(Dimension.of(1, 1, 1)),
+                  () -> assertThat(Dimension.of(1, 1, 1)).isLessThan(Dimension.of(2, 1, 1)),
+                  () -> assertThat(Dimension.of(1, 1, 1)).isLessThan(Dimension.of(1, 2, 1)),
+                  () -> assertThat(Dimension.of(1, 1, 1)).isLessThan(Dimension.of(1, 1, 2)),
+                  () -> assertThat(Dimension.of(2, 2, 2)).isLessThan(Dimension.of(3, 1, 1)));
     }
 }

@@ -15,11 +15,6 @@
  */
 package org.syphr.wordplay.core.component;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.iterableWithSize;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,11 +24,12 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.mockito.ArgumentCaptor;
 
-public class RackImplTest
+public class RackImplTest implements WithAssertions
 {
     @Test
     public void fill_BagHasEnoughPieces() throws NotEnoughPiecesException
@@ -45,7 +41,7 @@ public class RackImplTest
         RackImpl rack = rack(2);
         rack.fill(bag);
 
-        assertThat(rack.getPieces(), iterableWithSize(2));
+        assertThat(rack.getPieces()).hasSize(2);
     }
 
     @Test
@@ -57,7 +53,7 @@ public class RackImplTest
         RackImpl rack = rack(2);
         rack.fill(bag);
 
-        assertThat(rack.getPieces(), iterableWithSize(0));
+        assertThat(rack.getPieces()).isEmpty();
     }
 
     @Test
@@ -79,7 +75,7 @@ public class RackImplTest
 
         rack.exchange(bag);
 
-        assertThat(rack.getPieces(), containsInAnyOrder(bagPiece1, bagPiece2));
+        assertThat(rack.getPieces()).containsExactlyInAnyOrder(bagPiece1, bagPiece2);
     }
 
     @Test
@@ -100,7 +96,7 @@ public class RackImplTest
 
         rack.exchange(bag);
 
-        assertThat(rack.getPieces(), containsInAnyOrder(rackPiece2, bagPiece1));
+        assertThat(rack.getPieces()).containsExactlyInAnyOrder(rackPiece2, bagPiece1);
     }
 
     @Test
@@ -138,7 +134,7 @@ public class RackImplTest
         rack.exchange(List.of(rackPiece1), bag);
 
         // then
-        assertThat(rack.getPieces(), containsInAnyOrder(rackPiece2, bagPiece1));
+        assertThat(rack.getPieces()).containsExactlyInAnyOrder(rackPiece2, bagPiece1);
     }
 
     @Test
@@ -161,8 +157,8 @@ public class RackImplTest
         @SuppressWarnings("unchecked")
         ArgumentCaptor<List<Piece>> pieces = ArgumentCaptor.forClass(List.class);
         verify(bag).returnPieces(pieces.capture());
-        assertAll(() -> assertThat(pieces.getValue(), contains(rackPiece1, rackPiece2)),
-                  () -> assertThat(rack.getPieces(), empty()));
+        assertAll(() -> assertThat(pieces.getValue()).containsExactly(rackPiece1, rackPiece2),
+                  () -> assertThat(rack.getPieces()).isEmpty());
     }
 
     private RackImpl rack(int size)

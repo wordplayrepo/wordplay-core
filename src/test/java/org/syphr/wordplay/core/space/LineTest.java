@@ -15,33 +15,32 @@
  */
 package org.syphr.wordplay.core.space;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 
-public class LineTest
+public class LineTest implements WithAssertions
 {
     @Test
     public void between()
     {
-        assertThat(Line.between(Location.at(1, 1, 1), Location.at(2, 2, 2)),
-                   equalTo(new Line(Location.at(1, 1, 1), Location.at(2, 2, 2))));
+        assertThat(Line.between(Location.at(1, 1, 1), Location.at(2, 2, 2))).isEqualTo(new Line(Location.at(1, 1, 1),
+                                                                                                Location.at(2, 2, 2)));
     }
 
     @Test
     public void start()
     {
-        assertThat(Line.between(Location.at(1, 2, 3), Location.at(4, 5, 6)).start(), equalTo(Location.at(1, 2, 3)));
+        assertThat(Line.between(Location.at(1, 2, 3), Location.at(4, 5, 6)).start()).isEqualTo(Location.at(1, 2, 3));
     }
 
     @Test
     public void end()
     {
-        assertThat(Line.between(Location.at(1, 2, 3), Location.at(4, 5, 6)).end(), equalTo(Location.at(4, 5, 6)));
+        assertThat(Line.between(Location.at(1, 2, 3), Location.at(4, 5, 6)).end()).isEqualTo(Location.at(4, 5, 6));
     }
 
     @Test

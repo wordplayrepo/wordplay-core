@@ -15,17 +15,14 @@
  */
 package org.syphr.wordplay.core.space;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.comparesEqualTo;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class VectorTest
+class VectorTest implements WithAssertions
 {
     @Test
     void of_XY()
@@ -38,7 +35,7 @@ class VectorTest
         var result = Vector.of(x, y);
 
         // then
-        assertThat(result, equalTo(new Vector(x, y, 0)));
+        assertThat(result).isEqualTo(new Vector(x, y, 0));
     }
 
     @Test
@@ -53,7 +50,7 @@ class VectorTest
         var result = Vector.of(x, y, z);
 
         // then
-        assertThat(result, equalTo(new Vector(x, y, z)));
+        assertThat(result).isEqualTo(new Vector(x, y, z));
     }
 
     @ParameterizedTest
@@ -70,16 +67,16 @@ class VectorTest
         var result = Vector.from(Location.at(startX, startY, startZ), Location.at(endX, endY, endZ));
 
         // then
-        assertThat(result, equalTo(new Vector(endX - startX, endY - startY, endZ - startZ)));
+        assertThat(result).isEqualTo(new Vector(endX - startX, endY - startY, endZ - startZ));
     }
 
     @Test
     public void compareTo()
     {
-        assertAll(() -> assertThat(Vector.of(1, 1, 1), comparesEqualTo(Vector.of(1, 1, 1))),
-                  () -> assertThat(Vector.of(1, 1, 1), lessThan(Vector.of(2, 1, 1))),
-                  () -> assertThat(Vector.of(1, 1, 1), lessThan(Vector.of(1, 2, 1))),
-                  () -> assertThat(Vector.of(1, 1, 1), lessThan(Vector.of(1, 1, 2))),
-                  () -> assertThat(Vector.of(2, 2, 2), lessThan(Vector.of(3, 1, 1))));
+        assertAll(() -> assertThat(Vector.of(1, 1, 1)).isEqualByComparingTo(Vector.of(1, 1, 1)),
+                  () -> assertThat(Vector.of(1, 1, 1)).isLessThan(Vector.of(2, 1, 1)),
+                  () -> assertThat(Vector.of(1, 1, 1)).isLessThan(Vector.of(1, 2, 1)),
+                  () -> assertThat(Vector.of(1, 1, 1)).isLessThan(Vector.of(1, 1, 2)),
+                  () -> assertThat(Vector.of(2, 2, 2)).isLessThan(Vector.of(3, 1, 1)));
     }
 }

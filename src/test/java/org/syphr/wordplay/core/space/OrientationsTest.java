@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2023 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,42 +15,40 @@
  */
 package org.syphr.wordplay.core.space;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.equalTo;
-
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 
-class OrientationsTest
+class OrientationsTest implements WithAssertions
 {
     @Test
     void x()
     {
-        assertThat(Orientations.x(), equalTo(XOrientation.instance()));
+        assertThat(Orientations.x()).isEqualTo(XOrientation.instance());
     }
 
     @Test
     void y()
     {
-        assertThat(Orientations.y(), equalTo(YOrientation.instance()));
+        assertThat(Orientations.y()).isEqualTo(YOrientation.instance());
     }
 
     @Test
     void z()
     {
-        assertThat(Orientations.z(), equalTo(ZOrientation.instance()));
+        assertThat(Orientations.z()).isEqualTo(ZOrientation.instance());
     }
 
     @Test
     void xy()
     {
-        assertThat(Orientations.xy(), contains(XOrientation.instance(), YOrientation.instance()));
+        assertThat(Orientations.xy()).containsExactly(XOrientation.instance(), YOrientation.instance());
     }
 
     @Test
     void xyz()
     {
-        assertThat(Orientations.xyz(),
-                   contains(XOrientation.instance(), YOrientation.instance(), ZOrientation.instance()));
+        assertThat(Orientations.xyz()).containsExactly(XOrientation.instance(),
+                                                       YOrientation.instance(),
+                                                       ZOrientation.instance());
     }
 }

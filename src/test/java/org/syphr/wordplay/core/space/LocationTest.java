@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2023 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,40 +15,37 @@
  */
 package org.syphr.wordplay.core.space;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.comparesEqualTo;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 
-class LocationTest
+class LocationTest implements WithAssertions
 {
     @Test
     public void at_XY()
     {
-        assertThat(Location.at(1, 2), equalTo(new Location(1, 2, 0)));
+        assertThat(Location.at(1, 2)).isEqualTo(new Location(1, 2, 0));
     }
 
     @Test
     public void at_XYZ()
     {
-        assertThat(Location.at(1, 2, 3), equalTo(new Location(1, 2, 3)));
+        assertThat(Location.at(1, 2, 3)).isEqualTo(new Location(1, 2, 3));
     }
 
     @Test
     public void move_Positive()
     {
-        assertThat(Location.at(1, 1, 1).move(Vector.of(1, 1, 1)), equalTo(Location.at(2, 2, 2)));
+        assertThat(Location.at(1, 1, 1).move(Vector.of(1, 1, 1))).isEqualTo(Location.at(2, 2, 2));
     }
 
     @Test
     public void move_Negative()
     {
-        assertThat(Location.at(2, 2, 2).move(Vector.of(-1, -1, -1)), equalTo(Location.at(1, 1, 1)));
+        assertThat(Location.at(2, 2, 2).move(Vector.of(-1, -1, -1))).isEqualTo(Location.at(1, 1, 1));
     }
 
     @Test
@@ -68,10 +65,10 @@ class LocationTest
     @Test
     public void compareTo()
     {
-        assertAll(() -> assertThat(Location.at(1, 1, 1), comparesEqualTo(Location.at(1, 1, 1))),
-                  () -> assertThat(Location.at(1, 1, 1), lessThan(Location.at(2, 1, 1))),
-                  () -> assertThat(Location.at(1, 1, 1), lessThan(Location.at(1, 2, 1))),
-                  () -> assertThat(Location.at(1, 1, 1), lessThan(Location.at(1, 1, 2))),
-                  () -> assertThat(Location.at(2, 2, 2), lessThan(Location.at(3, 1, 1))));
+        assertAll(() -> assertThat(Location.at(1, 1, 1)).isEqualByComparingTo(Location.at(1, 1, 1)),
+                  () -> assertThat(Location.at(1, 1, 1)).isLessThan(Location.at(2, 1, 1)),
+                  () -> assertThat(Location.at(1, 1, 1)).isLessThan(Location.at(1, 2, 1)),
+                  () -> assertThat(Location.at(1, 1, 1)).isLessThan(Location.at(1, 1, 2)),
+                  () -> assertThat(Location.at(2, 2, 2)).isLessThan(Location.at(3, 1, 1)));
     }
 }

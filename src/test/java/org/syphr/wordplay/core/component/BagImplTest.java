@@ -15,13 +15,8 @@
  */
 package org.syphr.wordplay.core.component;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
@@ -30,8 +25,8 @@ import static org.mockito.Mockito.verify;
 
 import java.util.List;
 import java.util.random.RandomGenerator;
-import java.util.stream.Collectors;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,7 +41,7 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
 @ExtendWith(MockitoExtension.class)
-public class BagImplTest
+public class BagImplTest implements WithAssertions
 {
     @Mock
     PieceFactory pieceFactory;
@@ -70,7 +65,8 @@ public class BagImplTest
     @Test
     public void isEmpty_NoLetters()
     {
-        assertTrue(bag().isEmpty());
+        // then
+        assertThat(bag().isEmpty()).isTrue();
     }
 
     @Test
@@ -79,13 +75,15 @@ public class BagImplTest
         HashMultiset<Letter> letters = HashMultiset.create();
         letters.add(mock(Letter.class));
 
-        assertFalse(bag(letters).isEmpty());
+        // then
+        assertThat(bag(letters).isEmpty()).isFalse();
     }
 
     @Test
     public void getCount_NoLetters()
     {
-        assertThat(bag().getCount(), is(0));
+        // then
+        assertThat(bag().getCount()).isEqualTo(0);
     }
 
     @Test
@@ -94,7 +92,8 @@ public class BagImplTest
         HashMultiset<Letter> letters = HashMultiset.create();
         letters.add(mock(Letter.class), 1);
 
-        assertThat(bag(letters).getCount(), is(1));
+        // then
+        assertThat(bag(letters).getCount()).isEqualTo(1);
     }
 
     @Test
@@ -104,7 +103,8 @@ public class BagImplTest
         letters.add(mock(Letter.class), 1);
         letters.add(mock(Letter.class), 1);
 
-        assertThat(bag(letters).getCount(), is(2));
+        // then
+        assertThat(bag(letters).getCount()).isEqualTo(2);
     }
 
     @Test
@@ -114,7 +114,8 @@ public class BagImplTest
         letters.add(mock(Letter.class), 2);
         letters.add(mock(Letter.class), 3);
 
-        assertThat(bag(letters).getCount(), is(5));
+        // then
+        assertThat(bag(letters).getCount()).isEqualTo(5);
     }
 
     @Test
@@ -130,13 +131,18 @@ public class BagImplTest
     @Test
     public void getPiece_NotEmpty() throws NotEnoughPiecesException
     {
+        // given
         Letter letter = mock(Letter.class);
 
         HashMultiset<Letter> letters = HashMultiset.create();
         letters.add(letter, 1);
 
-        assertSame(letter, bag(letters).getPiece().getLetter());
+        // when
+        Piece result = bag(letters).getPiece();
+
+        // then
         verify(random).nextInt(anyInt());
+        assertThat(letter).isSameAs(result.getLetter());
     }
 
     @Test
@@ -176,8 +182,8 @@ public class BagImplTest
         BagImpl bag = bag(letters);
         Piece piece = bag.getPiece(letter);
 
-        assertSame(letter, piece.getLetter());
-        assertThat(bag.getCount(), is(0));
+        // then
+        assertAll(() -> assertThat(letter).isSameAs(piece.getLetter()), () -> assertThat(bag.getCount()).isEqualTo(0));
     }
 
     @Test
@@ -195,8 +201,8 @@ public class BagImplTest
         List<Piece> input = List.of(piece(letter3), piece(letter4));
         List<Piece> output = bag(letters).exchange(input);
 
-        assertThat(output.stream().map(p -> p.getLetter()).collect(Collectors.toList()),
-                   containsInAnyOrder(letter1, letter2));
+        // then
+        assertThat(output.stream().map(p -> p.getLetter()).toList()).containsExactlyInAnyOrder(letter1, letter2);
     }
 
     @Test
@@ -225,7 +231,8 @@ public class BagImplTest
         BagImpl bag = bag();
         bag.returnPiece(piece(mock(Letter.class)));
 
-        assertFalse(bag.isEmpty());
+        // then
+        assertThat(bag.isEmpty()).isFalse();
     }
 
     @Test
@@ -234,7 +241,8 @@ public class BagImplTest
         BagImpl bag = bag();
         bag.returnPieces(List.of(piece(mock(Letter.class)), piece(mock(Letter.class))));
 
-        assertThat(bag.getCount(), is(2));
+        // then
+        assertThat(bag.getCount()).isEqualTo(2);
     }
 
     private BagImpl bag()

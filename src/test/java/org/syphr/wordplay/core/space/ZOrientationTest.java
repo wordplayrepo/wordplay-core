@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2023 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,24 @@
  */
 package org.syphr.wordplay.core.space;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 
-class ZOrientationTest
+class ZOrientationTest implements WithAssertions
 {
     @Test
     void move()
     {
-        assertAll(() -> assertThat(ZOrientation.instance().move(Location.at(1, 1, 1), -1),
-                                   equalTo(Location.at(1, 1, 0))),
-                  () -> assertThat(ZOrientation.instance().move(Location.at(1, 1, 1), 1),
-                                   equalTo(Location.at(1, 1, 2))));
+        assertAll(() -> assertThat(ZOrientation.instance().move(Location.at(1, 1, 1), -1)).isEqualTo(Location.at(1,
+                                                                                                                 1,
+                                                                                                                 0)),
+                  () -> assertThat(ZOrientation.instance().move(Location.at(1, 1, 1), 1)).isEqualTo(Location.at(1,
+                                                                                                                1,
+                                                                                                                2)));
     }
 
     @Test

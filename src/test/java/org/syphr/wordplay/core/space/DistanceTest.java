@@ -15,65 +15,62 @@
  */
 package org.syphr.wordplay.core.space;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.comparesEqualTo;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class DistanceTest
+class DistanceTest implements WithAssertions
 {
     @Test
     public void zero()
     {
-        assertThat(Distance.zero(), equalTo(Distance.of(0, 0, 0)));
+        assertThat(Distance.zero()).isEqualTo(Distance.of(0, 0, 0));
     }
 
     @Test
     public void max()
     {
-        assertThat(Distance.max(), equalTo(Distance.of(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE)));
+        assertThat(Distance.max()).isEqualTo(Distance.of(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE));
     }
 
     @Test
     public void between()
     {
-        assertAll(() -> assertThat(Distance.between(Location.at(1, 1, 1), Location.at(2, 2, 2)),
-                                   equalTo(Distance.of(1, 1, 1))),
-                  () -> assertThat(Distance.between(Location.at(2, 2, 2), Location.at(1, 1, 1)),
-                                   equalTo(Distance.of(1, 1, 1))),
-                  () -> assertThat(Distance.between(Location.at(0, 0, 0), Location.at(1, 0, 0)),
-                                   equalTo(Distance.of(1, 0, 0))),
-                  () -> assertThat(Distance.between(Location.at(0, 0, 0), Location.at(0, 1, 0)),
-                                   equalTo(Distance.of(0, 1, 0))),
-                  () -> assertThat(Distance.between(Location.at(0, 0, 0), Location.at(0, 0, 1)),
-                                   equalTo(Distance.of(0, 0, 1))));
+        assertAll(() -> assertThat(Distance.between(Location.at(1, 1, 1),
+                                                    Location.at(2, 2, 2))).isEqualTo(Distance.of(1, 1, 1)),
+                  () -> assertThat(Distance.between(Location.at(2, 2, 2),
+                                                    Location.at(1, 1, 1))).isEqualTo(Distance.of(1, 1, 1)),
+                  () -> assertThat(Distance.between(Location.at(0, 0, 0),
+                                                    Location.at(1, 0, 0))).isEqualTo(Distance.of(1, 0, 0)),
+                  () -> assertThat(Distance.between(Location.at(0, 0, 0),
+                                                    Location.at(0, 1, 0))).isEqualTo(Distance.of(0, 1, 0)),
+                  () -> assertThat(Distance.between(Location.at(0, 0, 0),
+                                                    Location.at(0, 0, 1))).isEqualTo(Distance.of(0, 0, 1)));
     }
 
     @Test
     public void of_XY()
     {
-        assertThat(Distance.of(1, 2), equalTo(new Distance(1, 2, 0)));
+        assertThat(Distance.of(1, 2)).isEqualTo(new Distance(1, 2, 0));
     }
 
     @Test
     public void of_XYZ()
     {
-        assertThat(Distance.of(1, 2, 3), equalTo(new Distance(1, 2, 3)));
+        assertThat(Distance.of(1, 2, 3)).isEqualTo(new Distance(1, 2, 3));
     }
 
     @Test
     public void construct_NegativeValues()
     {
-        assertAll(() -> assertThat(Distance.of(-1, 0, 0), equalTo(Distance.of(1, 0, 0))),
-                  () -> assertThat(Distance.of(0, -1, 0), equalTo(Distance.of(0, 1, 0))),
-                  () -> assertThat(Distance.of(0, 0, -1), equalTo(Distance.of(0, 0, 1))));
+        assertAll(() -> assertThat(Distance.of(-1, 0, 0)).isEqualTo(Distance.of(1, 0, 0)),
+                  () -> assertThat(Distance.of(0, -1, 0)).isEqualTo(Distance.of(0, 1, 0)),
+                  () -> assertThat(Distance.of(0, 0, -1)).isEqualTo(Distance.of(0, 0, 1)));
     }
 
     @ParameterizedTest
@@ -93,10 +90,10 @@ class DistanceTest
     @Test
     public void compareTo()
     {
-        assertAll(() -> assertThat(Distance.of(1, 1, 1), comparesEqualTo(Distance.of(1, 1, 1))),
-                  () -> assertThat(Distance.of(1, 1, 1), lessThan(Distance.of(2, 1, 1))),
-                  () -> assertThat(Distance.of(1, 1, 1), lessThan(Distance.of(1, 2, 1))),
-                  () -> assertThat(Distance.of(1, 1, 1), lessThan(Distance.of(1, 1, 2))),
-                  () -> assertThat(Distance.of(2, 2, 2), lessThan(Distance.of(3, 1, 1))));
+        assertAll(() -> assertThat(Distance.of(1, 1, 1)).isEqualByComparingTo(Distance.of(1, 1, 1)),
+                  () -> assertThat(Distance.of(1, 1, 1)).isLessThan(Distance.of(2, 1, 1)),
+                  () -> assertThat(Distance.of(1, 1, 1)).isLessThan(Distance.of(1, 2, 1)),
+                  () -> assertThat(Distance.of(1, 1, 1)).isLessThan(Distance.of(1, 1, 2)),
+                  () -> assertThat(Distance.of(2, 2, 2)).isLessThan(Distance.of(3, 1, 1)));
     }
 }

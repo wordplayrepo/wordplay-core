@@ -15,9 +15,6 @@
  */
 package org.syphr.wordplay.core.component;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.iterableWithSize;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -40,6 +37,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -57,7 +55,7 @@ import org.syphr.wordplay.core.space.Orientations;
 import org.syphr.wordplay.core.space.Vector;
 
 @ExtendWith(MockitoExtension.class)
-public class BoardImplTest
+public class BoardImplTest implements WithAssertions
 {
     @Mock
     TileSetFactory tileSetFactory;
@@ -207,7 +205,7 @@ public class BoardImplTest
         Placement placement = new PlacementImpl(Location.at(0, 0, 0), Orientations.x(), List.of(mock(Piece.class)));
         int score = board.place(placement);
 
-        assertThat(score, is(1));
+        assertThat(score).isEqualTo(1);
         verify(scoreCalc).getScore(any(), eq(words), eq(attributes));
     }
 
@@ -250,7 +248,7 @@ public class BoardImplTest
 
         Map<Location, Piece> pieces = board().getPieces(placement);
 
-        assertThat(pieces.entrySet(), iterableWithSize(2));
+        assertThat(pieces.entrySet()).hasSize(2);
         assertSame(piece1, pieces.get(Location.at(0, 0, 0)));
         assertSame(piece2, pieces.get(Location.at(1, 0, 0)));
     }
@@ -267,7 +265,7 @@ public class BoardImplTest
 
         Map<Location, Piece> pieces = board().getPieces(placement);
 
-        assertThat(pieces.entrySet(), iterableWithSize(2));
+        assertThat(pieces.entrySet()).hasSize(2);
         assertSame(piece1, pieces.get(Location.at(0, 0, 0)));
         assertSame(piece2, pieces.get(Location.at(0, 1, 0)));
     }
@@ -284,7 +282,7 @@ public class BoardImplTest
 
         Map<Location, Piece> pieces = board().getPieces(placement);
 
-        assertThat(pieces.entrySet(), iterableWithSize(2));
+        assertThat(pieces.entrySet()).hasSize(2);
         assertSame(piece1, pieces.get(Location.at(0, 0, 0)));
         assertSame(piece2, pieces.get(Location.at(0, 0, 1)));
     }
@@ -307,7 +305,7 @@ public class BoardImplTest
 
         Map<Location, Piece> pieces = board().getPieces(placement);
 
-        assertThat(pieces.entrySet(), iterableWithSize(2));
+        assertThat(pieces.entrySet()).hasSize(2);
         assertSame(piece1, pieces.get(Location.at(0, 0, 0)));
         assertSame(piece2, pieces.get(Location.at(2, 0, 0)));
     }

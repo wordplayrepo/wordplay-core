@@ -16,16 +16,23 @@
 package org.syphr.wordplay.core.component;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.iterableWithSize;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -70,7 +77,7 @@ public class RackImplTest
         Piece rackPiece2 = mock(Piece.class);
 
         RackImpl rack = rack(2);
-        rack.add(rackPiece1);;
+        rack.add(rackPiece1);
         rack.add(rackPiece2);
 
         rack.exchange(bag);
@@ -91,12 +98,74 @@ public class RackImplTest
         Piece rackPiece2 = mock(Piece.class);
 
         RackImpl rack = rack(2);
-        rack.add(rackPiece1);;
+        rack.add(rackPiece1);
         rack.add(rackPiece2);
 
         rack.exchange(bag);
 
         assertThat(rack.getPieces(), containsInAnyOrder(rackPiece2, bagPiece1));
+    }
+
+    @Test
+    public void exchange_SomePieces_PieceNotFoundInRack() throws NoSuchPieceException, NotEnoughPiecesException
+    {
+        // given
+        Piece piece = mock(Piece.class);
+        Bag bag = mock(Bag.class);
+        RackImpl rack = rack(2);
+
+        // when
+        Executable exec = () -> rack.exchange(List.of(piece), bag);
+
+        // then
+        assertThrows(NoSuchPieceException.class, exec);
+    }
+
+    @Test
+    public void exchange_SomePieces_AllPiecesFound() throws NoSuchPieceException, NotEnoughPiecesException
+    {
+        // given
+        Piece bagPiece1 = mock(Piece.class);
+
+        Bag bag = mock(Bag.class);
+        when(bag.exchange(any())).thenReturn(List.of(bagPiece1));
+
+        Piece rackPiece1 = mock(Piece.class);
+        Piece rackPiece2 = mock(Piece.class);
+
+        RackImpl rack = rack(2);
+        rack.add(rackPiece1);
+        rack.add(rackPiece2);
+
+        // when
+        rack.exchange(List.of(rackPiece1), bag);
+
+        // then
+        assertThat(rack.getPieces(), containsInAnyOrder(rackPiece2, bagPiece1));
+    }
+
+    @Test
+    public void clear()
+    {
+        // given
+        Bag bag = mock(Bag.class);
+
+        Piece rackPiece1 = mock(Piece.class);
+        Piece rackPiece2 = mock(Piece.class);
+
+        RackImpl rack = rack(2);
+        rack.add(rackPiece1);
+        rack.add(rackPiece2);
+
+        // when
+        rack.clear(bag);
+
+        // then
+        @SuppressWarnings("unchecked")
+        ArgumentCaptor<List<Piece>> pieces = ArgumentCaptor.forClass(List.class);
+        verify(bag).returnPieces(pieces.capture());
+        assertAll(() -> assertThat(pieces.getValue(), contains(List.of(rackPiece1, rackPiece2))),
+                  () -> assertThat(rack.getPieces(), empty()));
     }
 
     private RackImpl rack(int size)

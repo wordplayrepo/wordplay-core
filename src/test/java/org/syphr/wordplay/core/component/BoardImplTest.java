@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2023 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,10 @@ package org.syphr.wordplay.core.component;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.iterableWithSize;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
@@ -39,12 +40,13 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.lang.Dictionary;
@@ -54,7 +56,7 @@ import org.syphr.wordplay.core.space.Orientation;
 import org.syphr.wordplay.core.space.Orientations;
 import org.syphr.wordplay.core.space.Vector;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class BoardImplTest
 {
     @Mock
@@ -72,10 +74,10 @@ public class BoardImplTest
     @Mock
     TileSet tileSet;
 
-    @Before
+    @BeforeEach
     public void setup()
     {
-        when(tileSetFactory.createTileSet()).thenReturn(tileSet);
+        lenient().when(tileSetFactory.createTileSet()).thenReturn(tileSet);
     }
 
     @Test
@@ -90,13 +92,20 @@ public class BoardImplTest
         verify(tileSetFactory, times(1)).createTileSet();
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getOrientations_Unmodifiable()
     {
+        // given
         Set<Orientation> mutableOrientations = new HashSet<>();
         mutableOrientations.add(mock(Orientation.class));
 
-        board(Dimension.of(3, 3), mutableOrientations, Location.at(0, 0)).getOrientations().clear();
+        var board = board(Dimension.of(3, 3), mutableOrientations, Location.at(0, 0));
+
+        // when
+        Executable exec = () -> board.getOrientations().clear();
+
+        // then
+        assertThrows(UnsupportedOperationException.class, exec);
     }
 
     @Test
@@ -143,28 +152,40 @@ public class BoardImplTest
         assertFalse(board.isValid(mock(Placement.class)));
     }
 
-    @Test(expected = InvalidLocationException.class)
+    @Test
     public void place_LocationInvalid_WordsValid() throws PlacementException
     {
+        // given
         BoardImpl board = spy(board());
         doReturn(new TreeMap<>(Map.of())).when(board).getPieces(any());
         lenient().doReturn(false).when(board).isLocationSetValid(any());
         lenient().doReturn(true).when(board).isWordSetValid(any());
 
         Placement placement = new PlacementImpl(Location.at(0, 0, 0), Orientations.x(), List.of(mock(Piece.class)));
-        board.place(placement);
+
+        // when
+        Executable exec = () -> board.place(placement);
+
+        // then
+        assertThrows(InvalidLocationException.class, exec);
     }
 
-    @Test(expected = InvalidWordException.class)
+    @Test
     public void place_LocationValid_WordsInvalid() throws PlacementException
     {
+        // given
         BoardImpl board = spy(board());
         doReturn(new TreeMap<>(Map.of())).when(board).getPieces(any());
         lenient().doReturn(true).when(board).isLocationSetValid(any());
         lenient().doReturn(false).when(board).isWordSetValid(any());
 
         Placement placement = new PlacementImpl(Location.at(0, 0, 0), Orientations.x(), List.of(mock(Piece.class)));
-        board.place(placement);
+
+        // when
+        Executable exec = () -> board.place(placement);
+
+        // then
+        assertThrows(InvalidWordException.class, exec);
     }
 
     @Test

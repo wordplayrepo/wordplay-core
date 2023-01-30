@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2023 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,13 +29,10 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.junit.MockitoJUnitRunner;
 
-@RunWith(MockitoJUnitRunner.class)
 public class RackImplTest
 {
     @Test
@@ -164,7 +161,7 @@ public class RackImplTest
         @SuppressWarnings("unchecked")
         ArgumentCaptor<List<Piece>> pieces = ArgumentCaptor.forClass(List.class);
         verify(bag).returnPieces(pieces.capture());
-        assertAll(() -> assertThat(pieces.getValue(), contains(List.of(rackPiece1, rackPiece2))),
+        assertAll(() -> assertThat(pieces.getValue(), contains(rackPiece1, rackPiece2)),
                   () -> assertThat(rack.getPieces(), empty()));
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2023 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,32 +18,34 @@ package org.syphr.wordplay.core.component;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 import org.syphr.wordplay.core.lang.Letter;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class BagImplTest
 {
     @Mock
@@ -52,10 +54,10 @@ public class BagImplTest
     @Mock
     RandomGenerator random;
 
-    @Before
+    @BeforeEach
     public void setup()
     {
-        when(pieceFactory.createPiece(any())).thenAnswer(new Answer<Piece>()
+        lenient().when(pieceFactory.createPiece(any())).thenAnswer(new Answer<Piece>()
         {
             @Override
             public Piece answer(InvocationOnMock invocation) throws Throwable
@@ -115,10 +117,14 @@ public class BagImplTest
         assertThat(bag(letters).getCount(), is(5));
     }
 
-    @Test(expected = NotEnoughPiecesException.class)
+    @Test
     public void getPiece_Empty() throws NotEnoughPiecesException
     {
-        bag().getPiece();
+        // when
+        Executable exec = () -> bag().getPiece();
+
+        // then
+        assertThrows(NotEnoughPiecesException.class, exec);
     }
 
     @Test
@@ -133,21 +139,30 @@ public class BagImplTest
         verify(random).nextInt(anyInt());
     }
 
-    @Test(expected = NoSuchPieceException.class)
+    @Test
     public void getPiece_Letter_Undefined() throws NoSuchPieceException
     {
-        bag().getPiece(mock(Letter.class));
+        // when
+        Executable exec = () -> bag().getPiece(mock(Letter.class));
+
+        // then
+        assertThrows(NoSuchPieceException.class, exec);
     }
 
-    @Test(expected = NoSuchPieceException.class)
+    @Test
     public void getPiece_Letter_Exhausted() throws NoSuchPieceException
     {
+        // given
         Letter letter = mock(Letter.class);
 
         HashMultiset<Letter> letters = HashMultiset.create();
         letters.add(letter, 0);
 
-        bag(letters).getPiece(letter);
+        // when
+        Executable exec = () -> bag(letters).getPiece(letter);
+
+        // then
+        assertThrows(NoSuchPieceException.class, exec);
     }
 
     @Test
@@ -184,9 +199,10 @@ public class BagImplTest
                    containsInAnyOrder(letter1, letter2));
     }
 
-    @Test(expected = NotEnoughPiecesException.class)
+    @Test
     public void exchange_NotEnoughPieces() throws NotEnoughPiecesException
     {
+        // given
         Letter letter1 = mock(Letter.class);
         Letter letter2 = mock(Letter.class);
         Letter letter3 = mock(Letter.class);
@@ -195,7 +211,12 @@ public class BagImplTest
         letters.add(letter1, 1);
 
         List<Piece> input = List.of(piece(letter2), piece(letter3));
-        bag(letters).exchange(input);
+
+        // when
+        Executable exec = () -> bag(letters).exchange(input);
+
+        // then
+        assertThrows(NotEnoughPiecesException.class, exec);
     }
 
     @Test
@@ -229,7 +250,7 @@ public class BagImplTest
     private Piece piece(Letter letter)
     {
         Piece piece = mock(Piece.class);
-        when(piece.getLetter()).thenReturn(letter);
+        lenient().when(piece.getLetter()).thenReturn(letter);
 
         return piece;
     }

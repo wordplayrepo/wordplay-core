@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2023 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ public abstract class AbstractPiece implements Piece
     private Letter letter;
     private boolean wild;
 
-    protected AbstractPiece copyTo(AbstractPiece piece)
+    protected <T extends AbstractPiece> T copyTo(T piece)
     {
         piece.setLetter(getLetter());
         piece.setWild(isWild());

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2023 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,13 +30,11 @@ import com.google.common.util.concurrent.UncheckedExecutionException;
  * The multi-level cache is simply a collection of nested caches with each step
  * utilizing a different key to retrieve a lower cache until the inner most
  * cache which returns a value.
- * 
+ *
  * @author Gregory P. Moyer
- * 
- * @param <K>
- *            the type of the keys
- * @param <V>
- *            the type of the value
+ *
+ * @param <K> the type of the keys
+ * @param <V> the type of the value
  */
 @ThreadSafe
 public class MultiLevelCache<K, V>
@@ -57,14 +55,13 @@ public class MultiLevelCache<K, V>
     private final Callable<V> loader;
 
     /**
-     * The list of keys used in the current get operation. This is required to
-     * allow the loader to process the keys without creating a new loader on
-     * every cache miss.
+     * The list of keys used in the current get operation. This is required to allow
+     * the loader to process the keys without creating a new loader on every cache
+     * miss.
      */
     private final List<K> keys = new ArrayList<K>();
 
-    public MultiLevelCache(final CacheBuilder<Object, Object> builder,
-                           final MultiLevelCacheLoader<K, V> loader)
+    public MultiLevelCache(final CacheBuilder<Object, Object> builder, final MultiLevelCacheLoader<K, V> loader)
     {
         this.cache = builder.build();
 
@@ -89,16 +86,17 @@ public class MultiLevelCache<K, V>
 
     /**
      * Retrieve the value corresponding to the given keys.
-     * 
-     * @param keys
-     *            the keys to reference the desired value
+     *
+     * @param keys the keys to reference the desired value
+     *
      * @return the value associated with the given keys
-     * @throws ExecutionException
-     *             if an error occurs while loading a new value into the cache
-     *             on a miss
+     *
+     * @throws ExecutionException if an error occurs while loading a new value into
+     *                            the cache on a miss
      */
+    @SafeVarargs
     @SuppressWarnings("unchecked")
-    public synchronized V get(K... keys) throws ExecutionException
+    public final synchronized V get(K... keys) throws ExecutionException
     {
         /*
          * Clear the keys list and initialize the first level cache.
@@ -107,16 +105,15 @@ public class MultiLevelCache<K, V>
         Cache<Object, Object> nestedCache = cache;
 
         /*
-         * Iterate over each key except the last to retrieve each nested cache
-         * level, building new caches as necessary.
+         * Iterate over each key except the last to retrieve each nested cache level,
+         * building new caches as necessary.
          */
         int i = 0;
-        for (; i < keys.length - 1; i++)
-        {
+        for (; i < keys.length - 1; i++) {
             K key = keys[i];
             this.keys.add(key);
 
-            nestedCache = (Cache<Object, Object>)nestedCache.get(key, builder);
+            nestedCache = (Cache<Object, Object>) nestedCache.get(key, builder);
         }
 
         K key = keys[i];
@@ -125,27 +122,25 @@ public class MultiLevelCache<K, V>
         /*
          * Retrieve or load the value from the innermost cache.
          */
-        return (V)nestedCache.get(key, loader);
+        return (V) nestedCache.get(key, loader);
     }
 
     /**
      * Retrieve the value corresponding to the given keys.
-     * 
-     * @param keys
-     *            the keys to reference the desired value
+     *
+     * @param keys the keys to reference the desired value
+     *
      * @return the value associated with the given keys
-     * @throws UncheckedExecutionException
-     *             if an error occurs while loading a new value into the cache
-     *             on a miss
+     *
+     * @throws UncheckedExecutionException if an error occurs while loading a new
+     *                                     value into the cache on a miss
      */
-    public V getUnchecked(K... keys) throws UncheckedExecutionException
+    @SafeVarargs
+    public final V getUnchecked(K... keys) throws UncheckedExecutionException
     {
-        try
-        {
+        try {
             return get(keys);
-        }
-        catch (ExecutionException e)
-        {
+        } catch (ExecutionException e) {
             throw new UncheckedExecutionException(e.getCause());
         }
     }
@@ -153,24 +148,22 @@ public class MultiLevelCache<K, V>
     /**
      * The multi-level cache loader generates a value based on a set of keys for
      * insertion into a multi-level cache when a miss occurs.
-     * 
+     *
      * @author Gregory P. Moyer
-     * 
-     * @param <K>
-     *            the type of the keys
-     * @param <V>
-     *            the type of the value
+     *
+     * @param <K> the type of the keys
+     * @param <V> the type of the value
      */
     public static interface MultiLevelCacheLoader<K, V>
     {
         /**
          * Create a new value based on the given list of keys.
-         * 
-         * @param keys
-         *            the keys to reference the new value
+         *
+         * @param keys the keys to reference the new value
+         *
          * @return the generated value
-         * @throws Exception
-         *             if an error occurs while creating the value
+         *
+         * @throws Exception if an error occurs while creating the value
          */
         public abstract V load(List<K> keys) throws Exception;
     }

@@ -171,6 +171,12 @@
                      </dependency>
                  </dependencies>
             </plugin>
+
+            <!-- Compiler version must be >= 3.7.0 to compile with module-info -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
         </plugins>
     </build>
 </project>

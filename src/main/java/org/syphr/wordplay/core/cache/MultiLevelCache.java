@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2023 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,13 +59,13 @@ public class MultiLevelCache<K, V>
      * the loader to process the keys without creating a new loader on every cache
      * miss.
      */
-    private final List<K> keys = new ArrayList<K>();
+    private final List<K> keys = new ArrayList<>();
 
     public MultiLevelCache(final CacheBuilder<Object, Object> builder, final MultiLevelCacheLoader<K, V> loader)
     {
         this.cache = builder.build();
 
-        this.builder = new Callable<Cache<Object, Object>>()
+        this.builder = new Callable<>()
         {
             @Override
             public Cache<Object, Object> call()
@@ -74,7 +74,7 @@ public class MultiLevelCache<K, V>
             }
         };
 
-        this.loader = new Callable<V>()
+        this.loader = new Callable<>()
         {
             @Override
             public V call() throws Exception

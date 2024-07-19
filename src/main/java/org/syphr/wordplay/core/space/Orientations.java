@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package org.syphr.wordplay.core.space;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Orientations
+public final class Orientations
 {
     public static Orientation x()
     {

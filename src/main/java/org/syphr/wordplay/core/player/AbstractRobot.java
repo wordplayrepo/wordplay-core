@@ -128,12 +128,12 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         LOGGER.info("Found {} possible combinations and permutations", candidates.size());
         // }
 
-        CompletionService<Collection<ValuedPlacement>> completionService = new ExecutorCompletionService<Collection<ValuedPlacement>>(getExecutor());
+        CompletionService<Collection<ValuedPlacement>> completionService = new ExecutorCompletionService<>(getExecutor());
 
         Iterator<List<PieceWrapper>> candidateIter = candidates.iterator();
         int groupSize = (int) Math.ceil((double) candidates.size() / (double) getMaxThreads());
         for (int t = 0; t < getMaxThreads(); t++) {
-            Collection<List<PieceWrapper>> candidateGroup = new ArrayList<List<PieceWrapper>>();
+            Collection<List<PieceWrapper>> candidateGroup = new ArrayList<>();
 
             for (int c = t * groupSize; c < (t + 1) * groupSize && candidateIter.hasNext(); c++) {
                 candidateGroup.add(candidateIter.next());
@@ -167,12 +167,12 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
     private Callable<Collection<ValuedPlacement>> buildPlacementTask(final Collection<List<PieceWrapper>> candidates,
                                                                      final Board board)
     {
-        return new Callable<Collection<ValuedPlacement>>()
+        return new Callable<>()
         {
             @Override
             public Collection<ValuedPlacement> call()
             {
-                Collection<ValuedPlacement> placements = new HashSet<ValuedPlacement>();
+                Collection<ValuedPlacement> placements = new HashSet<>();
 
                 // FIXME board is not thread safe
                 Dimension boardDimension = board.getDimension();
@@ -229,7 +229,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
 
     protected Collection<List<PieceWrapper>> getPlacementCandidates(List<Piece> pieces)
     {
-        Collection<List<PieceWrapper>> candidates = new HashSet<List<PieceWrapper>>();
+        Collection<List<PieceWrapper>> candidates = new HashSet<>();
 
         for (List<Piece> pieceGroup : getCombinationsAndPermutations(pieces)) {
             for (List<PieceWrapper> expandedPieceGroup : expandWildcards(Collections.<PieceWrapper>emptyList(),
@@ -251,17 +251,17 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         List<PieceWrapper> newList = list.subList(1, list.size());
 
         if (!nextPiece.isWild()) {
-            List<PieceWrapper> newPrefix = new ArrayList<PieceWrapper>(prefix);
+            List<PieceWrapper> newPrefix = new ArrayList<>(prefix);
             newPrefix.add(nextPiece);
             return expandWildcards(newPrefix, newList);
         }
 
-        Collection<List<PieceWrapper>> expanded = new HashSet<List<PieceWrapper>>();
+        Collection<List<PieceWrapper>> expanded = new HashSet<>();
         for (Letter expandedLetter : configuration.getLetterFactory().getLetters()) {
             PieceWrapper newPiece = nextPiece.copy();
             newPiece.setLetter(expandedLetter);
 
-            List<PieceWrapper> newPrefix = new ArrayList<PieceWrapper>(prefix);
+            List<PieceWrapper> newPrefix = new ArrayList<>(prefix);
             newPrefix.add(newPiece);
             expanded.addAll(expandWildcards(newPrefix, newList));
         }
@@ -271,7 +271,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
 
     protected List<PieceWrapper> wrap(List<Piece> pieces)
     {
-        List<PieceWrapper> wrapped = new ArrayList<PieceWrapper>();
+        List<PieceWrapper> wrapped = new ArrayList<>();
 
         for (Piece piece : pieces) {
             wrapped.add(PieceWrapper.wrap(piece));
@@ -282,7 +282,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
 
     protected List<Piece> unwrap(List<PieceWrapper> pieces)
     {
-        List<Piece> unwrapped = new ArrayList<Piece>();
+        List<Piece> unwrapped = new ArrayList<>();
 
         for (PieceWrapper piece : pieces) {
             unwrapped.add(piece.getPiece());
@@ -293,11 +293,11 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
 
     protected <T> Collection<List<T>> getCombinationsAndPermutations(List<T> list)
     {
-        Collection<List<T>> results = new HashSet<List<T>>(Collections2.permutations(list));
+        Collection<List<T>> results = new HashSet<>(Collections2.permutations(list));
 
         int size = list.size();
         for (int i = 0; i < size; i++) {
-            List<T> newList = new ArrayList<T>();
+            List<T> newList = new ArrayList<>();
             newList.addAll(list.subList(0, i));
             newList.addAll(list.subList(i + 1, size));
 
@@ -378,7 +378,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         {
             final int prime = 31;
             int result = 1;
-            result = prime * result + ((delegate.getLetter() == null) ? 0 : delegate.getLetter().hashCode());
+            result = prime * result + (delegate.getLetter() == null ? 0 : delegate.getLetter().hashCode());
             return result;
         }
 

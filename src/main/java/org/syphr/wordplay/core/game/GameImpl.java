@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public class GameImpl implements Game
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(GameImpl.class);
 
-    private static final Comparator<Player> RANKING_COMPARATOR = new Comparator<Player>()
+    private static final Comparator<Player> RANKING_COMPARATOR = new Comparator<>()
     {
         @Override
         public int compare(Player p1, Player p2)
@@ -54,7 +54,7 @@ public class GameImpl implements Game
         }
     };
 
-    private final Set<Player> players = new LinkedHashSet<Player>();
+    private final Set<Player> players = new LinkedHashSet<>();
 
     private final Board board;
     private final Bag bag;
@@ -106,7 +106,7 @@ public class GameImpl implements Game
     @Override
     public SortedSet<Player> getRankedPlayers()
     {
-        SortedSet<Player> ranked = new TreeSet<Player>(RANKING_COMPARATOR);
+        SortedSet<Player> ranked = new TreeSet<>(RANKING_COMPARATOR);
         ranked.addAll(players);
 
         return ranked;

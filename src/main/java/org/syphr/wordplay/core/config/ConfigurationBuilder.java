@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,10 +37,10 @@ public class ConfigurationBuilder
     private Dimension boardDimension = Dimension.of(9, 9);
     private Location boardStart = Location.at(4, 4);
     private Set<Orientation> orientations = Orientations.xy();
-    private Map<Location, Set<TileAttribute>> tileAttributes = new HashMap<>();
+    private final Map<Location, Set<TileAttribute>> tileAttributes = new HashMap<>();
 
     private int rackSize = 5;
-    private int rackBonus = 0;
+    private int rackBonus;
 
     private LetterFactory letterFactory;
     private Dictionary dictionary;
@@ -48,11 +48,11 @@ public class ConfigurationBuilder
     private Map<Letter, Integer> letterCounts;
     private Map<Letter, Integer> letterValues;
 
-    private Map<String, Object> extensions = new HashMap<>();
+    private final Map<String, Object> extensions = new HashMap<>();
 
     public Configuration build()
     {
-        Configuration config = new ConfigurationImpl(boardDimension,
+        return new ConfigurationImpl(boardDimension,
                                                      boardStart,
                                                      orientations,
                                                      tileAttributes,
@@ -63,7 +63,6 @@ public class ConfigurationBuilder
                                                      letterCounts,
                                                      letterValues,
                                                      extensions);
-        return config;
     }
 
     public ConfigurationBuilder boardDimension(Dimension dimension)

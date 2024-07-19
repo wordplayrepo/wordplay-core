@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public class WordFactoryImpl implements WordFactory
     public Set<Word> getWords(SortedMap<Location, Piece> pieces, Orientation orientation, Board board)
     {
         // TODO why is a tree set used, but an unordered interface is returned?
-        Set<Word> words = new TreeSet<Word>();
+        Set<Word> words = new TreeSet<>();
 
         Word mainWord = getWord(pieces.keySet().iterator().next(), orientation, board.getTiles(), pieces);
         if (mainWord != null) {
@@ -67,7 +67,7 @@ public class WordFactoryImpl implements WordFactory
             wordStart = newLocation;
         }
 
-        SortedSet<Tile> tiles = new TreeSet<Tile>();
+        SortedSet<Tile> tiles = new TreeSet<>();
         StringBuilder text = new StringBuilder();
 
         Location wordEnd = wordStart;

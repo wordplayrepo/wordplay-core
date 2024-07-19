@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import java.util.Set;
 import org.syphr.wordplay.core.config.Configuration;
 import org.syphr.wordplay.core.lang.Letter;
 
-public class RobotStrategies
+public final class RobotStrategies
 {
     public static RobotStrategy highestScore()
     {

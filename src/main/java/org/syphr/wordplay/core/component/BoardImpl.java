@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -144,7 +144,7 @@ public class BoardImpl implements Board
     {
         log.trace("Building piece map from placement: {}", placement);
 
-        SortedMap<Location, Piece> map = new TreeMap<Location, Piece>();
+        SortedMap<Location, Piece> map = new TreeMap<>();
 
         Orientation orientation = placement.getOrientation();
         log.trace("Orientation: {}", orientation);

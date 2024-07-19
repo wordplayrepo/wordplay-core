@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2023 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -202,7 +202,7 @@ public class BagImplTest implements WithAssertions
         List<Piece> output = bag(letters).exchange(input);
 
         // then
-        assertThat(output.stream().map(p -> p.getLetter()).toList()).containsExactlyInAnyOrder(letter1, letter2);
+        assertThat(output.stream().map(Piece::getLetter).toList()).containsExactlyInAnyOrder(letter1, letter2);
     }
 
     @Test

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2023 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ public abstract class AbstractPiece implements Piece
          * If the piece is wild, the letter should have no impact.
          */
         if (!wild) {
-            result = prime * result + ((letter == null) ? 0 : letter.hashCode());
+            result = prime * result + (letter == null ? 0 : letter.hashCode());
         }
 
         return result;

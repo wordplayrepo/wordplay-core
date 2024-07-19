@@ -30,7 +30,7 @@ public class HighestScoreStrategy implements RobotStrategy
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(HighestScoreStrategy.class);
 
-    private static final Comparator<ValuedPlacement> PLACEMENT_COMPARATOR = new Comparator<ValuedPlacement>()
+    private static final Comparator<ValuedPlacement> PLACEMENT_COMPARATOR = new Comparator<>()
     {
         @Override
         public int compare(ValuedPlacement p1, ValuedPlacement p2)
@@ -72,7 +72,7 @@ public class HighestScoreStrategy implements RobotStrategy
         }
     };
 
-    private final SortedSet<ValuedPlacement> placements = new TreeSet<ValuedPlacement>(PLACEMENT_COMPARATOR);
+    private final SortedSet<ValuedPlacement> placements = new TreeSet<>(PLACEMENT_COMPARATOR);
 
     @Override
     public Collection<ValuedPlacement> getDataStructure()

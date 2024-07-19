@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,11 @@ import java.util.Map;
 import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.space.Distance;
 
-public class TileAttributes
+public final class TileAttributes
 {
-    private static final Map<Integer, TileAttribute> LETTER_MULTIPLIERS = new HashMap<Integer, TileAttribute>();
+    private static final Map<Integer, TileAttribute> LETTER_MULTIPLIERS = new HashMap<>();
 
-    private static final Map<Integer, TileAttribute> WORD_MULTIPLIERS = new HashMap<Integer, TileAttribute>();
+    private static final Map<Integer, TileAttribute> WORD_MULTIPLIERS = new HashMap<>();
 
     public static TileAttribute letterMultiplier(int multiplier)
     {

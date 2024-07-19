@@ -108,7 +108,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
                                                                 .map(candidate -> new LocatedCandidate(location,
                                                                                                        candidate)))
                                 .flatMap(candidate -> generatePlacements(board, candidate))
-                                .filter(placement -> board.isValid(placement))
+                                .filter(board::isValid)
                                 .peek(placement -> ((ValuedPlacementImpl) placement).setPoints(board.calculatePoints(placement)))
                                 .collect(Collectors.toCollection(() -> placements));
 
@@ -202,7 +202,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
 
     protected Collection<List<PieceWrapper>> getPlacementCandidates(List<Piece> pieces)
     {
-        Collection<List<PieceWrapper>> candidates = new HashSet<List<PieceWrapper>>();
+        Collection<List<PieceWrapper>> candidates = new HashSet<>();
 
         for (List<Piece> pieceGroup : getCombinationsAndPermutations(pieces)) {
             for (List<PieceWrapper> expandedPieceGroup : expandWildcards(Collections.<PieceWrapper>emptyList(),
@@ -224,17 +224,17 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
         List<PieceWrapper> newList = list.subList(1, list.size());
 
         if (!nextPiece.isWild()) {
-            List<PieceWrapper> newPrefix = new ArrayList<PieceWrapper>(prefix);
+            List<PieceWrapper> newPrefix = new ArrayList<>(prefix);
             newPrefix.add(nextPiece);
             return expandWildcards(newPrefix, newList);
         }
 
-        Collection<List<PieceWrapper>> expanded = new HashSet<List<PieceWrapper>>();
+        Collection<List<PieceWrapper>> expanded = new HashSet<>();
         for (Letter expandedLetter : configuration.getLetterFactory().getLetters()) {
             PieceWrapper newPiece = nextPiece.copy();
             newPiece.setLetter(expandedLetter);
 
-            List<PieceWrapper> newPrefix = new ArrayList<PieceWrapper>(prefix);
+            List<PieceWrapper> newPrefix = new ArrayList<>(prefix);
             newPrefix.add(newPiece);
             expanded.addAll(expandWildcards(newPrefix, newList));
         }
@@ -244,7 +244,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
 
     protected List<PieceWrapper> wrap(List<Piece> pieces)
     {
-        List<PieceWrapper> wrapped = new ArrayList<PieceWrapper>();
+        List<PieceWrapper> wrapped = new ArrayList<>();
 
         for (Piece piece : pieces) {
             wrapped.add(PieceWrapper.wrap(piece));
@@ -255,7 +255,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
 
     protected List<Piece> unwrap(List<PieceWrapper> pieces)
     {
-        List<Piece> unwrapped = new ArrayList<Piece>();
+        List<Piece> unwrapped = new ArrayList<>();
 
         for (PieceWrapper piece : pieces) {
             unwrapped.add(piece.getPiece());
@@ -266,11 +266,11 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
 
     protected <T> Collection<List<T>> getCombinationsAndPermutations(List<T> list)
     {
-        Collection<List<T>> results = new HashSet<List<T>>(Collections2.permutations(list));
+        Collection<List<T>> results = new HashSet<>(Collections2.permutations(list));
 
         int size = list.size();
         for (int i = 0; i < size; i++) {
-            List<T> newList = new ArrayList<T>();
+            List<T> newList = new ArrayList<>();
             newList.addAll(list.subList(0, i));
             newList.addAll(list.subList(i + 1, size));
 

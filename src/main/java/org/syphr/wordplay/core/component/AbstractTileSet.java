@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class AbstractTileSet implements TileSet
 {
-    private final ConcurrentMap<Location, Tile> tiles = new ConcurrentHashMap<Location, Tile>();
+    private final ConcurrentMap<Location, Tile> tiles = new ConcurrentHashMap<>();
 
     @Override
     public void clear()
@@ -59,7 +59,7 @@ public abstract class AbstractTileSet implements TileSet
     @Override
     public Set<Tile> getOccupiedTiles()
     {
-        Set<Tile> occupiedTiles = new TreeSet<Tile>();
+        Set<Tile> occupiedTiles = new TreeSet<>();
         for (Tile tile : tiles.values()) {
             if (tile.hasPiece()) {
                 occupiedTiles.add(tile);
@@ -74,7 +74,7 @@ public abstract class AbstractTileSet implements TileSet
     {
         log.trace("Finding all tile attributes for locations {}", locations);
 
-        Map<Location, List<TileAttribute>> attributes = new TreeMap<Location, List<TileAttribute>>();
+        Map<Location, List<TileAttribute>> attributes = new TreeMap<>();
 
         for (Location location : locations) {
             Tile tile = getTile(location);
@@ -87,7 +87,7 @@ public abstract class AbstractTileSet implements TileSet
 
             List<TileAttribute> currentList = attributes.get(location);
             if (currentList == null) {
-                currentList = new ArrayList<TileAttribute>();
+                currentList = new ArrayList<>();
                 attributes.put(location, currentList);
             }
 

@@ -22,11 +22,11 @@ import java.util.ServiceLoader;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class GameFactories
+public final class GameFactories
 {
     private static final ServiceLoader<GameFactory> SERVICE_LOADER = ServiceLoader.load(GameFactory.class);
 
-    public synchronized static List<GameFactory> getFactories()
+    public static synchronized List<GameFactory> getFactories()
     {
         List<GameFactory> factories = new ArrayList<>();
 

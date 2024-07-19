@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,9 +91,9 @@ public class WordImpl implements Word
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((orientation == null) ? 0 : orientation.hashCode());
-        result = prime * result + ((startLocation == null) ? 0 : startLocation.hashCode());
-        result = prime * result + ((text == null) ? 0 : text.hashCode());
+        result = prime * result + (orientation == null ? 0 : orientation.hashCode());
+        result = prime * result + (startLocation == null ? 0 : startLocation.hashCode());
+        result = prime * result + (text == null ? 0 : text.hashCode());
         return result;
     }
 

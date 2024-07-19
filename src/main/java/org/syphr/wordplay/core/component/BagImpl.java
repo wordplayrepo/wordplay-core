@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -93,7 +93,7 @@ public class BagImpl implements Bag
             throw new NotEnoughPiecesException("Not enough pieces in the bag to exchange");
         }
 
-        List<Piece> newPieces = new ArrayList<Piece>();
+        List<Piece> newPieces = new ArrayList<>();
         for (int i = 0; i < incomingCount; i++) {
             newPieces.add(getPiece());
         }

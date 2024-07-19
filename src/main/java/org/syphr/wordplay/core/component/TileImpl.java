@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ public class TileImpl implements Tile
 
     private Piece piece;
 
-    private final Set<TileAttribute> attributes = new HashSet<TileAttribute>();
+    private final Set<TileAttribute> attributes = new HashSet<>();
 
     public TileImpl()
     {
@@ -124,7 +124,7 @@ public class TileImpl implements Tile
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((location == null) ? 0 : location.hashCode());
+        result = prime * result + (location == null ? 0 : location.hashCode());
         return result;
     }
 

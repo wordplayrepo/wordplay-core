@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ public class RackImpl implements Rack
 {
     private final int maxPieces;
 
-    private final List<Piece> pieces = new ArrayList<Piece>();
+    private final List<Piece> pieces = new ArrayList<>();
 
     @Override
     public void fill(Bag bag)

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(SaveEnablingLettersStrategy.class);
 
-    private static final Comparator<Entry<Character, Integer>> COMPARATOR = new Comparator<Map.Entry<Character, Integer>>()
+    private static final Comparator<Entry<Character, Integer>> COMPARATOR = new Comparator<>()
     {
         @Override
         public int compare(Map.Entry<Character, Integer> o1, Map.Entry<Character, Integer> o2)
@@ -63,7 +63,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
     {
         this.maxPointSacrificePercent = maxPointSacrificePercent;
         this.minPointThreshold = minPointThreshold;
-        this.enablingLetters = new HashSet<Letter>(enablingLetters);
+        this.enablingLetters = new HashSet<>(enablingLetters);
     }
 
     public SaveEnablingLettersStrategy(int letterCount,
@@ -78,8 +78,8 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
 
     protected Set<Letter> defineEnablingLetters(int letterCount, Configuration configuration)
     {
-        Map<Character, Integer> startFreqMap = new HashMap<Character, Integer>();
-        Map<Character, Integer> endFreqMap = new HashMap<Character, Integer>();
+        Map<Character, Integer> startFreqMap = new HashMap<>();
+        Map<Character, Integer> endFreqMap = new HashMap<>();
 
         for (String word : configuration.getDictionary().getWords()) {
             char firstChar = word.charAt(0);
@@ -89,16 +89,16 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
             endFreqMap.put(lastChar, increment(endFreqMap.get(lastChar)));
         }
 
-        List<Entry<Character, Integer>> startFreq = new ArrayList<Entry<Character, Integer>>(startFreqMap.entrySet());
+        List<Entry<Character, Integer>> startFreq = new ArrayList<>(startFreqMap.entrySet());
         Collections.sort(startFreq, COMPARATOR);
-        List<Entry<Character, Integer>> endFreq = new ArrayList<Entry<Character, Integer>>(endFreqMap.entrySet());
+        List<Entry<Character, Integer>> endFreq = new ArrayList<>(endFreqMap.entrySet());
         Collections.sort(endFreq, COMPARATOR);
 
-        Iterable<Entry<Character, Integer>> alternator = new AlternatingIterable<Entry<Character, Integer>>(startFreq,
+        Iterable<Entry<Character, Integer>> alternator = new AlternatingIterable<>(startFreq,
                                                                                                             endFreq);
 
         LetterFactory factory = configuration.getLetterFactory();
-        Set<Letter> set = new HashSet<Letter>();
+        Set<Letter> set = new HashSet<>();
         for (Entry<Character, Integer> entry : alternator) {
             set.add(factory.toLetter(entry.getKey()));
 
@@ -190,7 +190,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
 
     protected Set<Letter> toLetters(Placement placement)
     {
-        Set<Letter> placementLetters = new HashSet<Letter>();
+        Set<Letter> placementLetters = new HashSet<>();
 
         for (Piece piece : placement.getPieces()) {
             placementLetters.add(piece.getLetter());
@@ -235,7 +235,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
                 iterators[i] = iterables[i].iterator();
             }
 
-            return new AlternatingIterator<T>(iterators);
+            return new AlternatingIterator<>(iterators);
         }
     }
 

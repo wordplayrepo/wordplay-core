@@ -44,7 +44,7 @@ public final class Line
 
     private NavigableSet<Location> findLocations(Location start, Location end)
     {
-        NavigableSet<Location> set = new TreeSet<Location>();
+        NavigableSet<Location> set = new TreeSet<>();
         set.add(start);
 
         Distance d = Distance.between(start, end);

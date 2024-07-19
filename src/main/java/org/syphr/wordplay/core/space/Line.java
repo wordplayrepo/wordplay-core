@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,12 +70,12 @@ public final class Line
 
     public Location start()
     {
-        return locations.first();
+        return locations.getFirst();
     }
 
     public Location end()
     {
-        return locations.last();
+        return locations.getLast();
     }
 
     public boolean contains(Location l)

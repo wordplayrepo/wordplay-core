@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2023 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public class MultiLevelCacheTest implements WithAssertions
             public String load(List<Integer> keys) throws Exception
             {
                 cacheMiss.increment();
-                return keys.get(0) + "|" + keys.get(1) + "|" + keys.get(2);
+                return keys.getFirst() + "|" + keys.get(1) + "|" + keys.get(2);
             }
         };
         var cache = new MultiLevelCache<Integer, String>(cacheBuilder, loader);

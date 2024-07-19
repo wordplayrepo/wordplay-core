@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -220,7 +220,7 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
             return Collections.singleton(prefix);
         }
 
-        PieceWrapper nextPiece = list.get(0);
+        PieceWrapper nextPiece = list.getFirst();
         List<PieceWrapper> newList = list.subList(1, list.size());
 
         if (!nextPiece.isWild()) {

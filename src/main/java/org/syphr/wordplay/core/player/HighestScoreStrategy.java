@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,7 +89,7 @@ public class HighestScoreStrategy implements RobotStrategy
             return null;
         }
 
-        return placements.first();
+        return placements.getFirst();
     }
 
     @Override

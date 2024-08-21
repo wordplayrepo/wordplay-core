@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2023 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,10 @@
  */
 package org.syphr.wordplay.core.space;
 
+/**
+ * Location defines a point in space without concern for what may or may not be
+ * at that location.
+ */
 public record Location(int x, int y, int z) implements Comparable<Location>
 {
     public static Location at(int x, int y)

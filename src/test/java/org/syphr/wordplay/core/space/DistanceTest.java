@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2023 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -82,7 +82,7 @@ class DistanceTest implements WithAssertions
 
     @ParameterizedTest
     @CsvSource({ "2,0,0", "0,2,0", "0,0,2" })
-    public void contains_False(int x, int y, int z)
+    public void isWithin_False(int x, int y, int z)
     {
         assertFalse(Distance.of(x, y, z).isWithin(Distance.of(1, 1, 1)));
     }

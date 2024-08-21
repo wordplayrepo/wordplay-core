@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,13 @@
  */
 package org.syphr.wordplay.core.space;
 
+/**
+ * Distance defines the absolute separation between two {@link Location}
+ * instances.
+ */
 public record Distance(int x, int y, int z) implements Comparable<Distance>
 {
+
     private static final Distance ZERO = Distance.of(0, 0, 0);
     private static final Distance MAX = Distance.of(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
 

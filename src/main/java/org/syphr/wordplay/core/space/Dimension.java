@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,9 @@
  */
 package org.syphr.wordplay.core.space;
 
+/**
+ * Defines a container in two- or three-dimensional space.
+ */
 public record Dimension(int width, int height, int depth) implements Comparable<Dimension>
 {
     public static Dimension of(int width, int height)

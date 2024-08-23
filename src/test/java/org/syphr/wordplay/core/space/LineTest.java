@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2023 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,19 @@ public class LineTest implements WithAssertions
     public void end()
     {
         assertThat(Line.between(Location.at(1, 2, 3), Location.at(4, 5, 6)).end()).isEqualTo(Location.at(4, 5, 6));
+    }
+
+    @Test
+    public void point()
+    {
+        // given
+        Location point = Location.at(1, 1, 1);
+
+        // when
+        var result = Line.between(point, point);
+
+        // then
+        assertThat(result.start()).isEqualTo(result.end());
     }
 
     @Test

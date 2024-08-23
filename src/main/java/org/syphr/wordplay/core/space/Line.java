@@ -24,6 +24,9 @@ import javax.annotation.concurrent.ThreadSafe;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+/**
+ * Defines a path between start and end {@link Location} instances.
+ */
 @ThreadSafe
 @Immutable
 @EqualsAndHashCode

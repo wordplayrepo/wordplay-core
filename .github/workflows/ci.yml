@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
+        with:
+          # Fetch all history so that license verification works correctly.
+          fetch-depth: 0
 
       - name: Setup Java toolchain
         uses: actions/setup-java@v4

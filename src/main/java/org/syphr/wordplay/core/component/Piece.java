@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,31 +20,31 @@ import javax.annotation.concurrent.NotThreadSafe;
 import org.syphr.wordplay.core.lang.Letter;
 
 /**
- * A piece represents a game token that is represented by a {@link Letter} and
- * has attributes such as a value and a wildcard status.
- * 
+ * A piece represents a game token that contains a {@link Letter} and has
+ * attributes such as a value and a wildcard status.
+ *
  * @author Gregory P. Moyer
  */
 @NotThreadSafe
 public interface Piece
 {
     /**
-     * Set the letter that represents this piece.
-     * 
-     * @param letter the letter
+     * Set the {@link Letter} that this piece represents.
+     *
+     * @param letter the {@link Letter}
      */
     public void setLetter(Letter letter);
 
     /**
-     * Retrieve the letter that represents this piece.
-     * 
-     * @return the letter
+     * Retrieve the {@link Letter} that this piece represents.
+     *
+     * @return the {@link Letter}
      */
     public Letter getLetter();
 
     /**
      * Retrieve the base value of this piece when used in a placement.
-     * 
+     *
      * @return the base value
      */
     public int getValue();
@@ -52,14 +52,14 @@ public interface Piece
     /**
      * Determine whether or not this piece represents a wildcard (no specific letter
      * until one is chosen).
-     * 
+     *
      * @return <code>true</code> if this piece is wild; <code>false</code> otherwise
      */
     public boolean isWild();
 
     /**
      * Create a copy of this piece.
-     * 
+     *
      * @return a new piece identical to the original
      */
     public Piece copy();
@@ -67,9 +67,9 @@ public interface Piece
     /**
      * Two pieces are equal if they are both wild or they both represent the same
      * letter.
-     * 
+     *
      * @param obj the object to compare against this piece
-     * 
+     *
      * @return <code>true</code> if the given object is equal to this piece;
      *         <code>false</code> otherwise
      */

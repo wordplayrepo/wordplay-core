@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import org.syphr.wordplay.core.space.Orientation;
 
 /**
  * A placement is a specific grouping of pieces with a location and orientation.
- * 
+ *
  * @author Gregory P. Moyer
  */
 @NotThreadSafe
@@ -32,22 +32,21 @@ public interface Placement
 {
     /**
      * Retrieve the starting location of this placement.
-     * 
+     *
      * @return the stating location
      */
     public Location getStartLocation();
 
     /**
-     * Retrieve the spatial orientation of this placement (i.e. along the
-     * x-axis).
-     * 
+     * Retrieve the spatial orientation of this placement (e.g. along the x-axis).
+     *
      * @return the orientation
      */
     public Orientation getOrientation();
 
     /**
      * Retrieve the pieces contained within this placement.
-     * 
+     *
      * @return the pieces
      */
     public List<Piece> getPieces();

@@ -16,6 +16,7 @@
 package org.syphr.wordplay.core.component;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -75,8 +76,8 @@ public class WordFactoryImpl implements WordFactory
             Tile tile = tileset.getTile(wordEnd);
             tiles.add(tile);
 
-            Letter letter = tile.hasPiece() ? tile.getPiece().getLetter() : pieces.get(wordEnd).getLetter();
-            text.append(letter.toString());
+            Optional<Letter> letter = tile.hasPiece() ? tile.getPiece().getLetter() : pieces.get(wordEnd).getLetter();
+            text.append(letter.orElseThrow().toString());
 
             Location newLocation = orientation.move(wordEnd, 1);
             if (!tileset.getTile(newLocation).hasPiece() && !pieces.containsKey(newLocation)) {

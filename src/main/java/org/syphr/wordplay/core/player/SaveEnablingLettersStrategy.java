@@ -25,7 +25,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,8 +96,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
         List<Entry<Character, Integer>> endFreq = new ArrayList<>(endFreqMap.entrySet());
         Collections.sort(endFreq, COMPARATOR);
 
-        Iterable<Entry<Character, Integer>> alternator = new AlternatingIterable<>(startFreq,
-                                                                                                            endFreq);
+        Iterable<Entry<Character, Integer>> alternator = new AlternatingIterable<>(startFreq, endFreq);
 
         LetterFactory factory = configuration.getLetterFactory();
         Set<Letter> set = new HashSet<>();
@@ -190,13 +191,12 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
 
     protected Set<Letter> toLetters(Placement placement)
     {
-        Set<Letter> placementLetters = new HashSet<>();
-
-        for (Piece piece : placement.getPieces()) {
-            placementLetters.add(piece.getLetter());
-        }
-
-        return placementLetters;
+        return placement.getPieces()
+                        .stream()
+                        .map(Piece::getLetter)
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .collect(Collectors.toSet());
     }
 
     @Override

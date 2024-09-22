@@ -15,6 +15,8 @@
  */
 package org.syphr.wordplay.core.component;
 
+import java.util.Optional;
+
 import org.syphr.wordplay.core.lang.Letter;
 
 import lombok.Data;
@@ -25,9 +27,15 @@ public abstract class AbstractPiece implements Piece
     private Letter letter;
     private boolean wild;
 
+    @Override
+    public Optional<Letter> getLetter()
+    {
+        return Optional.ofNullable(letter);
+    }
+
     protected <T extends AbstractPiece> T copyTo(T piece)
     {
-        piece.setLetter(getLetter());
+        piece.setLetter(getLetter().orElse(null));
         piece.setWild(isWild());
 
         return piece;

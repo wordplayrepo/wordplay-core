@@ -15,6 +15,8 @@
  */
 package org.syphr.wordplay.core.component;
 
+import java.util.Optional;
+
 import javax.annotation.concurrent.NotThreadSafe;
 
 import org.syphr.wordplay.core.lang.Letter;
@@ -40,7 +42,7 @@ public interface Piece
      *
      * @return the {@link Letter}
      */
-    public Letter getLetter();
+    public Optional<Letter> getLetter();
 
     /**
      * Retrieve the base value of this piece when used in a placement.

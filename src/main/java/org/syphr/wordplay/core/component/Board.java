@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public interface Board
     /**
      * Retrieve the sizing of this board.
      *
-     * @return the size in as many dimensions as are supported by this board (i.e.
+     * @return the size in as many dimensions as are supported by this board (e.g.
      *         2D or 3D)
      */
     public Dimension getDimension();
@@ -46,7 +46,7 @@ public interface Board
      * current state of other placements (if any exist).
      *
      * @param placement the placement to validate
-     * 
+     *
      * @return <code>true</code> if the placement is valid; <code>false</code>
      *         otherwise
      */
@@ -56,7 +56,7 @@ public interface Board
      * Calculate the score that the given placement would receive.
      *
      * @param placement the placement to calculate
-     * 
+     *
      * @return the score that would be earned by the given placement
      */
     public int calculatePoints(Placement placement);
@@ -65,9 +65,9 @@ public interface Board
      * Commit the given placement to this board.
      *
      * @param placement the placement to commit
-     * 
+     *
      * @return the score earned by the placement
-     * 
+     *
      * @throws PlacementException if the given placement is not valid on this board
      */
     public int place(Placement placement) throws PlacementException;
@@ -87,8 +87,8 @@ public interface Board
     public Location getStart();
 
     /**
-     * Retrieve the allow orientations for the board.
-     * 
+     * Retrieve the allowed {@link Placement} orientations for the board.
+     *
      * @return allowed orientations
      */
     public Set<Orientation> getOrientations();

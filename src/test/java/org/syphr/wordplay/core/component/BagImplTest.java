@@ -24,6 +24,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.random.RandomGenerator;
 
 import org.assertj.core.api.WithAssertions;
@@ -142,7 +143,7 @@ public class BagImplTest implements WithAssertions
 
         // then
         verify(random).nextInt(anyInt());
-        assertThat(letter).isSameAs(result.getLetter());
+        assertThat(result.getLetter()).contains(letter);
     }
 
     @Test
@@ -183,7 +184,7 @@ public class BagImplTest implements WithAssertions
         Piece piece = bag.getPiece(letter);
 
         // then
-        assertAll(() -> assertThat(letter).isSameAs(piece.getLetter()), () -> assertThat(bag.getCount()).isEqualTo(0));
+        assertAll(() -> assertThat(piece.getLetter()).contains(letter), () -> assertThat(bag.getCount()).isEqualTo(0));
     }
 
     @Test
@@ -202,7 +203,10 @@ public class BagImplTest implements WithAssertions
         List<Piece> output = bag(letters).exchange(input);
 
         // then
-        assertThat(output.stream().map(Piece::getLetter).toList()).containsExactlyInAnyOrder(letter1, letter2);
+        assertThat(output.stream()
+                         .map(Piece::getLetter)
+                         .map(Optional::get)
+                         .toList()).containsExactlyInAnyOrder(letter1, letter2);
     }
 
     @Test
@@ -258,7 +262,7 @@ public class BagImplTest implements WithAssertions
     private Piece piece(Letter letter)
     {
         Piece piece = mock(Piece.class);
-        lenient().when(piece.getLetter()).thenReturn(letter);
+        lenient().when(piece.getLetter()).thenReturn(Optional.ofNullable(letter));
 
         return piece;
     }

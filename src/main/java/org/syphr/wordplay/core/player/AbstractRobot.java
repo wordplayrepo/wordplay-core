@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionService;
@@ -339,7 +340,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
         }
 
         @Override
-        public Letter getLetter()
+        public Optional<Letter> getLetter()
         {
             return delegate.getLetter();
         }

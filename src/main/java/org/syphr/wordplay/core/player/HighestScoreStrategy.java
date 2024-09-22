@@ -36,36 +36,34 @@ public class HighestScoreStrategy implements RobotStrategy
         public int compare(ValuedPlacement p1, ValuedPlacement p2)
         {
             int compare = p2.getPoints() - p1.getPoints();
-            if (compare != 0)
-            {
+            if (compare != 0) {
                 return compare;
             }
 
             Iterator<Piece> pieceIter1 = p1.getPieces().iterator();
             Iterator<Piece> pieceIter2 = p2.getPieces().iterator();
-            while (true)
-            {
+            while (true) {
                 boolean firstHasNext = pieceIter1.hasNext();
                 boolean secondHasNext = pieceIter2.hasNext();
 
-                if (!firstHasNext && !secondHasNext)
-                {
+                if (!firstHasNext && !secondHasNext) {
                     return 0;
                 }
 
-                if (!firstHasNext)
-                {
+                if (!firstHasNext) {
                     return -1;
                 }
 
-                if (!secondHasNext)
-                {
+                if (!secondHasNext) {
                     return 1;
                 }
 
-                compare = pieceIter1.next().getLetter().toString().compareTo(pieceIter2.next().getLetter().toString());
-                if (compare != 0)
-                {
+                compare = pieceIter1.next()
+                                    .getLetter()
+                                    .orElseThrow()
+                                    .toString()
+                                    .compareTo(pieceIter2.next().getLetter().orElseThrow().toString());
+                if (compare != 0) {
                     return compare;
                 }
             }
@@ -83,8 +81,7 @@ public class HighestScoreStrategy implements RobotStrategy
     @Override
     public ValuedPlacement selectPlacement()
     {
-        if (placements.isEmpty())
-        {
+        if (placements.isEmpty()) {
             LOGGER.trace("No placements available");
             return null;
         }

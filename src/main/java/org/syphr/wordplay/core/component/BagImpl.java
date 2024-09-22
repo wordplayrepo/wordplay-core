@@ -18,6 +18,7 @@ package org.syphr.wordplay.core.component;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
@@ -98,9 +99,7 @@ public class BagImpl implements Bag
             newPieces.add(getPiece());
         }
 
-        for (Piece piece : pieces) {
-            letters.add(piece.getLetter());
-        }
+        pieces.stream().map(Piece::getLetter).map(this::unwrap).forEach(letters::add);
 
         return newPieces;
     }
@@ -108,7 +107,7 @@ public class BagImpl implements Bag
     @Override
     public void returnPiece(Piece piece)
     {
-        letters.add(piece.getLetter());
+        letters.add(unwrap(piece.getLetter()));
     }
 
     @Override
@@ -117,5 +116,10 @@ public class BagImpl implements Bag
         for (Piece piece : pieces) {
             returnPiece(piece);
         }
+    }
+
+    private Letter unwrap(Optional<Letter> opt)
+    {
+        return opt.orElse(null);
     }
 }

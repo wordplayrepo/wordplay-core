@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +18,18 @@ package org.syphr.wordplay.core.component;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 
 import javax.annotation.concurrent.ThreadSafe;
 
 import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.space.Location;
 
+import lombok.NonNull;
+
 /**
  * A tile set is a collection of tiles belonging to a board.
- * 
+ *
  * @author Gregory P. Moyer
  */
 @ThreadSafe
@@ -40,27 +43,27 @@ public interface TileSet
     /**
      * Retrieve the tile at the given location. If no such tile exists, one will be
      * created.
-     * 
+     *
      * @param location the location of the desired tile
-     * 
+     *
      * @return the tile at the given location
      */
-    public Tile getTile(Location location);
+    public Tile getTile(@NonNull Location location);
 
     /**
      * Retrieve the subset of tiles which are occupied by pieces.
-     * 
+     *
      * @return the occupied tiles
      */
-    public Set<Tile> getOccupiedTiles();
+    public SortedSet<Tile> getOccupiedTiles();
 
     /**
      * Retrieve all tile attributes for the given set of locations.
-     * 
+     *
      * @param locations the locations for which attributes are requested
-     * 
+     *
      * @return a map of each given location to the list of tile attributes present
      *         at that location
      */
-    public Map<Location, List<TileAttribute>> getAttributes(Set<Location> locations);
+    public Map<Location, List<TileAttribute>> getAttributes(@NonNull Set<Location> locations);
 }

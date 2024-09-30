@@ -17,18 +17,20 @@ package org.syphr.wordplay.core.component;
 
 import javax.annotation.concurrent.ThreadSafe;
 
+import org.syphr.wordplay.core.space.Location;
+
 /**
- * Generator of {@link TileSet tile sets}.
+ * Generator of {@link Tile tiles}.
  *
  * @author Gregory P. Moyer
  */
 @ThreadSafe
-public interface TileSetFactory
+public interface TileFactory
 {
     /**
-     * Create a new tile set.
-     * 
-     * @return the new tile set
+     * Create a new tile.
+     *
+     * @return the new tile
      */
-    TileSet createTileSet();
+    Tile createTile(Location location);
 }

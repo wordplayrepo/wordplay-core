@@ -16,35 +16,34 @@
 package org.syphr.wordplay.core.component;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.space.Location;
 
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
+@RequiredArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class TileImpl implements Tile
 {
-    private Location location;
+    @NonNull
+    @EqualsAndHashCode.Include
+    private final Location location;
 
     private Piece piece;
 
     private final Set<TileAttribute> attributes = new HashSet<>();
 
-    public TileImpl()
-    {
-        super();
-    }
-
-    protected TileImpl(Location location, Piece piece)
+    protected TileImpl(@NonNull Location location, @NonNull Piece piece)
     {
         this.location = location;
         this.piece = piece;
-    }
-
-    protected void setLocation(Location location)
-    {
-        this.location = location;
     }
 
     @Override
@@ -74,8 +73,7 @@ public class TileImpl implements Tile
     @Override
     public int getBaseValue()
     {
-        if (piece == null)
-        {
+        if (piece == null) {
             return 0;
         }
 
@@ -88,9 +86,10 @@ public class TileImpl implements Tile
         attributes.add(attribute);
     }
 
-    protected void addAttributes(Collection<TileAttribute> attributes)
+    @Override
+    public void addAttributes(Collection<TileAttribute> attributes)
     {
-        attributes.addAll(attributes);
+        this.attributes.addAll(attributes);
     }
 
     @Override
@@ -102,60 +101,7 @@ public class TileImpl implements Tile
     @Override
     public Set<TileAttribute> getAttributes()
     {
-        return Collections.unmodifiableSet(attributes);
-    }
-
-    @Override
-    public String toString()
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.append("AbstractTile [location=");
-        builder.append(location);
-        builder.append(", piece=");
-        builder.append(piece);
-        builder.append(", attributes=");
-        builder.append(attributes);
-        builder.append("]");
-        return builder.toString();
-    }
-
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (location == null ? 0 : location.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        TileImpl other = (TileImpl)obj;
-        if (location == null)
-        {
-            if (other.location != null)
-            {
-                return false;
-            }
-        }
-        else if (!location.equals(other.location))
-        {
-            return false;
-        }
-        return true;
+        return Set.copyOf(attributes);
     }
 
     @Override

@@ -15,20 +15,27 @@
  */
 package org.syphr.wordplay.core.component;
 
-import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.concurrent.Immutable;
 
-/**
- * Generator of {@link TileSet tile sets}.
- *
- * @author Gregory P. Moyer
- */
-@ThreadSafe
-public interface TileSetFactory
+import org.syphr.wordplay.core.config.Configuration;
+import org.syphr.wordplay.core.space.Location;
+
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Immutable
+public class TileFactoryImpl implements TileFactory
 {
-    /**
-     * Create a new tile set.
-     * 
-     * @return the new tile set
-     */
-    TileSet createTileSet();
+    @NonNull
+    private final Configuration configuration;
+
+    @Override
+    public Tile createTile(Location location)
+    {
+        TileImpl tile = new TileImpl(location);
+        tile.addAttributes(configuration.getTileAttributes(location));
+
+        return tile;
+    }
 }

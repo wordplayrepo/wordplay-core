@@ -15,9 +15,6 @@
  */
 package org.syphr.wordplay.core.config;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -61,15 +58,15 @@ public class ConfigurationImpl implements Configuration
     {
         this.boardDimension = boardDimension;
         this.boardStart = boardStart;
-        this.orientations = Collections.unmodifiableSet(new HashSet<>(orientations));
-        this.tileAttributes = Collections.unmodifiableMap(new HashMap<>(tileAttributes));
+        this.orientations = Set.copyOf(orientations);
+        this.tileAttributes = Map.copyOf(tileAttributes);
         this.rackSize = rackSize;
         this.rackBonus = rackBonus;
         this.letterFactory = letterFactory;
         this.dictionary = dictionary;
-        this.letterCounts = Collections.unmodifiableMap(new HashMap<>(letterCounts));
-        this.letterValues = Collections.unmodifiableMap(new HashMap<>(letterValues));
-        this.extensions = Collections.unmodifiableMap(new HashMap<>(extensions));
+        this.letterCounts = Map.copyOf(letterCounts);
+        this.letterValues = Map.copyOf(letterValues);
+        this.extensions = Map.copyOf(extensions);
     }
 
     @Override
@@ -94,9 +91,7 @@ public class ConfigurationImpl implements Configuration
     public Set<TileAttribute> getTileAttributes(Location location)
     {
         Set<TileAttribute> attributes = tileAttributes.get(location);
-        return attributes != null
-                ? Collections.unmodifiableSet(attributes)
-                : Collections.emptySet();
+        return attributes != null ? Set.copyOf(attributes) : Set.of();
     }
 
     @Override

@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
@@ -150,7 +151,7 @@ class TileSetImplTest
         Tile tile1 = tileSet.getTile(Location.at(1, 2, 3));
         tileSet.getTile(Location.at(4, 5, 6));
 
-        when(tile1.getPiece()).thenReturn(mock(Piece.class));
+        when(tile1.getPiece()).thenReturn(Optional.of(mock(Piece.class)));
         when(tile1.hasPiece()).thenReturn(true);
 
         // when
@@ -172,11 +173,11 @@ class TileSetImplTest
         Tile tile1 = tileSet.getTile(Location.at(1, 2, 3));
         Tile tile2 = tileSet.getTile(Location.at(4, 5, 6));
 
-        when(tile1.getPiece()).thenReturn(mock(Piece.class));
+        when(tile1.getPiece()).thenReturn(Optional.of(mock(Piece.class)));
         when(tile1.hasPiece()).thenReturn(true);
         when(tile1.compareTo(any())).thenReturn(-1);
 
-        when(tile2.getPiece()).thenReturn(mock(Piece.class));
+        when(tile2.getPiece()).thenReturn(Optional.of(mock(Piece.class)));
         when(tile2.hasPiece()).thenReturn(true);
         when(tile2.compareTo(any())).thenReturn(1);
 

@@ -17,9 +17,15 @@ package org.syphr.wordplay.core.component;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
+import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.space.Location;
 
 class TileImplTest
@@ -51,10 +57,10 @@ class TileImplTest
         var location = Location.at(1, 2, 3);
 
         // when
-        var result = catchThrowable(() -> new TileImpl(location, null));
+        var result = new TileImpl(location, null);
 
         // then
-        assertThat(result).isInstanceOf(NullPointerException.class);
+        assertThat(result).isNotNull();
     }
 
     @Test
@@ -68,15 +74,172 @@ class TileImplTest
     }
 
     @Test
-    void getLocation()
+    void setPiece()
+    {
+        // given
+        var tile = new TileImpl(Location.at(1, 2, 3));
+        var piece = mock(Piece.class);
+
+        // when
+        tile.setPiece(piece);
+
+        // then
+        assertThat(tile.getPiece()).contains(piece);
+    }
+
+    @Test
+    void getPiece_Empty()
+    {
+        // given
+        var tile = new TileImpl(Location.at(1, 2, 3));
+
+        // when
+        Optional<Piece> result = tile.getPiece();
+
+        // then
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    void getPiece_NotEmpty()
     {
         // given
         var location = Location.at(1, 2, 3);
+        var piece = mock(Piece.class);
 
         // when
-        var result = new TileImpl(location).getLocation();
+        Optional<Piece> result = new TileImpl(location, piece).getPiece();
 
         // then
-        assertThat(result).isEqualTo(location);
+        assertThat(result).contains(piece);
+    }
+
+    @Test
+    void hasPiece_False()
+    {
+        // given
+        var tile = new TileImpl(Location.at(1, 2, 3));
+
+        // when
+        boolean result = tile.hasPiece();
+
+        // then
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    void hasPiece_True()
+    {
+        // given
+        var location = Location.at(1, 2, 3);
+        var piece = mock(Piece.class);
+
+        // when
+        boolean result = new TileImpl(location, piece).hasPiece();
+
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void getBaseValue_NoPiece()
+    {
+        // given
+        var tile = new TileImpl(Location.at(1, 2, 3));
+
+        // when
+        int result = tile.getBaseValue();
+
+        // then
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    void getBaseValue_WithPiece()
+    {
+        // given
+        var location = Location.at(1, 2, 3);
+        var piece = mock(Piece.class);
+
+        when(piece.getValue()).thenReturn(1);
+
+        // when
+        int result = new TileImpl(location, piece).getBaseValue();
+
+        // then
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    void addAttribute()
+    {
+        // given
+        var tile = new TileImpl(Location.at(1, 2, 3));
+        var attribute = mock(TileAttribute.class);
+
+        // when
+        tile.addAttribute(attribute);
+
+        // then
+        assertThat(tile.getAttributes()).containsExactly(attribute);
+    }
+
+    @Test
+    void addAttributes()
+    {
+        // given
+        var tile = new TileImpl(Location.at(1, 2, 3));
+        var attributes = Set.of(mock(TileAttribute.class), mock(TileAttribute.class));
+
+        // when
+        tile.addAttributes(attributes);
+
+        // then
+        assertThat(tile.getAttributes()).containsExactlyInAnyOrderElementsOf(attributes);
+    }
+
+    @Test
+    void removeAttribute()
+    {
+        // given
+        var tile = new TileImpl(Location.at(1, 2, 3));
+
+        var attribute1 = mock(TileAttribute.class);
+        var attribute2 = mock(TileAttribute.class);
+        tile.addAttributes(Set.of(attribute1, attribute2));
+
+        // when
+        tile.removeAttribute(attribute1);
+
+        // then
+        assertThat(tile.getAttributes()).containsExactly(attribute2);
+    }
+
+    @Test
+    void compareTo()
+    {
+        // given
+        var tile1 = new TileImpl(Location.at(1, 1, 1));
+        var tile2 = new TileImpl(Location.at(2, 2, 2));
+        var tile3 = new TileImpl(Location.at(2, 2, 2), mock(Piece.class));
+        tile3.addAttribute(mock(TileAttribute.class));
+
+        // then
+        assertAll(() -> assertThat(tile1).isLessThan(tile2),
+                  () -> assertThat(tile2).isGreaterThan(tile1),
+                  () -> assertThat(tile2).isEqualByComparingTo(tile3));
+    }
+
+    @Test
+    void equals()
+    {
+        // given
+        var tile1 = new TileImpl(Location.at(1, 1, 1));
+        var tile2 = new TileImpl(Location.at(2, 2, 2));
+        var tile3 = new TileImpl(Location.at(2, 2, 2), mock(Piece.class));
+        tile3.addAttribute(mock(TileAttribute.class));
+
+        // then
+        assertAll(() -> assertThat(tile1).isNotEqualTo(tile2), () -> assertThat(tile2).isEqualTo(tile3));
     }
 }

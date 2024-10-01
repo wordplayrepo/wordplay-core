@@ -76,7 +76,7 @@ public class WordFactoryImpl implements WordFactory
             Tile tile = tileset.getTile(wordEnd);
             tiles.add(tile);
 
-            Optional<Letter> letter = tile.hasPiece() ? tile.getPiece().getLetter() : pieces.get(wordEnd).getLetter();
+            Optional<Letter> letter = tile.getPiece().orElse(pieces.get(wordEnd)).getLetter();
             text.append(letter.orElseThrow().toString());
 
             Location newLocation = orientation.move(wordEnd, 1);
@@ -87,6 +87,7 @@ public class WordFactoryImpl implements WordFactory
             wordEnd = newLocation;
         }
 
+        // TODO minimum word length should be in the configuration
         if (tiles.size() < 2) {
             return null;
         }

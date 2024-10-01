@@ -16,6 +16,7 @@
 package org.syphr.wordplay.core.component;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -49,9 +50,9 @@ public interface Tile extends Comparable<Tile>
     /**
      * Get the piece that occupies this tile.
      *
-     * @return the piece or <code>null</code> if no piece is set
+     * @return the piece
      */
-    public Piece getPiece();
+    public Optional<Piece> getPiece();
 
     /**
      * Determine whether or not a piece has been set on this tile.

@@ -17,12 +17,14 @@ package org.syphr.wordplay.core.component;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.space.Location;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -34,22 +36,17 @@ public class TileImpl implements Tile
 {
     @NonNull
     @EqualsAndHashCode.Include
+    @Getter
     private final Location location;
 
     private Piece piece;
 
     private final Set<TileAttribute> attributes = new HashSet<>();
 
-    protected TileImpl(@NonNull Location location, @NonNull Piece piece)
+    protected TileImpl(@NonNull Location location, Piece piece)
     {
         this.location = location;
         this.piece = piece;
-    }
-
-    @Override
-    public Location getLocation()
-    {
-        return location;
     }
 
     @Override
@@ -59,9 +56,9 @@ public class TileImpl implements Tile
     }
 
     @Override
-    public Piece getPiece()
+    public Optional<Piece> getPiece()
     {
-        return piece;
+        return Optional.ofNullable(piece);
     }
 
     @Override
@@ -73,11 +70,7 @@ public class TileImpl implements Tile
     @Override
     public int getBaseValue()
     {
-        if (piece == null) {
-            return 0;
-        }
-
-        return piece.getValue();
+        return piece == null ? 0 : piece.getValue();
     }
 
     @Override

@@ -195,10 +195,6 @@
         <profile>
             <id>ossrh-release</id>
 
-            <properties>
-                <site.profile>production</site.profile>
-            </properties>
-
             <build>
                 <plugins>
                     <plugin>

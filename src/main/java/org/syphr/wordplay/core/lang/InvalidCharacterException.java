@@ -15,30 +15,20 @@
  */
 package org.syphr.wordplay.core.lang;
 
-import javax.annotation.concurrent.ThreadSafe;
+import java.io.Serial;
 
-/**
- * A letter represents a single character that, when put together with other
- * letters, creates a word that can be used in a placement.
- *
- * @author Gregory P. Moyer
- */
-@ThreadSafe
-public interface Letter
+public class InvalidCharacterException extends RuntimeException
 {
-    /**
-     * Retrieve the character that represents this letter.
-     *
-     * @return the character
-     */
-    public char getCharacter();
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-    @Override
-    public String toString();
+    public InvalidCharacterException(String message, Throwable cause)
+    {
+        super(message, cause);
+    }
 
-    @Override
-    public int hashCode();
-
-    @Override
-    public boolean equals(Object obj);
+    public InvalidCharacterException(String message)
+    {
+        super(message);
+    }
 }

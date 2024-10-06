@@ -1,10 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-
   pull_request:
 
 jobs:
@@ -28,8 +24,4 @@ jobs:
           cache: maven
 
       - name: Build and verify artifacts
-        run: mvn -B verify --file pom.xml
-
-      # Upload the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-      - name: Update dependency graph
-        uses: advanced-security/maven-dependency-submission-action@v4
+        run: mvn --batch-mode verify

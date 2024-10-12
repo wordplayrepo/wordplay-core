@@ -111,7 +111,7 @@ public class BagImpl implements Bag
     }
 
     @Override
-    public void returnPieces(Collection<Piece> pieces)
+    public void returnPieces(Iterable<Piece> pieces)
     {
         for (Piece piece : pieces) {
             returnPiece(piece);

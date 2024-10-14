@@ -189,11 +189,17 @@ public class BoardImpl implements Board
         log.trace("Testing location validity: {}", locations);
 
         for (Location location : locations) {
+            log.trace("Testing location at {} for board dimensions and overlapping pieces", location);
+
+            if (!dimension.contains(location)) {
+                log.debug("Placement location {} is not on the board", location);
+                return false;
+            }
+
             // TODO by eliminating overlapping pieces, a possible game mechanic is removed -
             // make this config
-            log.trace("Testing location at {} for board dimensions and overlapping pieces", location);
-            if (!dimension.contains(location) || getTiles().getTile(location).hasPiece()) {
-                log.debug("Location at {} is invalid", location);
+            if (getTiles().getTile(location).hasPiece()) {
+                log.debug("Placement location {} is already occupied", location);
                 return false;
             }
         }
@@ -213,7 +219,7 @@ public class BoardImpl implements Board
             }
         }
 
-        log.debug("Placement location is invalid, no adjacent pieces");
+        log.debug("Placement does not include the start location and has no adjacent pieces");
         return false;
     }
 

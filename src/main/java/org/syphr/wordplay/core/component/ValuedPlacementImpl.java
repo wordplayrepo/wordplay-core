@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,20 @@
  */
 package org.syphr.wordplay.core.component;
 
-public class ValuedPlacementImpl extends PlacementImpl implements ValuedPlacement
+import java.util.List;
+
+import org.syphr.wordplay.core.space.Location;
+import org.syphr.wordplay.core.space.Orientation;
+
+import lombok.Builder;
+
+@Builder(toBuilder = true)
+public record ValuedPlacementImpl(Location startLocation, Orientation orientation, List<Piece> pieces, int points)
+                                 implements
+                                 ValuedPlacement
 {
-    private int points;
-
-    @Override
-    public int getPoints()
+    public List<Piece> pieces()
     {
-        return points;
-    }
-
-    public void setPoints(int points)
-    {
-        this.points = points;
+        return List.copyOf(pieces);
     }
 }

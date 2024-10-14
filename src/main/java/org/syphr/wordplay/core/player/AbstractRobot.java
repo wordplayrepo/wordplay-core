@@ -160,7 +160,7 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
 
         if (LOGGER.isTraceEnabled()) {
             for (ValuedPlacement placement : placements) {
-                LOGGER.trace("{}\t{}", placement.getPoints(), placement.getPieces());
+                LOGGER.trace("{}\t{}", placement.points(), placement.pieces());
             }
         }
     }
@@ -193,10 +193,11 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
 
                             for (List<PieceWrapper> candidate : candidates) {
                                 for (Orientation orientation : configuration.getOrientations()) {
-                                    ValuedPlacementImpl placement = new ValuedPlacementImpl();
-                                    placement.setPieces(unwrap(candidate));
-                                    placement.setStartLocation(location);
-                                    placement.setOrientation(orientation);
+                                    ValuedPlacementImpl placement = ValuedPlacementImpl.builder()
+                                                                                       .startLocation(location)
+                                                                                       .orientation(orientation)
+                                                                                       .pieces(unwrap(candidate))
+                                                                                       .build();
 
                                     /*
                                      * If this placement is the same as another accepted placement, there is no need
@@ -214,8 +215,8 @@ public abstract class AbstractRobot extends PlayerImpl implements Robot
                                     }
 
                                     if (board.isValid(placement)) {
-                                        placement.setPoints(board.calculatePoints(placement));
-                                        placements.add(placement);
+                                        int points = board.calculatePoints(placement);
+                                        placements.add(placement.toBuilder().points(points).build());
                                     }
                                 }
                             }

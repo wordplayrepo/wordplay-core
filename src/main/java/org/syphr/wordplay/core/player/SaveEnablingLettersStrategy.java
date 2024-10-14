@@ -152,7 +152,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
             return highScorePlacement;
         }
 
-        int maxPoints = highScorePlacement.getPoints();
+        int maxPoints = highScorePlacement.points();
         LOGGER.trace("Highest score placement yields {} points", maxPoints);
 
         /*
@@ -166,13 +166,13 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
 
         while (placementIter.hasNext()) {
             ValuedPlacement placement = placementIter.next();
-            if (placement.getPoints() < minPoints) {
+            if (placement.points() < minPoints) {
                 LOGGER.trace("No placements available with no enabling letters above the minimum score");
                 break;
             }
 
             if (!hasEnablingLetters(placement)) {
-                LOGGER.trace("Found a placement with no enabling letters yielding {} point(s)", placement.getPoints());
+                LOGGER.trace("Found a placement with no enabling letters yielding {} point(s)", placement.points());
                 return placement;
             }
         }
@@ -191,7 +191,7 @@ public class SaveEnablingLettersStrategy extends HighestScoreStrategy
 
     protected Set<Letter> toLetters(Placement placement)
     {
-        return placement.getPieces()
+        return placement.pieces()
                         .stream()
                         .map(Piece::getLetter)
                         .filter(Optional::isPresent)

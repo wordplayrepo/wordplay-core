@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,16 +20,10 @@ import java.util.List;
 import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.core.space.Orientation;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class PlacementImpl implements Placement
+public record PlacementImpl(Location startLocation, Orientation orientation, List<Piece> pieces) implements Placement
 {
-    private Location startLocation;
-    private Orientation orientation;
-    private List<Piece> pieces;
+    public List<Piece> pieces()
+    {
+        return List.copyOf(pieces);
+    }
 }

@@ -35,13 +35,13 @@ public class HighestScoreStrategy implements RobotStrategy
         @Override
         public int compare(ValuedPlacement p1, ValuedPlacement p2)
         {
-            int compare = p2.getPoints() - p1.getPoints();
+            int compare = p2.points() - p1.points();
             if (compare != 0) {
                 return compare;
             }
 
-            Iterator<Piece> pieceIter1 = p1.getPieces().iterator();
-            Iterator<Piece> pieceIter2 = p2.getPieces().iterator();
+            Iterator<Piece> pieceIter1 = p1.pieces().iterator();
+            Iterator<Piece> pieceIter2 = p2.pieces().iterator();
             while (true) {
                 boolean firstHasNext = pieceIter1.hasNext();
                 boolean secondHasNext = pieceIter2.hasNext();

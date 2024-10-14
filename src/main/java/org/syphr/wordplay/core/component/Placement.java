@@ -17,7 +17,7 @@ package org.syphr.wordplay.core.component;
 
 import java.util.List;
 
-import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 
 import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.core.space.Orientation;
@@ -27,7 +27,7 @@ import org.syphr.wordplay.core.space.Orientation;
  *
  * @author Gregory P. Moyer
  */
-@NotThreadSafe
+@ThreadSafe
 public interface Placement
 {
     /**
@@ -35,25 +35,25 @@ public interface Placement
      *
      * @return the stating location
      */
-    public Location getStartLocation();
+    Location startLocation();
 
     /**
      * Retrieve the spatial orientation of this placement (e.g. along the x-axis).
      *
      * @return the orientation
      */
-    public Orientation getOrientation();
+    Orientation orientation();
 
     /**
      * Retrieve the pieces contained within this placement.
      *
      * @return the pieces
      */
-    public List<Piece> getPieces();
+    List<Piece> pieces();
 
     @Override
-    public int hashCode();
+    int hashCode();
 
     @Override
-    public boolean equals(Object obj);
+    boolean equals(Object obj);
 }

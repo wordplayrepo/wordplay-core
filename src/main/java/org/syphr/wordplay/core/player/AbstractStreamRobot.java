@@ -109,7 +109,9 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
                                                                                                        candidate)))
                                 .flatMap(candidate -> generatePlacements(board, candidate))
                                 .filter(board::isValid)
-                                .peek(placement -> ((ValuedPlacementImpl) placement).setPoints(board.calculatePoints(placement)))
+                                .map(placement -> ((ValuedPlacementImpl) placement).toBuilder()
+                                                                                   .points(board.calculatePoints(placement))
+                                                                                   .build())
                                 .collect(Collectors.toCollection(() -> placements));
 
         // candidates.parallelStream()
@@ -171,12 +173,11 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
         Builder<ValuedPlacement> builder = Stream.builder();
 
         for (Orientation orientation : configuration.getOrientations()) {
-            ValuedPlacementImpl placement = new ValuedPlacementImpl();
-            placement.setPieces(unwrap(lc.candidate));
-            placement.setStartLocation(lc.location);
-            placement.setOrientation(orientation);
-
-            builder.accept(placement);
+            builder.accept(ValuedPlacementImpl.builder()
+                                              .startLocation(lc.location)
+                                              .orientation(orientation)
+                                              .pieces(unwrap(lc.candidate))
+                                              .build());
         }
 
         return builder.build();
@@ -188,12 +189,11 @@ public class AbstractStreamRobot extends PlayerImpl implements Robot
             Builder<ValuedPlacement> builder = Stream.builder();
 
             for (Orientation orientation : configuration.getOrientations()) {
-                ValuedPlacementImpl placement = new ValuedPlacementImpl();
-                placement.setPieces(unwrap(candidate));
-                placement.setStartLocation(location);
-                placement.setOrientation(orientation);
-
-                builder.accept(placement);
+                builder.accept(ValuedPlacementImpl.builder()
+                                                  .startLocation(location)
+                                                  .orientation(orientation)
+                                                  .pieces(unwrap(candidate))
+                                                  .build());
             }
 
             return builder.build();

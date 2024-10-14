@@ -101,7 +101,7 @@ public class BoardImpl implements Board
 
         SortedMap<Location, Piece> pieces = getPieces(placement);
         return isLocationSetValid(pieces.keySet())
-               && isWordSetValid(wordFactory.getWords(pieces, placement.getOrientation(), this));
+               && isWordSetValid(wordFactory.getWords(pieces, placement.orientation(), this));
     }
 
     @Override
@@ -116,7 +116,7 @@ public class BoardImpl implements Board
             throw new InvalidLocationException("invalid location");
         }
 
-        Set<Word> words = wordFactory.getWords(pieces, placement.getOrientation(), this);
+        Set<Word> words = wordFactory.getWords(pieces, placement.orientation(), this);
         if (!isWordSetValid(words)) {
             // TODO - need more info
             throw new InvalidWordException("invalid word");
@@ -134,7 +134,7 @@ public class BoardImpl implements Board
     public int calculatePoints(Placement placement)
     {
         SortedMap<Location, Piece> pieces = getPieces(placement);
-        Set<Word> words = wordFactory.getWords(pieces, placement.getOrientation(), this);
+        Set<Word> words = wordFactory.getWords(pieces, placement.orientation(), this);
         Map<Location, List<TileAttribute>> attributes = getTiles().getAttributes(pieces.keySet());
 
         return scoreCalc.getScore(pieces, words, attributes);
@@ -146,13 +146,13 @@ public class BoardImpl implements Board
 
         SortedMap<Location, Piece> map = new TreeMap<>();
 
-        Orientation orientation = placement.getOrientation();
+        Orientation orientation = placement.orientation();
         log.trace("Orientation: {}", orientation);
 
-        Location location = placement.getStartLocation();
+        Location location = placement.startLocation();
         log.trace("Start location: {}", location);
 
-        for (Iterator<Piece> iter = placement.getPieces().iterator(); iter.hasNext();) {
+        for (Iterator<Piece> iter = placement.pieces().iterator(); iter.hasNext();) {
             Piece piece = iter.next();
 
             log.trace("Found piece ({}) at {}", piece, location);

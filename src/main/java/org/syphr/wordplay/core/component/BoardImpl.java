@@ -19,16 +19,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.syphr.wordplay.core.config.TileAttribute;
 import org.syphr.wordplay.core.lang.Dictionary;
 import org.syphr.wordplay.core.space.Dimension;
 import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.core.space.Orientation;
-
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,7 +42,7 @@ public class BoardImpl implements Board
     private final Dictionary dictionary;
     private final ScoreCalculator scoreCalc;
 
-    private TileSet tileset;
+    private volatile TileSet tileset;
 
     public BoardImpl(Dimension dimension,
                      Set<Orientation> orientations,
@@ -83,6 +82,7 @@ public class BoardImpl implements Board
     @Override
     public TileSet getTiles()
     {
+        // TODO what is the value of lazy creating the tile set here?
         if (tileset == null) {
             synchronized (this) {
                 if (tileset == null) {
@@ -179,7 +179,7 @@ public class BoardImpl implements Board
      *  2) Each location in the placement must be on an empty tile.
      *  3) If the start location is empty, at least one location in the placement
      *     must be the start location.
-     *  4) If the start location is not empty, at least one location in the 
+     *  4) If the start location is not empty, at least one location in the
      *     placement must have at least one piece next to it already on the board.
      *
      * @formatter:on

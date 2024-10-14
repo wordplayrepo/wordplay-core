@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,24 +18,28 @@ package org.syphr.wordplay.core.component;
 import java.util.Set;
 import java.util.SortedMap;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.core.space.Orientation;
 
 /**
  * Generator of {@link Word words}.
- * 
+ *
  * @author Gregory P. Moyer
  */
+@ThreadSafe
 public interface WordFactory
 {
     /**
      * Create all words from the board relevant to the collection of pieces
-     * presented in the given orientation.
-     * 
+     * presented in the given orientation. This method must not change the state of
+     * the board.
+     *
      * @param pieces      the relevant pieces and their locations
      * @param orientation the orientation of the pieces
      * @param board       the current state of the board
-     * 
+     *
      * @return all relevant words
      */
     public Set<Word> getWords(SortedMap<Location, Piece> pieces, Orientation orientation, Board board);

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2022 Gregory P. Moyer
+ * Copyright © 2012-2024 Gregory P. Moyer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package org.syphr.wordplay.core.component;
 
 import java.util.SortedSet;
 
-import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.ThreadSafe;
 
 import org.syphr.wordplay.core.space.Location;
@@ -25,30 +24,29 @@ import org.syphr.wordplay.core.space.Orientation;
 
 /**
  * A word is set of adjacent tiles that are occupied by pieces.
- * 
+ *
  * @author Gregory P. Moyer
  */
 @ThreadSafe
-@Immutable
-public interface Word extends Comparable<Word>
+public interface Word
 {
     /**
      * Retrieve the location of the first tile in this word.
-     * 
+     *
      * @return the start location
      */
     public Location getStartLocation();
 
     /**
      * Retrieve the location of the last tile in this word.
-     * 
+     *
      * @return the end location
      */
     public Location getEndLocation();
 
     /**
      * Retrieve the spatial orientation of this word (i.e. along the x-axis).
-     * 
+     *
      * @return the orientation
      */
     public Orientation getOrientation();
@@ -56,14 +54,14 @@ public interface Word extends Comparable<Word>
     /**
      * Retrieve the string formed by walking this word from start to end and
      * concatenating the letters found on the pieces.
-     * 
+     *
      * @return the word text
      */
     public String getText();
 
     /**
      * Retrieve the set of tiles that make up this word in proper order.
-     * 
+     *
      * @return the set of tiles
      */
     public SortedSet<Tile> getTiles();

@@ -22,17 +22,22 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.annotation.concurrent.Immutable;
+
 import org.syphr.wordplay.core.lang.Letter;
 import org.syphr.wordplay.core.space.Location;
 import org.syphr.wordplay.core.space.Orientation;
 
+@Immutable
 public class WordFactoryImpl implements WordFactory
 {
     @Override
     public Set<Word> getWords(SortedMap<Location, Piece> pieces, Orientation orientation, Board board)
     {
-        // TODO why is a tree set used, but an unordered interface is returned?
-        Set<Word> words = new TreeSet<>();
+        Set<Word> words = new HashSet<>();
+        if (pieces.isEmpty()) {
+            return words;
+        }
 
         Word mainWord = getWord(pieces.keySet().iterator().next(), orientation, board.getTiles(), pieces);
         if (mainWord != null) {
@@ -77,7 +82,7 @@ public class WordFactoryImpl implements WordFactory
             tiles.add(tile);
 
             Optional<Letter> letter = tile.getPiece().orElse(pieces.get(wordEnd)).getLetter();
-            text.append(letter.orElseThrow().toString());
+            text.append(letter.orElseThrow().getCharacter());
 
             Location newLocation = orientation.move(wordEnd, 1);
             if (!tileset.getTile(newLocation).hasPiece() && !pieces.containsKey(newLocation)) {
